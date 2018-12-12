@@ -1,0 +1,31 @@
+<%= form_with(model: reader, local: true) do |form| %>
+  <% if reader.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(reader.errors.count, "error") %> prohibited this reader from being saved:</h2>
+
+      <ul>
+      <% reader.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <div class="field">
+    <%= form.label :firstname %>
+    <%= form.text_field :firstname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lastname %>
+    <%= form.text_field :lastname %>
+  </div>
+
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

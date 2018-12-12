@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <%= image_tag @book.cover %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @book.title %>
+</p>
+
+<p>
+  <strong>Author first name:</strong>
+  <%= @book.author_first_name %>
+</p>
+
+<p>
+  <strong>Author last name:</strong>
+  <%= @book.author_last_name %>
+</p>
+
+<p>
+  <strong>Publisher:</strong>
+  <%= link_to "#{@book.publisher.name}", publisher_path(@book.publisher.id) %>
+</p>
+
+<p>
+  <strong>Cover:</strong>
+  <%= @book.cover %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @book.price %>
+</p>
+
+<p>
+  <strong>Isbn:</strong>
+  <%= @book.isbn %>
+</p>
+
+<p>
+  <strong>Synopsis:</strong>
+  <%= @book.synopsis %>
+</p>
+
+<p>
+  <strong> Genre: </strong>
+  <% @book.genres.each do |genre| %>
+  <%= genre.name%>
+  <%=  link_to 'X', remove_genre_book_path(@book, genre), method: :delete %>
+  <% end %>
+
+  <%= form_tag (add_genre_book_path(@book)) do %>
+  <%= text_field_tag "name" %>
+  <% end %>
+
+<%= link_to 'Edit', edit_book_path(@book) %> |
+<%= link_to 'Back', books_path %>

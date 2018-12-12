@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 
+  rut: 1
+  giro: MyString
+  user: one
+
+two:
+  name: 
+  rut: 1
+  giro: MyString
+  user: two

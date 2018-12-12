@@ -1,0 +1,35 @@
+<%= form_with(model: publisher, local: true) do |form| %>
+  <% if publisher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(publisher.errors.count, "error") %> prohibited this publisher from being saved:</h2>
+
+      <ul>
+      <% publisher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rut %>
+    <%= form.number_field :rut %>
+  </div>
+
+  <div class="field">
+    <%= form.label :giro %>
+    <%= form.text_field :giro %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

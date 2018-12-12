@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Firstname:</strong>
+  <%= @reader.firstname %>
+</p>
+
+<p>
+  <strong>Lastname:</strong>
+  <%= @reader.lastname %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_reader_path(@reader) %> |
+<%= link_to 'Back', readers_path %>
