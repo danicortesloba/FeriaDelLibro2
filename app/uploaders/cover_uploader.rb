@@ -1,7 +1,7 @@
 class CoverUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -16,13 +16,14 @@ class CoverUploader < CarrierWave::Uploader::Base
   # Provide a default URL as a default if there hasn't been a file uploaded:
    def default_url(*args)
   #   # For Rails 3.1+ asset pipeline compatibility:
-  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  #
+  # ActionController::Base.helpers.asset_path("cover_fallback.jpeg")
+  # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "cover_fallback.jpeg"].compact.join('_'))
+  https://www.aquaspresso.co.za/wp-content/uploads/2012/01/GUIDE.png
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
    end
 
   # Process files as they are uploaded:
-  # process scale: [200, 300]
+   process resize_to_fit: [214, 144]
   #
   # def scale(width, height)
   #   # do something
@@ -30,7 +31,7 @@ class CoverUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
    version :thumb do
-     process resize_to_fit: [50, 50]
+     process resize_to_fill: [107, 77]
    end
 
   # Add a white list of extensions which are allowed to be uploaded.
