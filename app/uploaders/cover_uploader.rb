@@ -15,11 +15,7 @@ class CoverUploader < CarrierWave::Uploader::Base
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
    def default_url(*args)
-  #   # For Rails 3.1+ asset pipeline compatibility:
-  # ActionController::Base.helpers.asset_path("cover_fallback.jpeg")
-  # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "cover_fallback.jpeg"].compact.join('_'))
-  https://www.aquaspresso.co.za/wp-content/uploads/2012/01/GUIDE.png
-  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+     ActionController::Base.helpers.asset_path("fallback/" + ["cover_fallback.jpeg"].compact.join('_'))
    end
 
   # Process files as they are uploaded:
@@ -32,8 +28,10 @@ class CoverUploader < CarrierWave::Uploader::Base
   # Create different versions of your uploaded files:
    version :thumb do
      process resize_to_fill: [107, 77]
+     def default_url
+       ActionController::Base.helpers.asset_path("fallback/" + ["thumb_fallback.jpeg"].compact.join('_'))
+     end
    end
-
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_whitelist

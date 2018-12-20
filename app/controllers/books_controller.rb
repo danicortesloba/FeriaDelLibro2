@@ -14,9 +14,20 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
   end
 
   def remove_genre
-    genre = @book.genres.find(params[:id])
+    genre = @book.genres.find(params[:genre_id])
     @book.genres.delete(genre)
+    redirect_to book_path
+  end
+
+  def add_comment
+    @book.comments << Comment.new(content:params[:content])
     redirect_to books_path
+  end
+
+  def remove_comment
+    genre = @book.comments.find(params[:comment_id])
+    @book.comments.delete(comment)
+    redirect_to book_path
   end
 
   # GET /books/1
@@ -82,7 +93,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:genres, :id, :title, :author_first_name, :author_last_name, :publisher_id, :cover, :price, :isbn, :synopsis)
+      params.require(:book).permit(:comments_attributes, :genres_attributes, :id, :title, :author_first_name, :author_last_name, :publisher_id, :cover, :price, :isbn, :synopsis)
     end
 
     def genre_params

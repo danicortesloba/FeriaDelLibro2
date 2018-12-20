@@ -13,24 +13,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
    def create
      @user = User.new(user_params)
      if @user.save
-       if @user.role == "publisher" and sign_in(@user)
+       if @user.role == "editorial" and sign_in(@user)
          redirect_to new_publisher_path
        elsif sign_in(@user)
          redirect_to new_reader_path
        end
     end
-
-=begin
-     if  @user.publisher.present? == false && @user.reader.present? == false
-       if @user.role == "publisher"
-         redirect_to new_publisher_path
-       else
-          redirect_to new_reader_path
-       end
-    else
-          redirect_to user_session_path
-    end
-=end
    end
 
   # GET /resource/edit

@@ -1,19 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h1>
   <%= @publisher.name %>
-</p>
+</h1>
 
 <p>
-  <strong>Rut:</strong>
-  <%= @publisher.rut %>
-</p>
-
-<p>
-  <strong>Giro:</strong>
-  <%= @publisher.giro %>
-</p>
+  <% @publisher.books.each do |book| %>
+<p>  <%= book.title%> por <%= book.author_first_name %> <%=" "%><%=book.author_last_name %></p>
+  <% end %>
+</p
 
 
 

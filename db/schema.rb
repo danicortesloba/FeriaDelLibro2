@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_215746) do
+ActiveRecord::Schema.define(version: 2018_12_20_012821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,9 +29,26 @@ ActiveRecord::Schema.define(version: 2018_11_28_215746) do
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
   end
 
+  create_table "books_comments", id: false, force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "comment_id", null: false
+  end
+
   create_table "books_genres", id: false, force: :cascade do |t|
     t.bigint "book_id", null: false
     t.bigint "genre_id", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "publisher_id"
+    t.bigint "book_id"
+    t.bigint "user_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_comments_on_book_id"
+    t.index ["publisher_id"], name: "index_comments_on_publisher_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -78,6 +95,9 @@ ActiveRecord::Schema.define(version: 2018_11_28_215746) do
   end
 
   add_foreign_key "books", "publishers"
+  add_foreign_key "comments", "books"
+  add_foreign_key "comments", "publishers"
+  add_foreign_key "comments", "users"
   add_foreign_key "publishers", "users"
   add_foreign_key "readers", "users"
 end

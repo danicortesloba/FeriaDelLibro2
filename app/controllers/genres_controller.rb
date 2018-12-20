@@ -10,6 +10,9 @@ class GenresController < ApplicationController
   # GET /genres/1
   # GET /genres/1.json
   def show
+     Genre.select(:name).distinct.each do |genre|
+    @genre = Genre.find_by_name @genre[:name]
+     end
   end
 
   # GET /genres/new

@@ -3,6 +3,10 @@
 <p>
   <strong>Name:</strong>
   <%= @genre.name %>
+  <% @genre.books.each do |book|%>
+  <% byebug %>
+  <%= book.title %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_genre_path(@genre) %> |

@@ -11,6 +11,7 @@ class PublishersController < ApplicationController
   # GET /publishers/1
   # GET /publishers/1.json
   def show
+    @books = Book.all
   end
 
   # GET /publishers/new
@@ -71,6 +72,6 @@ class PublishersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def publisher_params
-      params.require(:publisher).permit(:name, :rut, :giro, :user_id)
+      params.require(:publisher).permit(:name, :rut, :giro, :user_id, :id)
     end
 end

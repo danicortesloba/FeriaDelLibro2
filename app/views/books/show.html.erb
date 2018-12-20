@@ -24,11 +24,6 @@
 </p>
 
 <p>
-  <strong>Cover:</strong>
-  <%= @book.cover %>
-</p>
-
-<p>
   <strong>Price:</strong>
   <%= @book.price %>
 </p>
@@ -47,11 +42,21 @@
   <strong> Genre: </strong>
   <% @book.genres.each do |genre| %>
   <%= genre.name%>
-  <%=  link_to 'X', remove_genre_book_path(@book, genre), method: :delete %>
+  <%=  link_to 'X', remove_genre_book_path(@book, genre_id: genre.id), method: :delete %>
   <% end %>
 
   <%= form_tag (add_genre_book_path(@book)) do %>
   <%= text_field_tag "name" %>
+  <% end %>
+
+  <strong> Comments: </strong>
+  <% @book.comments.each do |comment| %>
+  <%= comment.content%>
+  <%=  link_to 'X', remove_comment_book_path(@book, comment_id: comment.id), method: :delete %>
+  <% end %>
+
+  <%= form_tag (add_comment_book_path(@book)) do %>
+  <%= text_field_tag "Comentario" %>
   <% end %>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
