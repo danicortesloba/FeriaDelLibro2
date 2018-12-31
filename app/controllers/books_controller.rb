@@ -5,7 +5,11 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    if params[:query].present?
+      @books = Book.where("lower(title) LIKE ?", "%#{params[:query].downcase}%" )
+    else
+      @books = Book.all
+    end
   end
 
 
