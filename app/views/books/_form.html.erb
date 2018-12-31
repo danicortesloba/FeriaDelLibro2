@@ -53,13 +53,3 @@
     <%= form.submit %>
   </div>
 <% end %>
-
-<strong> Género: </strong>
-<% @book.genres.each do |genre| %>
-<%= genre.name%>
-<%=  link_to 'X', remove_genre_book_path(@book, genre_id: genre.id), method: :delete %>
-<% end %>
-
-<%= form_tag (add_genre_book_path(@book)) do %>
-<%= text_field_tag "name" %>
-<% end %>

@@ -28,6 +28,15 @@
         <td><%= book.price %></td>
         <td><%= book.isbn %></td>
         <td><%= book.genres.pluck(:name).join(",") %></td>
+        <% book.genres.each do |genre| %>
+        <td> <%= genre.name%></td>
+        <%=  link_to 'X', remove_genre_book_path(book, genre_id: genre.id), method: :delete %>
+        <% end %>
+
+        <%= form_tag (add_genre_book_path(book)) do %>
+        <td> <%= text_field_tag "name" %></td>
+        <% end %>
+
         <td><%= link_to 'Detalle', book %></td>
         <td><%= link_to 'Editar', edit_book_path(book) %></td>
         <td><%= link_to 'Borrar', book, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
