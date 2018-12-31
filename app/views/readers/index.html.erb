@@ -5,9 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Firstname</th>
-      <th>Lastname</th>
-      <th>User</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Email</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,6 +17,7 @@
       <tr>
         <td><%= reader.firstname %></td>
         <td><%= reader.lastname %></td>
+        <td><%= reader.user.email %></td>
         <td><%= link_to 'Show', reader %></td>
         <td><%= link_to 'Edit', edit_reader_path(reader) %></td>
         <td><%= link_to 'Destroy', reader, method: :delete, data: { confirm: 'Are you sure?' } %></td>
