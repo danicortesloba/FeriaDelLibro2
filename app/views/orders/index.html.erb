@@ -24,5 +24,14 @@
     </tr>
   </tbody>
 </table>
+
 <h2>Dirección de envío</h2>
-<%= current_user.addresses %>
+<% current_user.addresses.each do |address| %>
+    <% if address.default == true %>
+        <tr>
+          <td><%= address.title %></td>
+          <td><%= address.address %></td>
+          <td><%= link_to "Cambiar", addresses_path%></td>
+        </tr>
+    <% end %>
+<% end %>

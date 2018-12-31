@@ -24,9 +24,6 @@
         <% else %>
         <td><%= link_to 'Hacer dirección de envío', addresses_default_path(address) %></td>
         <% end %>
-        <% if address.default == true %>
-        <td> Dirección actual de envío</td>
-        <% end %>
       </tr>
     <% end %>
   </tbody>

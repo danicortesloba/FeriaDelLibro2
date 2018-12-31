@@ -11,16 +11,43 @@
     <p>Apellido: <%= @user.reader.lastname%> <%= link_to 'Cambiar', edit_reader_path(@reader) %></p>
 <% end %>
 
-Direcciones:
-<% @user.addresses.each do |address| %>
-    <p><%= address.title %><br>
-    <%= address.address %><br>
-    <% if address.default == true %>
-      ¿Enviar a esta dirección?: Sí <br>
-      <% elsif address.default == false %>
-      ¿Enviar a esta dirección: No <br>
+<h1>Direcciones</h1>
+
+<table>
+  <thead>
+    <tr>
+
+      <th>Title</th>
+      <th>Address</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% current_user.addresses.each do |address| %>
+      <tr>
+        <td><%= address.title %></td>
+        <td><%= address.address %></td>
+        <td><%= link_to 'Cambiar', edit_address_path(address) %></td>
+        <td><%= link_to 'Eliminar', address, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if address.default == true %>
+        <td> Dirección actual de envío</td>
+        <% else %>
+        <td><%= link_to 'Hacer dirección de envío', addresses_default_path(address) %></td>
+        <% end %>
+      </tr>
     <% end %>
-    <%= link_to 'Cambiar', edit_address_path(address) %></p>
-<% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nueva dirección', new_address_path %>
+
+
+
+
+
+
 
 <p><%= link_to 'Cerrar mi cuenta', edit_user_registration_path %> </p>
