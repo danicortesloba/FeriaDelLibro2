@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
 before_action :authenticate_user!, only: [:new, :create]
-before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :remove_genre]
+before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :remove_genre, :add_comment, :remove_comment]
 
   # GET /books
   # GET /books.json
@@ -20,12 +20,18 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
   end
 
   def add_comment
-    @book.comments << Comment.new(content:params[:content])
+    comment = Comment.new
+    comment.content = params[:content]
+    comment.user_id = current_user.id
+    comment.publisher_id = @book.publisher.id
+    comment.book_id = @book.id
+    comment.save
+    @book.comments << comment
     redirect_to books_path
   end
 
   def remove_comment
-    genre = @book.comments.find(params[:comment_id])
+    genre = @book.comments.find(params[:comments_id])
     @book.comments.delete(comment)
     redirect_to book_path
   end
@@ -33,7 +39,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
   # GET /books/1
   # GET /books/1.json
   def show
-
+    @comment = Comment.all
   end
 
   # GET /books/new
@@ -98,5 +104,9 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
 
     def genre_params
       params.require(:genre).permit(:id)
+    end
+
+    def comment_params
+      params.require(:comment).permit(:id, :content, :publisher_id, :user_id, :book_id)
     end
 end

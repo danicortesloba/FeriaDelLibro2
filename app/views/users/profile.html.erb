@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>Email: <%= @user.email %> <%= link_to 'Cambiar', edit_user_registration_path %> </p>
+
+<% if @user.role == "editorial" and sign_in(@user) %>
+    <p> Nombre: <%= @user.publisher.name%> <%= link_to 'Cambiar', edit_publisher_path(@publisher) %> </p>
+    <p> Rut: <%= @user.publisher.rut%> <%= link_to 'Cambiar', edit_publisher_path(@publisher) %></p>
+    <p> Giro: <%= @user.publisher.giro%> <%= link_to 'Cambiar', edit_publisher_path(@publisher) %></p>
+<% elsif @user.role == "lector"%>
+    <p>Nombre: <%= @user.reader.firstname%> <%= link_to 'Cambiar', edit_reader_path(@reader) %></p>
+    <p>Apellido: <%= @user.reader.lastname%> <%= link_to 'Cambiar', edit_reader_path(@reader) %></p>
+<% end %>
+
+Direcciones:
+<% @user.addresses.each do |address| %>
+    <p><%= address.title %><br>
+    <%= address.address %><br>
+    <% if address.default == true %>
+      ¿Enviar a esta dirección?: Sí <br>
+      <% elsif address.default == false %>
+      ¿Enviar a esta dirección: No <br>
+    <% end %>
+    <%= link_to 'Cambiar', edit_address_path(address) %></p>
+<% end %>
+
+<p><%= link_to 'Cerrar mi cuenta', edit_user_registration_path %> </p>

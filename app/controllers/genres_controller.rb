@@ -12,6 +12,7 @@ class GenresController < ApplicationController
   def show
      Genre.select(:name).distinct.each do |genre|
     @genre = Genre.find_by_name @genre[:name]
+    puts @genre.books
      end
   end
 

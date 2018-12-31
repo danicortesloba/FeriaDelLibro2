@@ -4,11 +4,14 @@
   <%= @publisher.name %>
 </h1>
 
-<p>
+
   <% @publisher.books.each do |book| %>
 <p>  <%= book.title%> por <%= book.author_first_name %> <%=" "%><%=book.author_last_name %></p>
+     <% book.comments.each do |comment| %>
+        <p><%= comment.content %></p>
+     <% end %>
   <% end %>
-</p
+
 
 
 

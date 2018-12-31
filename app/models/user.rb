@@ -7,5 +7,6 @@ class User < ApplicationRecord
   has_one :publisher
   has_one :reader
   has_many :comments
+  has_many :addresses
   enum role: [:editorial, :lector]
 end
