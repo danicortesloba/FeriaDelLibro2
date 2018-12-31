@@ -27,8 +27,11 @@
         <td><%= book.price %></td>
         <td><%= book.isbn %></td>
         <td><%= book.genres.pluck(:name).join(",") %></td>
-        <td><%= link_to 'Comprar', book_orders_path(book), method: :post %> </td>
+        <td><%= link_to 'Comprar', book_order_path(book), method: :post %> </td>
         <td><%= link_to 'Detalle', book %></td>
+        <td><%= link_to 'Edit', edit_book_path(book) %></td>
+        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%= link_to 'New Book', new_book_path %>
       </tr>
     <% end %>
   </tbody>

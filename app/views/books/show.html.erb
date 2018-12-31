@@ -38,16 +38,7 @@
   <%= @book.synopsis %>
 </p>
 
-<p>
-  <strong> Genre: </strong>
-  <% @book.genres.each do |genre| %>
-  <%= genre.name%>
-  <%=  link_to 'X', remove_genre_book_path(@book, genre_id: genre.id), method: :delete %>
-  <% end %>
-
-  <%= form_tag (add_genre_book_path(@book)) do %>
-  <%= text_field_tag "name" %>
-  <% end %>
+<p><%= link_to 'Comprar', book_orders_path(@book), method: :post %> </p>
 
   <strong> Comments: </strong>
   <% @book.comments.each do |comment| %>
@@ -59,6 +50,16 @@
   <%= text_field_tag :content %>
   <%#= hidden_field :user_id, value: current_user.id %>
   <%#= hidden_field :publisher_id, value: @book.publisher.id %>
+  <% end %>
+
+  <strong> Genre: </strong>
+  <% @book.genres.each do |genre| %>
+  <%= genre.name%>
+  <%=  link_to 'X', remove_genre_book_path(@book, genre_id: genre.id), method: :delete %>
+  <% end %>
+
+  <%= form_tag (add_genre_book_path(@book)) do %>
+  <%= text_field_tag "name" %>
   <% end %>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |

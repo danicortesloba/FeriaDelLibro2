@@ -1,10 +1,11 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @orders = current_user.orders
   end
 
   # GET /orders/1
@@ -24,17 +25,13 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
-
-    respond_to do |format|
+    @book = Book.find(params[:book_id])
+    @order = Order.new(book: @book, user: current_user)
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
+        redirect_to books_path, notice: 'Se agregó este libro a tu carrito de compras'
       else
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+        redirect_to books_path, alert: 'No pudimos agregar el libro a tu carrito de compras'
       end
-    end
   end
 
   # PATCH/PUT /orders/1

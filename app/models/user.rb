@@ -8,5 +8,7 @@ class User < ApplicationRecord
   has_one :reader
   has_many :comments
   has_many :addresses
+  has_many :orders
+  has_many :books, through: :orders
   enum role: [:editorial, :lector]
 end
