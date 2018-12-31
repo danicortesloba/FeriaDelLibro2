@@ -2,7 +2,7 @@
 
 <p>Email: <%= @user.email %> <%= link_to 'Cambiar', edit_user_registration_path %> </p>
 
-<% if @user.role == "editorial" and sign_in(@user) %>
+<% if @user.role == "editorial" %>
     <p> Nombre: <%= @user.publisher.name%> <%= link_to 'Cambiar', edit_publisher_path(@publisher) %> </p>
     <p> Rut: <%= @user.publisher.rut%> <%= link_to 'Cambiar', edit_publisher_path(@publisher) %></p>
     <p> Giro: <%= @user.publisher.giro%> <%= link_to 'Cambiar', edit_publisher_path(@publisher) %></p>
@@ -11,6 +11,7 @@
     <p>Apellido: <%= @user.reader.lastname%> <%= link_to 'Cambiar', edit_reader_path(@reader) %></p>
 <% end %>
 
+<% if current_user.role == 'lector' %>
 <h1>Direcciones</h1>
 
 <table>
@@ -44,10 +45,6 @@
 
 <%= link_to 'Nueva dirección', new_address_path %>
 
-
-
-
-
-
+<% end %>
 
 <p><%= link_to 'Cerrar mi cuenta', edit_user_registration_path %> </p>

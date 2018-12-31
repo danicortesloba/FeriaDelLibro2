@@ -52,7 +52,7 @@
   <%#= hidden_field :publisher_id, value: @book.publisher.id %>
   <% end %>
 
-  <strong> Genre: </strong>
+  <strong> Género: </strong>
   <% @book.genres.each do |genre| %>
   <%= genre.name%>
   <%=  link_to 'X', remove_genre_book_path(@book, genre_id: genre.id), method: :delete %>

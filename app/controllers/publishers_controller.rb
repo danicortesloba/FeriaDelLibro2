@@ -7,7 +7,6 @@ class PublishersController < ApplicationController
   def index
     @publishers = Publisher.all
   end
-
   # GET /publishers/1
   # GET /publishers/1.json
   def show

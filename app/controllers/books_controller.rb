@@ -8,6 +8,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
     @books = Book.all
   end
 
+
   def add_genre
     @book.genres << Genre.new(name:params[:name])
     redirect_to books_path

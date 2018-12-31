@@ -5,4 +5,11 @@ class UsersController < ApplicationController
     @publisher = current_user.publisher
     @reader = current_user.reader
   end
+
+  def my_books
+    if current_user.role == 'editorial'
+    publisher = current_user.publisher
+    @books = publisher.books
+    end
+  end
 end

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
         registrations: 'users/registrations'
       }
     devise_for :users, skip: :all
+    get 'users/my_books'
     get 'users/profile'
     root "books#index"
 
