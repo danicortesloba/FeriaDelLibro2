@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Membership:</strong>
+  <%= @membership_order.membership %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @membership_order.user %>
+</p>
+
+<p>
+  <strong>Paid:</strong>
+  <%= @membership_order.paid %>
+</p>
+
+<%= link_to 'Edit', edit_membership_order_path(@membership_order) %> |
+<%= link_to 'Back', membership_orders_path %>

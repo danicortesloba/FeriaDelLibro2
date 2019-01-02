@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_31_220749) do
+ActiveRecord::Schema.define(version: 2019_01_02_164936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,24 @@ ActiveRecord::Schema.define(version: 2018_12_31_220749) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "membership_orders", force: :cascade do |t|
+    t.bigint "membership_id"
+    t.bigint "user_id"
+    t.boolean "paid", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["membership_id"], name: "index_membership_orders_on_membership_id"
+    t.index ["user_id"], name: "index_membership_orders_on_user_id"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "movies_tags", id: false, force: :cascade do |t|
     t.bigint "movie_id", null: false
     t.bigint "tag_id", null: false
@@ -119,6 +137,8 @@ ActiveRecord::Schema.define(version: 2018_12_31_220749) do
   add_foreign_key "comments", "books"
   add_foreign_key "comments", "publishers"
   add_foreign_key "comments", "users"
+  add_foreign_key "membership_orders", "memberships"
+  add_foreign_key "membership_orders", "users"
   add_foreign_key "orders", "books"
   add_foreign_key "orders", "users"
   add_foreign_key "publishers", "users"

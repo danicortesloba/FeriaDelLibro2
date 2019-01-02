@@ -1,0 +1,32 @@
+<%= form_with(model: membership_order, local: true) do |form| %>
+  <% if membership_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(membership_order.errors.count, "error") %> prohibited this membership_order from being saved:</h2>
+
+      <ul>
+      <% membership_order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :membership_id %>
+    <%= form.text_field :membership_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :paid %>
+    <%= form.check_box :paid %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

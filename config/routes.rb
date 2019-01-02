@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :membership_orders
+  resources :memberships
     resources :addresses
     get 'addresses/:id/default', to: 'addresses#default', as:'addresses_default'
     resources :classifications
