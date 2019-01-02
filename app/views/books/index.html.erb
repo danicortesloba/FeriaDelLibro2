@@ -29,9 +29,13 @@
             <td> <%= link_to "#{book.publisher.name}", publisher_path(book.publisher.id) %></td>
             <td><%= book.price %></td>
             <td><%= book.isbn %></td>
-            <td><%= book.genres.pluck(:name).join(",") %></td>
-            <td><%= link_to 'Comprar', book_orders_path(book), method: :post %> </td>
+            <td><%= book.genres.pluck(:name).join(", ") %></td>
             <td><%= link_to 'Detalle', book %></td>
+            <% if signed_in? && current_user.role == 'Lector' %>
+            <td><%= link_to 'Comprar', book_orders_path(book), method: :post %> </td>
+            <% else %>
+            <td> Ingresa con tu cuenta de lector para comprar </td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>

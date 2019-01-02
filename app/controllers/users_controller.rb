@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def my_books
-    if current_user.role == 'editorial'
+    if current_user.role == 'Editorial'
     publisher = current_user.publisher
     @books = publisher.books
     end

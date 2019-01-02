@@ -2,16 +2,16 @@
 
 <p>Email: <%= @user.email %> <%= link_to 'Cambiar', edit_user_registration_path %> </p>
 
-<% if @user.role == "editorial" %>
+<% if @user.role == "Editorial" %>
     <p> Nombre: <%= @user.publisher.name%> <%= link_to 'Cambiar', edit_publisher_path(@publisher) %> </p>
     <p> Rut: <%= @user.publisher.rut%> <%= link_to 'Cambiar', edit_publisher_path(@publisher) %></p>
     <p> Giro: <%= @user.publisher.giro%> <%= link_to 'Cambiar', edit_publisher_path(@publisher) %></p>
-<% elsif @user.role == "lector"%>
+<% elsif @user.role == "Lector"%>
     <p>Nombre: <%= @user.reader.firstname%> <%= link_to 'Cambiar', edit_reader_path(@reader) %></p>
     <p>Apellido: <%= @user.reader.lastname%> <%= link_to 'Cambiar', edit_reader_path(@reader) %></p>
 <% end %>
 
-<% if current_user.role == 'lector' %>
+<% if current_user.role == 'Lector' %>
 <h1>Direcciones</h1>
 
 <table>

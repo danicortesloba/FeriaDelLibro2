@@ -15,7 +15,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
 
   def add_genre
     @book.genres << Genre.new(name:params[:name])
-    redirect_to books_path
+    redirect_to book_path
   end
 
   def remove_genre
@@ -32,11 +32,11 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
     comment.book_id = @book.id
     comment.save
     @book.comments << comment
-    redirect_to books_path
+    redirect_to book_path
   end
 
   def remove_comment
-    genre = @book.comments.find(params[:comments_id])
+    comment = @book.comments.find(params[:comment_id])
     @book.comments.delete(comment)
     redirect_to book_path
   end

@@ -38,29 +38,42 @@
   <%= @book.synopsis %>
 </p>
 
-<p><%= link_to 'Comprar', book_orders_path(@book), method: :post %> </p>
+<strong> Género: </strong>
+<% @book.genres.each do |genre| %>
+    <p><%= genre.name%>
+    <% if signed_in? && current_user.role == 'Editorial'%>
+      <%=  link_to 'X', remove_genre_book_path(@book, genre_id: genre.id), method: :delete %></p>
+    <% end %>
+<% end %>
+<br>
+<% if signed_in? && current_user.role == 'Editorial'%>
+    <h3>Agregar género</h3>
+    <p><%= form_tag (add_genre_book_path(@book)) do %>
+    <%= text_field_tag "name" %></p>
+    <% end %>
+<% end %>
 
-  <strong> Comments: </strong>
-  <% @book.comments.each do |comment| %>
-  <%= comment.content%>
-  <%=  link_to 'X', remove_comment_book_path(@book, comment_id: comment.id), method: :delete %>
-  <% end %>
+<strong> Comentarios: </strong>
+<% if signed_in? && current_user.role =='Lector' %>
+    <% @book.comments.each do |comment| %>
+        <p><%= comment.content%>
+        <%= link_to 'X', remove_comment_book_path(@book, comment_id: comment.id), method: :delete %></p>
+    <% end %>
+<% else %>
+    <% @book.comments.each do |comment| %>
+        <p><%= comment.content%></p>
+    <% end %>
+<% end %>
 
-  <%= form_tag (add_comment_book_path(@book)) do %>
-  <%= text_field_tag :content %>
-  <%#= hidden_field :user_id, value: current_user.id %>
-  <%#= hidden_field :publisher_id, value: @book.publisher.id %>
-  <% end %>
+<% if signed_in? && current_user.role == 'Lector' %>
+    <p><%= link_to 'Comprar', book_orders_path(@book), method: :post %> </p>
+    <h3>Agregar comentario</h3>
+    <%= form_tag (add_comment_book_path(@book)) do %>
+    <%= text_area_tag :content %>
+    <% end %>
+<% end %>
 
-  <strong> Género: </strong>
-  <% @book.genres.each do |genre| %>
-  <%= genre.name%>
-  <%=  link_to 'X', remove_genre_book_path(@book, genre_id: genre.id), method: :delete %>
-  <% end %>
-
-  <%= form_tag (add_genre_book_path(@book)) do %>
-  <%= text_field_tag "name" %>
-  <% end %>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<% if signed_in? && current_user.role == 'Editorial' %>
+  <p><%= link_to 'Editar', edit_book_path(@book) %></p>
+<% end %>
+<p><%= link_to 'Novedades', books_path %></p>

@@ -10,5 +10,5 @@ class User < ApplicationRecord
   has_many :addresses
   has_many :orders
   has_many :books, through: :orders
-  enum role: [:editorial, :lector, :admin]
+  enum role: [:Editorial, :Lector, :admin]
 end
