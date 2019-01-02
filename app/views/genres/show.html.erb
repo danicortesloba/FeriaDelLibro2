@@ -1,12 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @genre.name %>
-  <% @genre.books.each do |book|%>
-  <%= book.title %>
-  <% end %>
-</p>
+<% @books.each do |book| %>
+<%= book.title %>
+<% end %>
 
 <%= link_to 'Edit', edit_genre_path(@genre) %> |
 <%= link_to 'Back', genres_path %>

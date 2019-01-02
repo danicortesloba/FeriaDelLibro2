@@ -6,7 +6,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
   # GET /books.json
   def index
     if params[:query].present?
-      @books = Book.where("lower(title) LIKE ?", "%#{params[:query].downcase}%" )
+      @books = Book.where("lower(title) LIKE ?", "%#{params[:query].downcase}%" ).or(Book.where("lower(author_first_name) LIKE ?", "%#{params[:query].downcase}%" )).or(Book.where("lower(author_last_name) LIKE ?", "%#{params[:query].downcase}%" ))
     else
       @books = Book.all
     end

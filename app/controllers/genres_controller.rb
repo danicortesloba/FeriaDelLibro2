@@ -10,10 +10,10 @@ class GenresController < ApplicationController
   # GET /genres/1
   # GET /genres/1.json
   def show
-     Genre.select(:name).distinct.each do |genre|
-    @genre = Genre.find_by_name @genre[:name]
-    puts @genre.books
-     end
+    genres = Genre.where(name: 'Romance').map
+    genres.each do |genre|
+      @books = genre.books
+    end
   end
 
   # GET /genres/new
