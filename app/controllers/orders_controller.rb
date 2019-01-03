@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = current_user.orders
+    @orders = current_user.orders.where(payed: false)
   end
 
   # GET /orders/1

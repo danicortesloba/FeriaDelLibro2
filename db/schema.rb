@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_02_164936) do
+ActiveRecord::Schema.define(version: 2019_01_02_232054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,21 @@ ActiveRecord::Schema.define(version: 2019_01_02_164936) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "publisher_comments", force: :cascade do |t|
+    t.string "content"
+    t.bigint "publisher_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["publisher_id"], name: "index_publisher_comments_on_publisher_id"
+    t.index ["user_id"], name: "index_publisher_comments_on_user_id"
+  end
+
+  create_table "publisher_comments_publishers", id: false, force: :cascade do |t|
+    t.bigint "publisher_id", null: false
+    t.bigint "publisher_comment_id", null: false
+  end
+
   create_table "publishers", force: :cascade do |t|
     t.string "name"
     t.integer "rut"
@@ -141,6 +156,8 @@ ActiveRecord::Schema.define(version: 2019_01_02_164936) do
   add_foreign_key "membership_orders", "users"
   add_foreign_key "orders", "books"
   add_foreign_key "orders", "users"
+  add_foreign_key "publisher_comments", "publishers"
+  add_foreign_key "publisher_comments", "users"
   add_foreign_key "publishers", "users"
   add_foreign_key "readers", "users"
 end

@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 
+<% if @membership_orders.exists? %>
 <h1>Membership Orders</h1>
 
 <table>
   <thead>
     <tr>
       <th>Membership</th>
-      <th>User</th>
+      <th>Price</th>
       <th>Paid</th>
       <th colspan="3"></th>
     </tr>
@@ -15,17 +16,16 @@
   <tbody>
     <% @membership_orders.each do |membership_order| %>
       <tr>
-        <td><%= membership_order.membership %></td>
-        <td><%= membership_order.user %></td>
+        <td><%= membership_order.membership.name %></td>
+        <td><%= membership_order.membership.price %></td>
         <td><%= membership_order.paid %></td>
-        <td><%= link_to 'Show', membership_order %></td>
-        <td><%= link_to 'Edit', edit_membership_order_path(membership_order) %></td>
-        <td><%= link_to 'Destroy', membership_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Borrar', membership_order, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Membership Order', new_membership_order_path %>
+<% else %>
+<p>No tienes ninguna membresía por comprar </p>
+<% end %>

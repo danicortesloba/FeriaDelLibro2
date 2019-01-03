@@ -4,7 +4,7 @@ class MembershipOrdersController < ApplicationController
   # GET /membership_orders
   # GET /membership_orders.json
   def index
-    @membership_orders = MembershipOrder.all
+      @membership_orders = current_user.membership_orders.where(paid: false)
   end
 
   # GET /membership_orders/1
@@ -24,11 +24,12 @@ class MembershipOrdersController < ApplicationController
   # POST /membership_orders
   # POST /membership_orders.json
   def create
-    @membership_order = MembershipOrder.new(membership_order_params)
+    @membership = Membership.find(params[:membership_id])
+    @membership_order = MembershipOrder.new(membership: @membership, user: current_user)
 
     respond_to do |format|
       if @membership_order.save
-        format.html { redirect_to @membership_order, notice: 'Membership order was successfully created.' }
+        format.html { redirect_to membership_orders_path, notice: 'Membership order was successfully created.' }
         format.json { render :show, status: :created, location: @membership_order }
       else
         format.html { render :new }

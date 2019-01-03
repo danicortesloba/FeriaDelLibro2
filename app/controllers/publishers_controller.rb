@@ -1,6 +1,6 @@
 class PublishersController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
-  before_action :set_publisher, only: [:show, :edit, :update, :destroy]
+  before_action :set_publisher, only: [:show, :edit, :update, :destroy, :add_publisher_comment, :remove_publisher_comment]
 
   # GET /publishers
   # GET /publishers.json
@@ -21,6 +21,22 @@ class PublishersController < ApplicationController
 
   # GET /publishers/1/edit
   def edit
+  end
+
+  def add_publisher_comment
+    publishercomment = PublisherComment.new
+    publishercomment.content = params[:content]
+    publishercomment.user_id = current_user.id
+    publishercomment.publisher_id = @publisher.id
+    publishercomment.save
+    @publisher.publisher_comments << publishercomment
+    redirect_to publisher_path
+  end
+
+  def remove_publisher_comment
+    publishercomment = @publisher.publisher_comments.find(params[:publisher_comment_id])
+    @publisher.publisher_comments.delete(publishercomment)
+    redirect_to publisher_path
   end
 
   # POST /publishers

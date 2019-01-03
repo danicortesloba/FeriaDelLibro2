@@ -1,0 +1,24 @@
+<%= form_with(model: publisher_comment, local: true) do |form| %>
+  <% if publisher_comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(publisher_comment.errors.count, "error") %> prohibited this publisher_comment from being saved:</h2>
+
+      <ul>
+      <% publisher_comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+  </div>
+
+    <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -21,6 +21,11 @@
         <td><%= link_to 'Show', membership %></td>
         <td><%= link_to 'Edit', edit_membership_path(membership) %></td>
         <td><%= link_to 'Destroy', membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if signed_in? && current_user.role == 'Editorial' %>
+        <td><%= link_to 'Contratar', membership_membership_orders_path(membership), method: :post %> </td>
+        <% else %>
+        <td> Ingresa con tu cuenta para comprar </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

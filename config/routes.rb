@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
-  resources :membership_orders
-  resources :memberships
+    resources :memberships do
+      resources :membership_orders, only: :create
+      resources :membership_orders, only: :index
+    end
     resources :addresses
-    get 'addresses/:id/default', to: 'addresses#default', as:'addresses_default'
+      get 'addresses/:id/default', to: 'addresses#default', as:'addresses_default'
     resources :classifications
     resources :genres
+    resources :publishers do
+      member do
+        post 'add_publisher_comment'
+        delete 'remove_publisher_comment/:publisher_comment_id',
+        to: 'publisher#remove_publisher_comment', :format => false,
+        as: 'remove_publisher_comment'
+      end
+    end
     resources :books do
       resources :orders, only: :create
       resources :orders, only: :index
@@ -22,8 +32,8 @@ Rails.application.routes.draw do
       end
     end
     resources :orders
+    resources :membership_orders
     resources :readers
-    resources :publishers
     devise_for :users, controllers: {
         registrations: 'users/registrations'
       }

@@ -69,7 +69,7 @@
     <p><%= link_to 'Comprar', book_orders_path(@book), method: :post %> </p>
     <h3>Agregar comentario</h3>
     <%= form_tag (add_comment_book_path(@book)) do %>
-    <%= text_area_tag :content %>
+    <%= text_field_tag "content" %>
     <% end %>
 <% end %>
 

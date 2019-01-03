@@ -12,8 +12,24 @@
      <% end %>
   <% end %>
 
+  <strong> Comentarios: </strong>
+  <% if signed_in? && current_user.role =='Lector' %>
+      <% @publisher.publisher_comments.each do |publisher_comment| %>
+          <p><%= publisher_comment.content%>
+          <%= link_to 'X', remove_publisher_comment_publisher_path(@publisher, publisher_comment_id: publisher_comment.id), method: :delete %></p>
+      <% end %>
+  <% else %>
+      <% @publisher.publisher_comments.each do |publisher_comment| %>
+          <p><%= publisher_comment.content%></p>
+      <% end %>
+  <% end %>
 
-
+  <% if signed_in? && current_user.role == 'Lector' %>
+      <h3>Agregar comentario</h3>
+      <%= form_tag (add_publisher_comment_publisher_path(@publisher)) do %>
+      <%= text_field_tag "content" %>
+      <% end %>
+  <% end %>
 
 <%= link_to 'Edit', edit_publisher_path(@publisher) %> |
 <%= link_to 'Back', publishers_path %>

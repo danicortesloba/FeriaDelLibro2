@@ -3,4 +3,5 @@ class Publisher < ApplicationRecord
   belongs_to :user
   has_many :books
   has_many :comments
+  has_many :publisher_comments
 end

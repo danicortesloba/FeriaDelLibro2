@@ -10,13 +10,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  
+
 
    def create
      @user = User.new(user_params)
      if @user.save
        if @user.role == "Editorial" and sign_in(@user)
-         redirect_to new_publisher_path
+         redirect_to memberships_path
        elsif sign_in(@user)
          redirect_to new_reader_path
        end

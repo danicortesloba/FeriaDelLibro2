@@ -7,8 +7,11 @@ class User < ApplicationRecord
   has_one :publisher
   has_one :reader
   has_many :comments
+  has_many :publisher_comments
   has_many :addresses
   has_many :orders
+  has_many :membership_orders
   has_many :books, through: :orders
+  has_many :memberships, through: :membership_orders
   enum role: [:Editorial, :Lector, :admin]
 end
