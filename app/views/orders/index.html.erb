@@ -6,8 +6,8 @@
     <table>
       <thead>
         <tr>
-          <th>User</th>
-          <th>Book</th>
+          <th>Título</th>
+          <th>Precio</th>
           <th colspan="3"></th>
         </tr>
       </thead>
@@ -24,10 +24,12 @@
           <td>Total</td>
           <td><%= @orders.map{|order| order.book.price }.sum %></td>
         </tr>
-      </tbody>
-    </table>
 
-    <h2>Dirección de envío</h2>
+        <tr>
+          <td>
+            <h2>Dirección de envío</h2>
+        </tr>
+          </td>
     <% current_user.addresses.each do |address| %>
         <% if address.default == true %>
             <tr>
@@ -37,6 +39,18 @@
             </tr>
         <% end %>
     <% end %>
+              <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                  <%= link_to 'Confirmar compra', prepay_billings_path, class: 'btn btn-success float-right' %>
+              <tr>
+                <td>
+
+      </tbody>
+    </table>
 
 <% else %>
     <p> ¡No tienes nada en tu carrito!</p>

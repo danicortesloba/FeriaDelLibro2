@@ -40,6 +40,11 @@ Rails.application.routes.draw do
     devise_for :users, skip: :all
     get 'users/my_books'
     get 'users/profile'
+    resources :billings, only: [] do
+        collection do
+            get 'prepay'
+        end 
+    end
     root "books#index"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
