@@ -24,6 +24,7 @@ Rails.application.config.assets.paths << Rails.root.join('vendor', 'img', 'produ
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'img', 'slider')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'img', 'team')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'img', 'thum-2')
+Rails.application.config.assets.paths << Rails.root.join('vendor', 'js')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'js', 'vendor')
 
 # Precompile additional assets.
