@@ -1,54 +1,171 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="<%= root_path %>">Feria del Libro</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="<%= publishers_path %>">Editoriales<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="<%= readers_path %>">Lectores<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= books_path %>">Novedades</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= users_profile_path%>">Mi perfil</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= orders_path%>">Carrito de Compras</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= users_my_books_path%>">Mis libros</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= new_book_path%>">Agregar libro</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Categorías
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <% Genre.select(:name).distinct.each do |genre|  %>
-            <% genre = Genre.find_by_name genre[:name] %>
-            <a class="dropdown-item" href="<%= genre_path(genre.id)%>"> <%= genre.name.titleize %></a>
+<header>
+<!-- header-top-area-start -->
+<div class="header-top-area">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <div class="account-area text-right">
+        <ul>
+          <li><a href="<%= users_profile_path%>"> Mi perfil</a></li>
+          <% if user_signed_in?%>
+          <li><a href="<%= destroy_user_session_path%>" data-method="DELETE">Salir</a></li>
+          <% else %>
+              <li><a href="<%= new_user_session_path%>">Entrar</a></li>
+              <li><a href="<%= new_user_registration_path%>">Registrarse</a></li>
           <% end %>
-        </div>
-      </li>
-
-      <%if user_signed_in?%>
-      <li class="nav-item active"><a class="nav-link" href="<%= destroy_user_session_path%>" data-method="DELETE">Salir</a></li>
-      <% else %>
-          <li class="nav-item active"><a class="nav-link"href="<%= new_user_session_path%>">Entrar</a></li>
-          <li class="nav-item"><a class="nav-link" href="<%= new_user_registration_path%>">Registrarse</a></li>
-      <% end %>
-    </ul>
-    <form class="form-inline my-2 my-lg-0" action="<%= books_path%>">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+        </ul>
+      </div>
+    </div>
   </div>
+</div>
+</div>
+<!-- header-top-area-end -->
+<!-- header-mid-area-start -->
+<div class="header-mid-area ptb-40">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+      <div class="logo-area">
+        <a href="index.html"><img src="<%= asset_path 'img/logo/3.png' %>" alt="logo" /></a>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-5 col-xs-12">
+      <div class="header-search">
+        <form action="<%= books_path%>">
+          <input type="search" placeholder="Busca en toda la tienda"  name="query">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <div class="my-cart">
+        <ul>
+          <li><a href="#"><i class="fa fa-shopping-cart"></i>My Cart</a>
+            <span>2</span>
+            <div class="mini-cart-sub">
+              <div class="cart-product">
+                <div class="single-cart">
+                  <div class="cart-img">
+                    <a href="#"><img src="<%= asset_path 'img/product/1.jpg' %>" alt="book" /></a>
+                  </div>
+                  <div class="cart-info">
+                    <h5><a href="#">Joust Duffle Bag</a></h5>
+                    <p>1 x £60.00</p>
+                  </div>
+                  <div class="cart-icon">
+                      <a href="#"><i class="fa fa-remove"></i></a>
+                  </div>
+                </div>
+                <div class="single-cart">
+                  <div class="cart-img">
+                    <a href="#"><img src="<%= asset_path 'img/product/3.jpg' %>" alt="book" /></a>
+                  </div>
+                  <div class="cart-info">
+                    <h5><a href="#">Chaz Kangeroo Hoodie</a></h5>
+                    <p>1 x £52.00</p>
+                  </div>
+                  <div class="cart-icon">
+                                                <a href="#"><i class="fa fa-remove"></i></a>
+                                            </div>
+                </div>
+              </div>
+              <div class="cart-totals">
+                <h5>Total <span>£12.00</span></h5>
+              </div>
+              <div class="cart-bottom">
+                <a class="view-cart" href="<%= orders_path%>">Carrito de Compras</a>
+                <a href="checkout.html">Check out</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="main-menu-area hidden-sm hidden-xs" id="header-sticky">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="menu-area">
+        <nav>
+          <ul>
+            <li class="active"><a href="<%= root_path %>">Inicio<i class="fa fa-angle-down"></i></a></li>
+            <li><a href="<%= books_path %>">Libros<i class="fa fa-angle-down"></i></a>
+              <div class="mega-menu">
+                <span>
+                  <% Genre.select(:name).distinct.each do |genre|  %>
+                    <% genre = Genre.find_by_name genre[:name] %>
+                    <a href="<%= genre_path(genre.id)%>"> <%= genre.name.titleize %></a>
+                  <% end %>
+                </span>
+              </div>
+            </li>
+            <li><a href="#">Admin<i class="fa fa-angle-down"></i></a>
+              <div class="sub-menu sub-menu-2">
+                <ul>
+                  <li><a href="<%= publishers_path %>">Editoriales</a></li>
+                  <li><a href="<%= readers_path %>">Lectores</a></li>
+                </ul>
+              </div>
+            </li>
+            <li><a href="#">Editoriales<i class="fa fa-angle-down"></i></a>
+              <div class="sub-menu sub-menu-2">
+                <ul>
+                  <li> <a href="<%= users_my_books_path%>">Mis libros</a> </li>
+                  <li><a href="<%= new_book_path%>">Agregar libro</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- main-menu-area-end -->
+<!-- mobile-menu-area-start -->
+<div class="mobile-menu-area hidden-md hidden-lg">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="mobile-menu">
+        <nav id="mobile-menu-active">
+          <ul id="nav">
+            <li><a href="<%= root_path %>">Inicio</a></li>
+            <li><a href="<%= books_path %>">Libros</a>
+              <ul>
+                <li><% Genre.select(:name).distinct.each do |genre|  %>
+                  <% genre = Genre.find_by_name genre[:name] %>
+                  <a href="<%= genre_path(genre.id)%>"> <%= genre.name.titleize %></a>
+                <% end %></li>
+              </ul>
+            </li>
+            <li><a href="#">Admin</a>
+              <ul>
+                <li><a href="<%= publishers_path %>">Editoriales</a></li>
+                <li><a href="<%= readers_path %>">Lectores</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Editoriales</a>
+              <ul>
+                <li> <a href="<%= users_my_books_path%>">Mis libros</a> </li>
+                <li><a href="<%= new_book_path%>">Agregar libro</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- mobile-menu-area-end -->
+</header>
+
 </nav>
