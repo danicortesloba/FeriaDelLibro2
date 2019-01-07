@@ -1,0 +1,45 @@
+Addresses
+Form: OK
+Index: Cart
+
+Books:
+Form: register
+Show: product-details
+Index: OK
+
+Devise
+Login: login
+Form:register
+Password: register
+
+Genres:
+Show books:
+
+Memberships:
+Form: register
+Index: cart
+
+MembershipOrder:
+Index: Cart
+
+Orders:
+Index: cart
+
+Publishers:
+Form: Register
+Index: Wishlist
+Show: shop
+
+Readers:
+Form: Register
+Index: Wishlist
+Show: Cart
+
+Users:
+My_books: Wishlist
+Profile: Cart
+
+Also:
+- Modales
+- Footer
+- Banners

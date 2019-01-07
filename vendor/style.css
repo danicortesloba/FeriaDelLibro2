@@ -4,10 +4,10 @@
     Version: 2
 
 -----------------------------------------------------------------------------------
-    
+
     CSS INDEX
     ===================
-	
+
     1. Template Default CSS (body, link color, section etc)
 	2. Header-area
 		2.1 Header top area
@@ -43,7 +43,7 @@
 	27. Checkout
 	28. Wishlist
 	29. 404 page
-	
+
 
 -----------------------------------------------------------------------------------*/
 
@@ -1741,7 +1741,7 @@ body {
     width: 40px;
     z-index: 1;
 }
-.product-active-2.owl-carousel .owl-nav button i , 
+.product-active-2.owl-carousel .owl-nav button i ,
 .product-active-3.owl-carousel .owl-nav button i {
     position: relative;
     top: -3px;
@@ -1750,20 +1750,20 @@ body {
     background: #f07c29 none repeat scroll 0 0;
     color: #fff;
 }
-.product-active-2.owl-carousel .owl-nav button.owl-next , 
+.product-active-2.owl-carousel .owl-nav button.owl-next ,
 .product-active-3.owl-carousel .owl-nav button.owl-next {
     left: auto;
     right: 40px;
 }
-.product-active-2.owl-carousel:hover .owl-nav button.owl-next , 
+.product-active-2.owl-carousel:hover .owl-nav button.owl-next ,
 .product-active-3.owl-carousel:hover .owl-nav button.owl-next {
     right: 0px;
 }
-.product-active-2.owl-carousel:hover .owl-nav button.owl-prev , 
+.product-active-2.owl-carousel:hover .owl-nav button.owl-prev ,
 .product-active-3.owl-carousel:hover .owl-nav button.owl-prev {
     left: 0px;
 }
-.product-active-2.owl-carousel:hover .owl-nav button , 
+.product-active-2.owl-carousel:hover .owl-nav button ,
 .product-active-3.owl-carousel:hover .owl-nav button {
     opacity: 1;
     visibility: visible;
@@ -2932,7 +2932,7 @@ a#scrollUp:hover {
 .home-4 .twitter-text a:hover {
     color: #232323;
 }
-.home-4 .product-active-2.owl-carousel .owl-nav button:hover , 
+.home-4 .product-active-2.owl-carousel .owl-nav button:hover ,
 .home-4 .product-active-3.owl-carousel .owl-nav button:hover {
     background: #00abe0 none repeat scroll 0 0;
     color: #fff;
@@ -5017,9 +5017,9 @@ nav.menu .cr-dropdown ul {
     font-weight: 400;
 }
 .single-register > a:hover {
-    background-color: #F07C29;
+    background-color: #00abe0;
     color: #fff;
-    border: 1px solid #F07C29;
+    border: 1px solid #00abe0;
 }
 
 
