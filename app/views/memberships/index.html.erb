@@ -17,7 +17,7 @@
       <tr>
         <td><%= membership.name %></td>
         <td><%= membership.description %></td>
-        <td><%= membership.price %></td>
+        <td><%= number_to_currency(membership.price, precision: 0) %></td>
         <td><%= link_to 'Show', membership %></td>
         <td><%= link_to 'Edit', edit_membership_path(membership) %></td>
         <td><%= link_to 'Destroy', membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>

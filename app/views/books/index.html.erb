@@ -122,95 +122,35 @@
     <!-- most-product-area-start -->
     <div class="most-product-area mb-30">
       <div class="section-title-2 mb-30">
-        <h3>Trending Products </h3>
+        <h3>Últimas Editoriales </h3>
       </div>
       <div class="product-active-2 owl-carousel" id="trending">
+
         <div class="product-total-2">
+          <% @publishers.last(3).reverse.each do |publisher| %>
           <div class="single-most-product bd mb-18">
             <div class="most-product-img">
-              <a href="#"><img src="<%= asset_path 'img/product/20.jpg' %>" alt="book" /></a>
+              <% if publisher.books.exists? %>
+                <% publisher.books.last do |book|  %>
+                  <%= image_tag book.thumb.cover.url %>
+                <% end %>
+              <% else %>
+                <%= image_tag 'fallback/thumb_fallback.jpeg' %>
+              <% end %>
             </div>
             <div class="most-product-content">
-              <h4><a href="#">Endeavor Daytrip</a></h4>
+              <%= publisher.name %>
               <div class="product-price">
                 <ul>
-                  <li>$30.00</li>
-                  <li class="old-price">$33.00</li>
+                  <li><%= link_to "#{publisher.name}", publisher_path(publisher.id) %></li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="single-most-product bd mb-18">
-            <div class="most-product-img">
-              <a href="#"><img src="<%= asset_path 'img/product/21.jpg' %>" alt="book" /></a>
-            </div>
-            <div class="most-product-content">
-              <h4><a href="#">Savvy Shoulder Tote</a></h4>
-              <div class="product-price">
-                <ul>
-                  <li>$30.00</li>
-                  <li class="old-price">$35.00</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="single-most-product">
-            <div class="most-product-img">
-              <a href="#"><img src="<%= asset_path 'img/product/22.jpg' %>" alt="book" /></a>
-            </div>
-            <div class="most-product-content">
-              <h4><a href="#">Compete Track Tote</a></h4>
-              <div class="product-price">
-                <ul>
-                  <li>$35.00</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <% end %>
         </div>
-        <div class="product-total-2">
-          <div class="single-most-product bd mb-18">
-            <div class="most-product-img">
-              <a href="#"><img src="<%= asset_path 'img/product/23.jpg' %>" alt="book" /></a>
-            </div>
-            <div class="most-product-content">
-              <h4><a href="#">Voyage Yoga Bag</a></h4>
-              <div class="product-price">
-                <ul>
-                  <li>$30.00</li>
-                  <li class="old-price">$33.00</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="single-most-product bd mb-18">
-            <div class="most-product-img">
-              <a href="#"><img src="<%= asset_path 'img/product/24.jpg' %>" alt="book" /></a>
-            </div>
-            <div class="most-product-content">
-              <h4><a href="#">Impulse Duffle</a></h4>
-              <div class="product-price">
-                <ul>
-                  <li>$70.00</li>
-                  <li class="old-price">$74.00</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="single-most-product">
-            <div class="most-product-img">
-              <a href="#"><img src="<%= asset_path 'img/product/22.jpg' %>" alt="book" /></a>
-            </div>
-            <div class="most-product-content">
-              <h4><a href="#">Fusion Backpack</a></h4>
-              <div class="product-price">
-                <ul>
-                  <li>$59.00</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+
+
       </div>
     </div>
     <!-- most-product-area-end -->
@@ -247,57 +187,59 @@
 <% if @books.any? %>
     <div class="new-book-area ptb-50">
       <div class="section-title-2 mb-30">
-        <h3>New Arrivals</h3>
+        <h3>Novedades</h3>
       </div>
+
+
       <div class="tab-active-3 owl-carousel" id="new">
+        <% @books.last(10).reverse.each do |book| %>
         <div class="tab-total">
-<div class="product-wrapper mb-40">
-          <!-- single-product-start -->
-          <% @books.each_slice(5) do |row| %>
-            <% row.each do |book| %>
-            <div class="product-img">
-              <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
-              <div class="quick-view">
-                  <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                            <i class="fa fa-search-plus"></i>
-                                        </a>
-              </div>
-              <div class="product-flag">
-                                        <ul>
-                                            <li><span class="sale">Nuevo</span></li>
+              <div class="product-wrapper mb-40">
 
-                                        </ul>
-              </div>
-            </div>
-            <div class="product-details text-center">
-              <h4><a href="<%= book_path(book.id) %>"><%= book.title %></a></h4>
+                <div class="product-img">
+                  <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
+                  <div class="quick-view">
+                      <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
+                                                <i class="fa fa-search-plus"></i>
+                                            </a>
+                  </div>
+                  <div class="product-flag">
+                                            <ul>
+                                                <li><span class="sale">Nuevo</span></li>
 
-              <h4><a href="<%= book_path(book.id) %>"><%= book.author_first_name %> <%= book.author_last_name %></a></h4>
-              <div class="product-price">
-                <ul>
-                  <li><%= book.price %></li>
-                </ul>
+                                            </ul>
+                  </div>
+                </div>
+                <div class="product-details text-center">
+                  <h4><a href="<%= book_path(book.id) %>"><%= book.title %></a></h4>
+
+                  <h4><a href="<%= book_path(book.id) %>"><%= book.author_first_name %> <%= book.author_last_name %></a></h4>
+                  <div class="product-price">
+                    <ul>
+                      <li><%= number_to_currency(book.price, precision: 0) %></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="product-link">
+                  <div class="product-button">
+                    <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                  </div>
+                  <div class="add-to-link">
+                    <ul>
+                      <li><a href="product-details.html" title="Details"><i class="fa fa-external-link"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="product-link">
-              <div class="product-button">
-                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-              </div>
-              <div class="add-to-link">
-                <ul>
-                  <li><a href="product-details.html" title="Details"><i class="fa fa-external-link"></i></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-      <% end %>
-      <% end %>
-          <!-- single-product-end -->
         </div>
+        <% end %>
       </div>
+
+
 <% else %>
 <div class="section-title-2 mb-30">
-  <h3>No hay libros con esos criterios</h3>
+  <h3>Búsqueda</h3>
+  <h4>No hay libros con esos criterios</h4>
 </div>
 <% end %>
 
@@ -310,7 +252,7 @@
       <div class="row">
           <div class="col-md-4 col-sm-12 xs-mb">
               <div class="section-title-2 mb-30">
-                                <h3>Book</h3>
+                                <h3>Los más vendidos</h3>
                             </div>
                             <div class="product-active-3 owl-carousel" id="product">
                                 <div class="product-total-2">
@@ -387,7 +329,7 @@
           </div>
           <div class="col-md-4 col-sm-12 xs-mb">
               <div class="section-title-2 mb-30 mrg-sm">
-                                <h3>Audio books </h3>
+                                <h3>Los más comentados </h3>
                             </div>
                             <div class="product-active-3 owl-carousel" id="product2">
                                 <div class="product-total-2">
@@ -464,7 +406,7 @@
           </div>
           <div class="col-md-4 col-sm-12">
               <div class="section-title-2 mb-30 mrg-sm">
-                                <h3>Children’s books</h3>
+                                <h3>Los más nuevos</h3>
                             </div>
                             <div class="product-active-3 owl-carousel" id="product3">
                                 <div class="product-total-2">

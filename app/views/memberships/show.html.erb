@@ -12,7 +12,7 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @membership.price %>
+  <%= number_to_currency(@membership.price, precision:0) %>
 </p>
 
 <%= link_to 'Edit', edit_membership_path(@membership) %> |

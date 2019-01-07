@@ -17,7 +17,7 @@
     <% @membership_orders.each do |membership_order| %>
       <tr>
         <td><%= membership_order.membership.name %></td>
-        <td><%= membership_order.membership.price %></td>
+        <td><%= number_to_currency(membership_order.membership.price, precision:0) %></td>
         <td><%= membership_order.paid %></td>
         <td><%= link_to 'Borrar', membership_order, method: :delete %></td>
       </tr>

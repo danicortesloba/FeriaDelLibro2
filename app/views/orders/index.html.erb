@@ -16,13 +16,13 @@
         <% @orders.each do |order| %>
           <tr>
             <td><%= order.book.title %></td>
-            <td><%= order.book.price %></td>
+            <td><%= number_to_currency(order.book.price, precision: 0) %></td>
             <td><%= link_to "Borrar", order, method: :delete %></td>
           </tr>
         <% end %>
         <tr>
           <td>Total</td>
-          <td><%= @orders.map{|order| order.book.price }.sum %></td>
+          <td><%= number_to_currency(@orders.map{|order| order.book.price }.sum, precision: 0) %></td>
         </tr>
 
         <tr>

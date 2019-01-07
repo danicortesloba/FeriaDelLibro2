@@ -55,7 +55,7 @@
                     </div>
                     <div class="cart-info">
                       <h5><a href="<%= book_path(book.id) %>"><%= book.title %></a></h5>
-                      <p><%= book.price %></p>
+                      <p><%= number_to_currency(book.price, precision: 0) %></p>
                     </div>
                     <div class="cart-icon">
                         <%= link_to "X", order, method: :delete %>
@@ -64,7 +64,7 @@
                 <% end %>
               </div>
               <div class="cart-totals">
-                <h5>Total <span><td><%= current_user.orders.where(payed: false).map{|order| order.book.price }.sum %></td></span></h5>
+                <h5>Total <span><td><%= number_to_currency(current_user.orders.where(payed: false).map{|order| order.book.price }.sum, precision: 0) %></td></span></h5>
               </div>
               <div class="cart-bottom">
                 <a class="view-cart" href="<%= orders_path%>">Carrito de Compras</a>
