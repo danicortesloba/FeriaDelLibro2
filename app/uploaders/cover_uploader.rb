@@ -19,7 +19,7 @@ class CoverUploader < CarrierWave::Uploader::Base
    end
 
   # Process files as they are uploaded:
-   process resize_to_fit: [214, 144]
+   process resize_to_fill: [432, 600]
   #
   # def scale(width, height)
   #   # do something
@@ -27,7 +27,7 @@ class CoverUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
    version :thumb do
-     process resize_to_fill: [107, 77]
+     process resize_to_fill: [144, 200]
      def default_url
        ActionController::Base.helpers.asset_path("fallback/" + ["thumb_fallback.jpeg"].compact.join('_'))
      end

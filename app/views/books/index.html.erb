@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+
 <!-- header-mid-area-end -->
 <!-- main-menu-area-start -->
 
@@ -10,7 +11,7 @@
   <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
       <!-- slider-area-start -->
                 <div class="slider-area">
-                    <div class="slider-active owl-carousel">
+                    <div class="slider-active owl-carousel" id="main">
                         <div class="single-slider slider-hm4-1 pt-154 pb-154 bg-img" style="background-image:url(<%= asset_path 'img/slider/7.jpg' %>);">
                             <div class="slider-content-4 slider-animated-1 pl-40">
                                 <h1>Sale up to 30% off</h1>
@@ -123,7 +124,7 @@
       <div class="section-title-2 mb-30">
         <h3>Trending Products </h3>
       </div>
-      <div class="product-active-2 owl-carousel">
+      <div class="product-active-2 owl-carousel" id="trending">
         <div class="product-total-2">
           <div class="single-most-product bd mb-18">
             <div class="most-product-img">
@@ -214,69 +215,7 @@
     </div>
     <!-- most-product-area-end -->
     <!-- recent-post-area-start -->
-    <div class="recent-post-area mb-30">
-      <div class="section-title-2 mb-30">
-        <h3>Recent Posts </h3>
-      </div>
-      <div class="post-active-2 owl-carousel">
-        <div class="single-post">
-                            <div class="post-img">
-                                <a href="#"><img src="<%= asset_path 'img/post/1.jpg'%> " alt="post" /></a>
-                                <div class="blog-date-time">
-                                    <span class="day-time">06</span>
-                                    <span class="moth-time">Dec</span>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <h3><a href="#">The History and the Hype</a></h3>
-                                <span class="meta-author"> Demo Posthemes </span>
-                                <p>Discover five of our favourite dresses from our new collection that are destined to be worn and loved immediately.</p>
-                            </div>
-                        </div>
-        <div class="single-post">
-                            <div class="post-img">
-                                <a href="#"><img src="<%= asset_path 'img/post/2.jpg' %>" alt="post" /></a>
-                                <div class="blog-date-time">
-                                    <span class="day-time">07</span>
-                                    <span class="moth-time">Dec</span>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <h3><a href="#">Answers to your Questions</a></h3>
-                                <span class="meta-author"> Demo Posthemes </span>
-                                <p>Discover five of our favourite dresses from our new collection that are destined to be worn and loved immediately.</p>
-                            </div>
-                        </div>
-        <div class="single-post">
-                            <div class="post-img">
-                                <a href="#"><img src="<%= asset_path 'img/post/3.jpg' %>" alt="post" /></a>
-                                <div class="blog-date-time">
-                                    <span class="day-time">08</span>
-                                    <span class="moth-time">Dec</span>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <h3><a href="#">What is Bootstrap?</a></h3>
-                                <span class="meta-author"> Demo Posthemes </span>
-                                <p>Discover five of our favourite dresses from our new collection that are destined to be worn and loved immediately.</p>
-                            </div>
-                        </div>
-        <div class="single-post">
-                            <div class="post-img">
-                                <a href="#"><img src="<%= asset_path 'img/post/4.jpg' %>" alt="post" /></a>
-                                <div class="blog-date-time">
-                                    <span class="day-time">09</span>
-                                    <span class="moth-time">Dec</span>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <h3><a href="#">Etiam eros massa</a></h3>
-                                <span class="meta-author"> Demo Posthemes </span>
-                                <p>Discover five of our favourite dresses from our new collection that are destined to be worn and loved immediately.</p>
-                            </div>
-                        </div>
-      </div>
-    </div>
+
     <!-- recent-post-area-end -->
     <!-- block-newsletter-area-start -->
     <div class="block-newsletter">
@@ -305,20 +244,19 @@
     </div>
     <!-- banner-area-5-end -->
     <!-- new-book-area-start -->
-    <% if @books.any? %>
+<% if @books.any? %>
     <div class="new-book-area ptb-50">
       <div class="section-title-2 mb-30">
         <h3>New Arrivals</h3>
       </div>
-      <div class="tab-active-3 owl-carousel">
+      <div class="tab-active-3 owl-carousel" id="new">
         <div class="tab-total">
+<div class="product-wrapper mb-40">
           <!-- single-product-start -->
-          <% @books.each do |book| %>
-          <div class="product-wrapper mb-40">
+          <% @books.each_slice(5) do |row| %>
+            <% row.each do |book| %>
             <div class="product-img">
-              <a href="<%= books_path %>">
-                <img src="<%= asset_path 'img/product/1.jpg' %>" alt="book" class="primary" />
-              </a>
+              <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
               <div class="quick-view">
                   <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
                                             <i class="fa fa-search-plus"></i>
@@ -326,25 +264,18 @@
               </div>
               <div class="product-flag">
                                         <ul>
-                                            <li><span class="sale">new</span></li>
-                                            <li><span class="discount-percentage">-5%</span></li>
+                                            <li><span class="sale">Nuevo</span></li>
+
                                         </ul>
               </div>
             </div>
             <div class="product-details text-center">
-              <div class="product-rating">
-                <ul>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                </ul>
-              </div>
-              <h4><a href="#">Joust Duffle Bag</a></h4>
+              <h4><a href="<%= book_path(book.id) %>"><%= book.title %></a></h4>
+
+              <h4><a href="<%= book_path(book.id) %>"><%= book.author_first_name %> <%= book.author_last_name %></a></h4>
               <div class="product-price">
                 <ul>
-                  <li>$60.00</li>
+                  <li><%= book.price %></li>
                 </ul>
               </div>
             </div>
@@ -359,14 +290,18 @@
               </div>
             </div>
           </div>
+      <% end %>
+      <% end %>
           <!-- single-product-end -->
         </div>
       </div>
+<% else %>
+<div class="section-title-2 mb-30">
+  <h3>No hay libros con esos criterios</h3>
+</div>
+<% end %>
+
     </div>
-    <% end %>
-    <% else %>
-    <p> No hay libros con esos datos </p>
-    <% end %>
     <!-- new-book-area-start -->
     <!-- hot-sell-area-2-start -->
     <!-- hot-sell-area-2-end -->
@@ -377,7 +312,7 @@
               <div class="section-title-2 mb-30">
                                 <h3>Book</h3>
                             </div>
-                            <div class="product-active-3 owl-carousel">
+                            <div class="product-active-3 owl-carousel" id="product">
                                 <div class="product-total-2">
                                     <div class="single-most-product bd mb-18">
                                         <div class="most-product-img">
@@ -454,7 +389,7 @@
               <div class="section-title-2 mb-30 mrg-sm">
                                 <h3>Audio books </h3>
                             </div>
-                            <div class="product-active-3 owl-carousel">
+                            <div class="product-active-3 owl-carousel" id="product2">
                                 <div class="product-total-2">
                                     <div class="single-most-product bd mb-18">
                                         <div class="most-product-img">
@@ -529,9 +464,9 @@
           </div>
           <div class="col-md-4 col-sm-12">
               <div class="section-title-2 mb-30 mrg-sm">
-                                <h3>chilren’s books</h3>
+                                <h3>Children’s books</h3>
                             </div>
-                            <div class="product-active-3 owl-carousel">
+                            <div class="product-active-3 owl-carousel" id="product3">
                                 <div class="product-total-2">
                                     <div class="single-most-product bd mb-18">
                                         <div class="most-product-img">
@@ -857,47 +792,3 @@
         </div>
     </div>
 </div>
-
-<% if @books.any? %>
-
-<h1>Novedades</h1>
-
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Título</th>
-          <th>Autor</th>
-          <th>Apellido</th>
-          <th> Editorial </th>
-          <th>Precio</th>
-          <th>ISBN</th>
-          <th>Géneros</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @books.each do |book| %>
-          <tr>
-            <td><%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %></td>
-            <td><%= book.title %></td>
-            <td><%= book.author_first_name %></td>
-            <td><%= book.author_last_name %></td>
-            <td> <%= link_to "#{book.publisher.name}", publisher_path(book.publisher.id) %></td>
-            <td><%= book.price %></td>
-            <td><%= book.isbn %></td>
-            <td><%= book.genres.pluck(:name).join(", ") %></td>
-            <td><%= link_to 'Detalle', book %></td>
-            <% if signed_in? && current_user.role == 'Lector' %>
-            <td><%= link_to 'Comprar', book_orders_path(book), method: :post %> </td>
-            <% else %>
-            <td> Ingresa con tu cuenta de lector para comprar </td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-<% else %>
-<p> No hay libros con esos datos </p>
-<% end %>
