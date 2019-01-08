@@ -48,6 +48,8 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
   # GET /books/1
   # GET /books/1.json
   def show
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
+    @books = Book.all
     @comment = Comment.all
   end
 
