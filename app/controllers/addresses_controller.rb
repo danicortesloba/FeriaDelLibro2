@@ -15,12 +15,15 @@ class AddressesController < ApplicationController
   end
 
   def index
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
+    @books = Book.all
     @addresses = Address.all
   end
 
   # GET /addresses/1
   # GET /addresses/1.json
   def show
+
   end
 
   # GET /addresses/new
