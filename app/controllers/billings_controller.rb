@@ -2,7 +2,7 @@ class BillingsController < ApplicationController
   def prepay
     orders = current_user.orders.where(payed: false)
     precios = orders.map do |order|
-      order.book.price
+    order.book.price
     end
     total = precios.sum
     items = orders.map do |order|
@@ -10,7 +10,7 @@ class BillingsController < ApplicationController
       item[:sku] = order.id.to_s
       item[:name] = order.book.title
       item[:price] = order.book.price.to_s
-      item[:currency] = 'CLP'
+      item[:currency] = 'USD'
       item[:quantity] = 1
       item
     end
@@ -18,22 +18,14 @@ class BillingsController < ApplicationController
         :intent =>  "sale",
         :payer =>  {
           :payment_method =>  "paypal" },
-        :redirect_urls => {
+          :redirect_urls => {
           :return_url => "http://localhost:3000/payment/execute",
           :cancel_url => "http://localhost:3000/" },
-        :transactions =>  [{
-          :item_list => {
-            items: items
-            },
-          :amount =>  {
-            :total =>  total.to_s,
-            :currency =>  "CLP" },
-          :description =>  "Carro de compras." }]})
-
-        if @payment.create
-          render json: @payment.to_json
-        else
-          ":()"
-        end
+          :transactions =>  [{ :item_list => { items: items },:amount =>  {:total =>  total.to_s, :currency =>  "USD" },:description =>  "Carro de compras." }]})
+    if @payment.create
+      render json: @payment.to_json
+    else
+      ":()"
+    end
   end
 end

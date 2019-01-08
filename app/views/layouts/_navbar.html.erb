@@ -43,7 +43,7 @@
       <% if user_signed_in? %>
       <div class="my-cart">
         <ul>
-          <li><a href="#"><i class="fa fa-shopping-cart"></i>Mi Carrito</a>
+          <li><a href="<%= orders_path %>"><i class="fa fa-shopping-cart"></i>Mi Carrito</a>
             <span><%= current_user.orders.where(payed: false).count %></span>
             <div class="mini-cart-sub">
               <div class="cart-product">

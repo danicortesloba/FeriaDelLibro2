@@ -10,9 +10,11 @@ class GenresController < ApplicationController
   # GET /genres/1
   # GET /genres/1.json
   def show
-    genres = Genre.where(name: 'Romance').map
+
+    @books = []
+    genres = Genre.where(name: @genre.name)
     genres.each do |genre|
-      @books = genre.books
+      @books += genre.books.map{|x| x if x.title.present?} if genre.books.any?
     end
   end
 
@@ -29,6 +31,7 @@ class GenresController < ApplicationController
   # POST /genres.json
   def create
     @genre = Genre.new(genre_params)
+    @genre.update(name: @genre.name.titleize) 
 
     respond_to do |format|
       if @genre.save

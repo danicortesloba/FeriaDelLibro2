@@ -1,55 +1,97 @@
 <%= form_with(model: book, local: true) do |form| %>
   <% if book.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
-
-      <ul>
-      <% book.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+        <ul>
+          <% book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :author_first_name %>
-    <%= form.text_field :author_first_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :author_last_name %>
-    <%= form.text_field :author_last_name %>
-  </div>
-
   <%= form.hidden_field :publisher_id, value: current_user.publisher.present? ? current_user.publisher.id : nil %>
 
+  <div class="user-login-area mb-70">
+    <div class="container">
+      <div class="row">
 
-  <div class="field">
-    <%= form.label :cover %>
-    <%= form.file_field :cover, id: :cover_image %>
-  </div>
+        <div class="col-lg-12">
+          <div class="login-title text-center mb-30">
+            <h2>Nuevo Libro</h2>
+          </div>
+        </div>
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
+            <div class="billing-fields">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-register">
+                          <%= form.label :título %>
+                          <%= form.text_field :title %>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-register">
+                          <%= form.label :nombre_del_autor %>
+                          <%= form.text_field :author_first_name %>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-register">
+                          <%= form.label :apellido_del_autor %>
+                          <%= form.text_field :author_last_name %>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-register">
+                          <%= form.label :portada %>
+                          <%= form.file_field :cover, id: :cover_image %>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-register">
+                          <%= form.label :precio %>
+                          <%= form.number_field :price %>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-register">
+                          <%= form.label :ISBN %>
+                          <%= form.number_field :isbn %>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-register">
+                          <%= form.label :sinopsis %>
+                          <%= form.text_area :synopsis %>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="text-center mb-30">
+                          <div class="buttons-cart mb-30">
+                          <a href="#"><%= form.submit "Crear libro"%></a>
+                          </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
+                      </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
 
-  <div class="field">
-    <%= form.label :isbn %>
-    <%= form.number_field :isbn %>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :synopsis %>
-    <%= form.text_area :synopsis %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+  <% end %>

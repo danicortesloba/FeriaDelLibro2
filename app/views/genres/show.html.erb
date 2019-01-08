@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<% byebug %>
 <% @books.each do |book| %>
-<%= book.title %>
+  <%= book.title%>
 <% end %>
 
 <%= link_to 'Edit', edit_genre_path(@genre) %> |
