@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
   $('#main').owlCarousel({
       loop:true,
       margin:10,

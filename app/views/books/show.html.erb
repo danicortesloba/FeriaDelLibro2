@@ -3,7 +3,7 @@
 <div class="product-main-area mb-70">
   <div class="container">
     <div class="row">
-      
+
       <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
         <!-- product-main-area-start -->
         <div class="product-main-area">
@@ -42,7 +42,7 @@
                 <div class="product-add-form">
                     <form action="#">
                     <% if signed_in? && current_user.role == 'Editorial' %>
-                      <li><%= link_to 'Editar Libro', edit_book_path(@book) %></li>
+                      <%= link_to 'Editar Libro', edit_book_path(@book) %>
                     <% end %>
                   </form>
                </div>
@@ -57,7 +57,7 @@
         </div>
         <!-- product-main-area-end -->
         <!-- product-info-area-start -->
-        <div class="product-info-area mt-20">
+        <div class="product-info-area mt-80">
           <!-- Nav tabs -->
           <a id="com"></a>
           <ul class="nav nav-tabs" role="tablist">
@@ -98,35 +98,41 @@
                                     <div class="section-title mb-10 mt-10">
                                         <h4>Comentarios</h4>
                                     </div>
-                                    <div class="review-control-vote">
-                                          <% if signed_in? && current_user.role =='Lector' %>
-                                                <% @book.comments.each do |comment| %>
-                                                    <p> <%= comment.content%>
-                                                    <%= link_to 'X', remove_comment_book_path(@book, comment_id: comment.id), method: :delete %></p>
-                                                <% end %>
-                                          <% else %>
-                                               <% @book.comments.each do |comment| %>
-                                                    <p><%= comment.content%></p>
-                                                <% end %>
-                                          <% end %>
+                                    <div class="review-field-ratings">
+                                      <div class="control">
+                                        <div class="single-control">
+                                              <div class="review-control-vote">
+                                                    <% if signed_in? && current_user.role =='Lector' %>
+                                                          <% @book.comments.each do |comment| %>
+                                                              <p> <%= comment.content%>
+                                                              <%= link_to 'X', remove_comment_book_path(@book, comment_id: comment.id), method: :delete %></p>
+                                                          <% end %>
+                                                    <% else %>
+                                                         <% @book.comments.each do |comment| %>
+                                                              <p><%= comment.content%></p>
+                                                          <% end %>
+                                                    <% end %>
+                                               </div>
+                                        </div>
                                      </div>
+                                    </div>
                                      <div class="review-add">
                                         <h3>Estás comentando:</h3>
                                         <h4><%= @book.title %></h4>
+                                      </div>
                                         <div class="review-form">
                                             <div class="single-form">
                                                     <% if signed_in? && current_user.role == 'Lector' %>
                                                         <p><%= form_tag (add_comment_book_path(@book)) do %>
                                                               <%= text_area_tag "content" %></p>
-                                                              <div class="buttons-cart mb-10">
-                                                              <p><%= submit_tag "Guardar comentario"%></p>
                                                           <% end %>
                                                       <% end %>
-                                          </div>
                                             </div>
                                         </div>
-                                     </div>
-                               </div>
+                                        <div class="buttons-cart mb-10">
+                                              <p><%= submit_tag "Guardar comentario"%></p>
+                                        </div>
+                                </div>
                             </div>
           </div>
         </div>
@@ -142,7 +148,7 @@
             <h4>Novedades </h4>
           </div>
           <div class="random-area mb-30">
-            <div class="product-active-2 owl-carousel" id="latest">
+            <div class="product-active-2 owl-carousel" id=latest>
               <div class="product-total-2">
                 <% Book.all.last(3).reverse.each do |book| %>
                     <div class="single-most-product bd mb-18">
@@ -163,6 +169,7 @@
               </div>
             </div>
           </div>
+
           <div class="banner-area mb-30">
             <div class="banner-img-2">
               <a href="#"><img src="<%= asset_path 'img/banner/33.jpg' %>" alt="banner" /></a>
@@ -172,7 +179,7 @@
             <h4>Los más comentados</h4>
           </div>
           <div class="random-area mb-30">
-            <div class="product-active-2 owl-carousel" id="commented">
+            <div class="product-active-2 owl-carousel" id=commented>
               <div class="product-total-2">
                 <% @bycomments.limit(3).each do |book| %>
                     <div class="single-most-product bd mb-18">
@@ -192,7 +199,7 @@
                 <% end %>
             </div>
           </div>
-        </div>
+          </div>
         </div>
       </div>
 

@@ -2,6 +2,7 @@
 <div class="product-main-area mb-70">
   <div class="container">
     <div class="row">
+
       <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
             <div class="user-login-area mb-70">
               <div class="container">
@@ -74,8 +75,9 @@
       <h4>Novedades </h4>
     </div>
     <div class="random-area mb-30">
-      <div class="product-active-2 owl-carousel" id="latest">
+      <div class="product-active-2 owl-carousel" id=latest>
         <div class="product-total-2">
+
           <% Book.all.last(3).reverse.each do |book| %>
               <div class="single-most-product bd mb-18">
                 <div class="most-product-img">
@@ -104,7 +106,7 @@
       <h4>Los más comentados</h4>
     </div>
     <div class="random-area mb-30">
-      <div class="product-active-2 owl-carousel" id="commented">
+      <div class="product-active-2 owl-carousel" id=commented>
         <div class="product-total-2">
           <% @bycomments.limit(3).each do |book| %>
               <div class="single-most-product bd mb-18">
