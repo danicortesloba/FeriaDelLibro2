@@ -44,10 +44,10 @@
       <div class="my-cart">
         <ul>
           <li><a href="<%= orders_path %>"><i class="fa fa-shopping-cart"></i>Mi Carrito</a>
-            <span><%= current_user.orders.where(payed: false).count %></span>
+            <span><%= current_user.orders.cart.count %></span>
             <div class="mini-cart-sub">
               <div class="cart-product">
-                <% current_user.orders.where(payed: false).each do |order| %>
+                <% current_user.orders.cart.each do |order| %>
                   <% book = order.book  %>
                   <div class="single-cart">
                     <div class="cart-img">
@@ -64,7 +64,7 @@
                 <% end %>
               </div>
               <div class="cart-totals">
-                <h5>Total <span><td><%= number_to_currency(current_user.orders.where(payed: false).map{|order| order.book.price }.sum, precision: 0) %></td></span></h5>
+                <h5>Total <span><td><%= number_to_currency(current_user.orders.cart.map{|order| order.book.price }.sum, precision: 0) %></td></span></h5>
               </div>
               <div class="cart-bottom">
                 <a class="view-cart" href="<%= orders_path%>">Carrito de Compras</a>

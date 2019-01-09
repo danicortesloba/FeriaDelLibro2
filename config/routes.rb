@@ -46,7 +46,9 @@ Rails.application.routes.draw do
     get 'users/publishers'
     resources :billings, only: [] do
         collection do
+            get 'index'
             get 'prepay'
+            get 'execute'
         end
     end
     root "books#index"

@@ -1,0 +1,8 @@
+    <% @billing.orders.each do |order| %>
+
+          Título: <%= order.book.title %>
+          Editorial: <%= order.book.publisher.name %>
+          Precio: <%= number_to_currency(order.book.price, precision: 0) %>
+
+    <% end %>
+    

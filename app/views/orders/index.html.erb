@@ -22,7 +22,7 @@
         <% end %>
         <tr>
           <td>Total</td>
-          <td><%= number_to_currency(@orders.map{|order| order.book.price }.sum, precision: 0) %></td>
+          <td><%= number_to_currency(@orders.get_total, precision: 0) %></td>
         </tr>
 
         <tr>

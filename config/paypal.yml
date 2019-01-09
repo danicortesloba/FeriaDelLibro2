@@ -1,8 +1,8 @@
 test: &default
 
   # Credentials for REST APIs
-  client_id: ARGKbxCiHzFnvHWVGF9hZnZkWU1lHnoNoLKn7ZtFupkHGzbv14U22f7IZZ3B7wXOpF1KC-74z7fI-bSi
-  client_secret: ELIpw5qieuEwGbhV9gS5jMFt1U3Gu-fT_s7TEAvnDR7oEfK6PivfsbcceV0aGiYwhMlLOhRt-A1YxSSM
+  client_id: <%= Rails.application.credentials.fetch(:paypal_client_id) %>
+  client_secret: <%= Rails.application.credentials.fetch(:paypal_secret_id) %>
 
   # Mode can be 'live' or 'sandbox'
   mode: sandbox
