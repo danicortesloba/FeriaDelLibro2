@@ -4,4 +4,6 @@ class Publisher < ApplicationRecord
   has_many :books
   has_many :comments
   has_many :publisher_comments
+  enum voucher: [:Boleta, :Factura]
+  enum method: [:Paypal, :Depósito, :Mach]
 end

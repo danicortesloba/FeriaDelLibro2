@@ -1,3 +1,6 @@
-
-
+<% if @unpaid.any? or current_user.membership_orders.empty? %>
+<h3> ¡Oops! Debes pagar tu membresía de editor para agregar libros. <h3>
+<h4>Revisa aquí las <%= link_to 'Membresías', memberships_path %><h4>
+<% else %>
 <%= render 'form', book: @book %>
+<% end %>

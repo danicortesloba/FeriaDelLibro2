@@ -39,6 +39,14 @@ Users:
 My_books: Wishlist
 Profile: Cart
 
+About: About + Pestañas
+
+Contact: contact
+
+FAQ: About + pestañas
+
+Publishers: Wishlist
+
 Also:
 - Ask: must reload for custom js to work
 - Limit genre menu

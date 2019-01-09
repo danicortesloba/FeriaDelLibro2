@@ -12,4 +12,17 @@ class UsersController < ApplicationController
     @books = publisher.books
     end
   end
+
+  def about
+  end
+
+  def faq
+  end
+
+  def contact
+  end
+
+  def publishers
+  end
+  
 end

@@ -162,7 +162,7 @@
                                                       <div class="product-img">
                                                           <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
                                                           <div class="quick-view">
-                                                              <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
+                                                              <a class="action-view" href="#" data-target="#productModal<%= book.id %>" data-toggle="modal" title="Quick View">
                                                                 <i class="fa fa-search-plus"></i>
                                                               </a>
                                                           </div>
@@ -322,7 +322,8 @@
 <!-- banner-area-end -->
 
 <!-- Modal -->
-<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+  <% @books.each do |book| %>
+<div class="modal fade" id="productModal<%= book.id %>" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
             <div class="modal-content">
                     <div class="modal-header">
@@ -330,7 +331,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <% @books.each do |book| %>
+
                                 <div class="col-md-5 col-sm-5 col-xs-12">
                                     <div class="modal-tab">
                                         <div class="product-details-large tab-content">
@@ -354,9 +355,10 @@
 
                                     </div>
                                 </div>
-                            <% end %>
+
                         </div>
                     </div>
             </div>
     </div>
 </div>
+  <% end %>

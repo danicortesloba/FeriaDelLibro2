@@ -46,7 +46,7 @@ class PublishersController < ApplicationController
 
     respond_to do |format|
       if @publisher.save
-        format.html { redirect_to @publisher, notice: 'Publisher was successfully created.' }
+        format.html { redirect_to memberships_path, notice: 'Publisher was successfully created.' }
         format.json { render :show, status: :created, location: @publisher }
       else
         format.html { render :new }

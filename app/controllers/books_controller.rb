@@ -55,6 +55,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
 
   # GET /books/new
   def new
+    @unpaid = current_user.membership_orders.where(paid: false)
     @book = Book.new
   end
 

@@ -40,10 +40,14 @@ Rails.application.routes.draw do
     devise_for :users, skip: :all
     get 'users/my_books'
     get 'users/profile'
+    get 'users/about'
+    get 'users/faq'
+    get 'users/contact'
+    get 'users/publishers'
     resources :billings, only: [] do
         collection do
             get 'prepay'
-        end 
+        end
     end
     root "books#index"
 

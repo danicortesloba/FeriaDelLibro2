@@ -3,6 +3,7 @@
 <div class="product-main-area mb-70">
   <div class="container">
     <div class="row">
+      
       <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
         <!-- product-main-area-start -->
         <div class="product-main-area">
@@ -121,19 +122,20 @@
                                                               <p><%= submit_tag "Guardar comentario"%></p>
                                                           <% end %>
                                                       <% end %>
-                                              </div>
+                                          </div>
+                                            </div>
                                         </div>
                                      </div>
                                </div>
-                          </div>
-            </div>
+                            </div>
+          </div>
         </div>
-        </div>
+      </div>
         <!-- product-info-area-end -->
         <!-- new-book-area-start -->
 
         <!-- new-book-area-start -->
-      </div>
+
       <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
         <div class="shop-left">
           <div class="left-title mb-20">
@@ -184,15 +186,16 @@
                                 <li><a href="<%= book_path(book.id) %>"><%= book.title %></a></li><br>
                                 <li><%= number_to_currency(book.price, precision: 0) %></li>
                             </ul>
-                        </div>
+                      </div>
                       </div>
                     </div>
                 <% end %>
-              </div>
             </div>
           </div>
         </div>
+        </div>
       </div>
+
     </div>
   </div>
 </div>
