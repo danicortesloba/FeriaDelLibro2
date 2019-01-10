@@ -14,5 +14,6 @@ class User < ApplicationRecord
   has_many :books, through: :orders
   has_many :memberships, through: :membership_orders
   has_many :billings
+  has_many :millings
   enum role: [:Editorial, :Lector, :admin]
 end

@@ -54,5 +54,5 @@ class BillingsController < ApplicationController
      else
          render plain: "No se puedo generar el cobro en PayPal."
      end
-end
+   end
 end

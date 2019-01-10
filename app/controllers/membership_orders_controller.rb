@@ -4,7 +4,7 @@ class MembershipOrdersController < ApplicationController
   # GET /membership_orders
   # GET /membership_orders.json
   def index
-      @membership_orders = current_user.membership_orders.where(paid: false)
+      @membership_orders = current_user.membership_orders.cart
   end
 
   # GET /membership_orders/1

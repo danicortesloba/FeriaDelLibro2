@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_08_144253) do
+ActiveRecord::Schema.define(version: 2019_01_09_233838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,13 +78,26 @@ ActiveRecord::Schema.define(version: 2019_01_08_144253) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "membership_billings", force: :cascade do |t|
+    t.string "code"
+    t.string "payment_method"
+    t.decimal "amount", precision: 10, scale: 2
+    t.string "currency"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_membership_billings_on_user_id"
+  end
+
   create_table "membership_orders", force: :cascade do |t|
     t.bigint "membership_id"
     t.bigint "user_id"
     t.boolean "paid", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "milling_id"
     t.index ["membership_id"], name: "index_membership_orders_on_membership_id"
+    t.index ["milling_id"], name: "index_membership_orders_on_milling_id"
     t.index ["user_id"], name: "index_membership_orders_on_user_id"
   end
 
@@ -94,6 +107,17 @@ ActiveRecord::Schema.define(version: 2019_01_08_144253) do
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "millings", force: :cascade do |t|
+    t.string "code"
+    t.string "payment_method"
+    t.decimal "amount", precision: 10, scale: 2
+    t.string "currency"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_millings_on_user_id"
   end
 
   create_table "movies_tags", id: false, force: :cascade do |t|
@@ -169,8 +193,11 @@ ActiveRecord::Schema.define(version: 2019_01_08_144253) do
   add_foreign_key "comments", "books"
   add_foreign_key "comments", "publishers"
   add_foreign_key "comments", "users"
+  add_foreign_key "membership_billings", "users"
   add_foreign_key "membership_orders", "memberships"
+  add_foreign_key "membership_orders", "millings"
   add_foreign_key "membership_orders", "users"
+  add_foreign_key "millings", "users"
   add_foreign_key "orders", "billings"
   add_foreign_key "orders", "books"
   add_foreign_key "orders", "users"

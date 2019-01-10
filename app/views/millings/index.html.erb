@@ -1,0 +1,6 @@
+<% @milling.membership_orders.each do |order| %>
+
+      Nombre <%= order.membership.name %>
+      Precio: <%= number_to_currency(order.membership.price, precision: 0) %>
+
+<% end %>

@@ -51,6 +51,13 @@ Rails.application.routes.draw do
             get 'execute'
         end
     end
+    resources :millings, only: [] do
+        collection do
+            get 'pre_pay'
+            get 'execute'
+            get 'index'
+        end
+    end
     root "books#index"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

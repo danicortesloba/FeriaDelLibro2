@@ -24,7 +24,7 @@
         <% if signed_in? && current_user.role == 'Editorial' %>
         <td><%= link_to 'Contratar', membership_membership_orders_path(membership), method: :post %> </td>
         <% else %>
-        <td> Ingresa con tu cuenta para comprar </td>
+        <td> Ingresa con tu cuenta de editor para comprar </td>
         <% end %>
       </tr>
     <% end %>
