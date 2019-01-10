@@ -8,18 +8,17 @@
       <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <div class="slider-area">
                 <div class="slider-active owl-carousel" id="main">
-                    <div class="single-slider slider-hm4-1 pt-154 pb-154 bg-img" style="background-image:url(<%= asset_path 'img/slider/7.jpg' %>);">
+                    <div class="single-slider slider-hm4-1 pt-154 pb-154 bg-img" style="background-image:url(<%= asset_path 'banners/IndexMainReading.png' %>);">
                         <div class="slider-content-4 slider-animated-1 pl-40">
-                            <h1>Sale up to 30% off</h1>
-                            <h2>Books in Store</h2>
-                            <a href="#">Shopping now!</a>
+                            <h1>Revisa nuestras ofertas </h1>
+                            <h2>Descuentos en todos los libros</h2>
                         </div>
                     </div>
-                    <div class="single-slider pt-154 pb-154 bg-img" style="background-image:url(<%= asset_path 'img/slider/8.jpg' %>);">
+                    <div class="single-slider pt-154 pb-154 bg-img" style="background-image:url(<%= asset_path 'banners/IndexMainBook.png' %>);">
                         <div class="slider-content-4 slider-animated-1 pl-40">
-                            <h1>Sale up to 30% off</h1>
-                            <h2>Books in Order</h2>
-                            <a href="#">Shopping now!</a>
+                            <h1>Oferta para editoriales</h1>
+                            <h2>Sólo $20.000 al año</h2>
+                            <a href="<%= memberships_path %>">Contrata ahora</a>
                         </div>
                     </div>
                 </div>
@@ -29,46 +28,46 @@
       <div class="col-lg-3 col-md-3 hidden-sm col-xs-12">
         <div class="banner-static-2">
           <div class="banner-img-2">
-            <a href="#"><img src="<%= asset_path 'img/banner/20.jpg' %>" alt="banner" /></a>
+            <a href="<%= users_about_path %>"><img src="<%= asset_path 'banners/IndexRightDoor2.png' %>" alt="banner" /></a>
           </div>
 
          <div class="banner-area-3">
            <div class="single-banner-2 mt-16">
               <div class="single-icon-2">
-                  <a href="#">
+                  <a href="<%= users_about_path %>">
                       <img class="service-blue-img" src="<%= asset_path 'img/icon-img/service-1.png' %>" alt="banner" />
                       <img class="service-white-img" src="<%= asset_path 'img/icon-img/service-1-white.png' %>" alt="banner" />
                   </a>
               </div>
               <div class="single-text-2">
-                <h2>Free shipping item</h2>
-                <p>For all orders over $500</p>
+                <h2>Directo a tu puerta</h2>
+                <p>Enviado por la editorial</p>
               </div>
            </div>
 
             <div class="single-banner-2 mt-16">
               <div class="single-icon-2">
-                    <a href="#">
+                    <a href="<%= users_about_path %>">
                       <img class="service-blue-img" src="<%= asset_path 'img/icon-img/service-2.png' %>" alt="banner" />
                       <img class="service-white-img" src="<%= asset_path 'img/icon-img/service-2-white.png' %>" alt="banner" />
                     </a>
               </div>
               <div class="single-text-2">
-                    <h2>Money back guarante</h2>
-                    <p>100% money back guarante</p>
+                    <h2>Entrega en 15 días hábiles</h2>
+                    <p>Máximo para ventas en Chile</p>
               </div>
             </div>
 
             <div class="single-banner-2 mt-16">
                 <div class="single-icon-2">
-                    <a href="#">
+                    <a href="<%= users_about_path %>">
                         <img class="service-blue-img" src="<%= asset_path 'img/icon-img/service-3.png' %>" alt="banner" />
                         <img class="service-white-img" src="<%= asset_path 'img/icon-img/service-3-white.png' %>" alt="banner" />
                     </a>
                 </div>
                 <div class="single-text-2">
-                    <h2>Cash on delivery</h2>
-                    <p>Lorem ipsum dolor amet</p>
+                    <h2>Te devolvemos tu dinero</h2>
+                    <p>Si el libro no te llega</p>
                 </div>
             </div>
           </div>
@@ -141,7 +140,7 @@
                       <!-- banner-area-start -->
                       <div class="banner-area mb-30">
                         <div class="banner-img-2">
-                          <a href="#"><img src="<%= asset_path 'img/banner/21.jpg' %>" alt="banner" /></a>
+                          <a href="<% users_publishers_path %>"><img src="<%= asset_path 'banners/IndexLeftComission.png' %>" alt="banner" /></a>
                         </div>
                       </div>
 
@@ -202,12 +201,12 @@
                         <div class="banner-area-5 mb-70">
                             <div class="single-banner-4 xs-mb">
                                 <div class="banner-img-2">
-                                    <a href="#"><img src="<%= asset_path 'img/banner/24.jpg' %>" alt="banner" /></a>
+                                    <a href="#"><img src="<%= asset_path 'banners/IndexMiddleLargeOffers.png' %>" alt="banner" /></a>
                                 </div>
                             </div>
                             <div class="single-banner-5">
                                 <div class="banner-img-2">
-                                    <a href="#"><img src="<%= asset_path 'img/banner/23.jpg' %>" alt="banner" /></a>
+                                    <a href="#"><img src="<%= asset_path 'banners/IndexMiddleSmallEscape2.png' %>" alt="banner" /></a>
                                 </div>
                             </div>
                         </div>
@@ -309,10 +308,10 @@
         <div class="row">
               <div class="col-lg-12">
                     <div class="banner-img-2 for-height">
-                        <a href="#"><img src="<%= asset_path 'img/banner/5.jpg' %>" alt="banner" /></a>
+                        <a href="#"><img src="<%= asset_path 'banners/IndexBottomBooks.png' %>" alt="banner" /></a>
                         <div class="banner-text">
-                            <h3>G. Meyer Books & Spiritual Traveler Press</h3>
-                            <h2>Sale up to 30% off</h2>
+                            <h3>Original | Económica | Libre</h3>
+                            <h2>Descubre la literatura independiente</h2>
                         </div>
                     </div>
               </div>
