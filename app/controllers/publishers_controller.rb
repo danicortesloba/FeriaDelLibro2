@@ -34,8 +34,9 @@ class PublishersController < ApplicationController
   end
 
   def remove_publisher_comment
-    publishercomment = @publisher.publisher_comments.find(params[:publisher_comment_id])
-    @publisher.publisher_comments.delete(publishercomment)
+    byebug
+    publisher_comment = @publisher.publisher_comments.find(params[:publisher_comment_id])
+    @publisher.publisher_comments.delete(publisher_comment)
     redirect_to publisher_path
   end
 
