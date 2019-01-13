@@ -2,6 +2,10 @@ class MillingsController < ApplicationController
   def index
     @milling = current_user.millings.last
   end
+
+  def alternative
+  end
+  
   def pre_pay
     orders = current_user.membership_orders.cart
     precios = orders.map do |order|

@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     end
     resources :millings, only: [] do
         collection do
+            get 'alternative'
             get 'pre_pay'
             get 'execute'
             get 'index'

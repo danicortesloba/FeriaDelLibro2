@@ -7,6 +7,11 @@ Form: OK
 Show: OK
 Index: OK
 
+Billings
+Index: cart
+
+
+
 Devise
 Login: login
 Form:register

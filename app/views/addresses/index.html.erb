@@ -3,132 +3,132 @@
   <div class="container">
     <div class="row">
 
-      <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-            <div class="user-login-area mb-70">
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-9">
-                    <div class="login-title text-center mb-30">
-                      <h2>Mis direcciones</h2>
+              <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                    <div class="user-login-area mb-70">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-lg-9">
+                            <div class="login-title text-center mb-30">
+                              <h2>Mis direcciones</h2>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <% if current_user.addresses.exists? %>
+                    <div class="cart-main-area mb-70">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-lg-8">
+                            <form action="#">
+                              <div class="table-content table-responsive">
+                                <table>
+                                  <thead>
+                                    <tr>
+                                      <th class="product-thumbnail">Nombre</th>
+                                      <th class="product-name">Dirección</th>
+                                      <th class="product-price">Editar</th>
+                                      <th class="product-quantity">Eliminar</th>
+                                      <th class="product-subtotal">Dirección de envío</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <% current_user.addresses.each do |address| %>
+                                        <tr>
+                                            <td class="product-name"><%= address.title %></td>
+                                            <td class="product-name"><%= address.address %></td>
+                                            <td class="product-remove"><%= link_to 'Editar', edit_address_path(address) %></td>
+                                            <td class="product-remove"><%= link_to 'Eliminar', address, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                                            <% if address.default == true %>
+                                                <td class="product-name">Dirección actual de envío <img class="service-blue-img" src="<%= asset_path 'img/icon-img/service-1.png' %>" alt="banner" /></td>
+                                            <% else %>
+                                                <td class="product-name"><%= link_to 'Hacer dirección de envío', addresses_default_path(address) %></td>
+                                            <% end %>
+                                         </tr>
+                                     <% end %>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <% else %>
+                    <h3> Aún no has ingresado direcciones </h3>
+                    <% end %>
+
+                    <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                                    <div class="buttons-cart mb-30">
+                                        <ul>
+                                            <li><%= link_to 'Nueva dirección', new_address_path %></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                      </div>
+             </div>
+              <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                <div class="shop-left">
+                  <div class="left-title mb-20">
+                    <h4>Novedades </h4>
+                  </div>
+                  <div class="random-area mb-30">
+                    <div class="product-active-2 owl-carousel" id=latest>
+                      <div class="product-total-2">
+
+                        <% Book.all.last(3).reverse.each do |book| %>
+                            <div class="single-most-product bd mb-18">
+                              <div class="most-product-img">
+                                <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
+                              </div>
+                              <div class="most-product-content">
+                                <h4><%= book.author_first_name %> <%=book.author_last_name %></h4>
+                                <div class="product-price">
+                                    <ul>
+                                        <li><a href="<%= book_path(book.id) %>"><%= book.title %></a></li><br>
+                                        <li><%= number_to_currency(book.price, precision: 0) %></li>
+                                    </ul>
+                                </div>
+                              </div>
+                            </div>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="banner-area mb-30">
+                    <div class="banner-img-2">
+                      <a href="#"><img src="<%= asset_path 'img/banner/33.jpg' %>" alt="banner" /></a>
+                    </div>
+                  </div>
+                  <div class="left-title mb-20">
+                    <h4>Los más comentados</h4>
+                  </div>
+                  <div class="random-area mb-30">
+                    <div class="product-active-2 owl-carousel" id=commented>
+                      <div class="product-total-2">
+                        <% @bycomments.limit(3).each do |book| %>
+                            <div class="single-most-product bd mb-18">
+                              <div class="most-product-img">
+                                <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
+                              </div>
+                              <div class="most-product-content">
+                                <h4><%= book.author_first_name %> <%=book.author_last_name %></h4>
+                                <div class="product-price">
+                                    <ul>
+                                        <li><a href="<%= book_path(book.id) %>"><%= book.title %></a></li><br>
+                                        <li><%= number_to_currency(book.price, precision: 0) %></li>
+                                    </ul>
+                                </div>
+                              </div>
+                            </div>
+                        <% end %>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <% if current_user.addresses.exists? %>
-            <div class="cart-main-area mb-70">
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-8">
-                    <form action="#">
-                      <div class="table-content table-responsive">
-                        <table>
-                          <thead>
-                            <tr>
-                              <th class="product-thumbnail">Nombre</th>
-                              <th class="product-name">Dirección</th>
-                              <th class="product-price">Cambiar</th>
-                              <th class="product-quantity">Eliminar</th>
-                              <th class="product-subtotal">Dirección de envío</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <% current_user.addresses.each do |address| %>
-                                <tr>
-                                    <td class="product-name"><%= address.title %></td>
-                                    <td class="product-name"><%= address.address %></td>
-                                    <td class="product-remove"><%= link_to 'Cambiar', edit_address_path(address) %></td>
-                                    <td class="product-remove"><%= link_to 'Eliminar', address, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                                    <% if address.default == true %>
-                                        <td class="product-name">Dirección actual de envío <img class="service-blue-img" src="<%= asset_path 'img/icon-img/service-1.png' %>" alt="banner" /></td>
-                                    <% else %>
-                                        <td class="product-name"><%= link_to 'Hacer dirección de envío', addresses_default_path(address) %></td>
-                                    <% end %>
-                                 </tr>
-                             <% end %>
-                          </tbody>
-                        </table>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <% else %>
-            <h3> Aún no has ingresado direcciones </h3>
-            <% end %>
-
-            <div class="row">
-                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
-                            <div class="buttons-cart mb-30">
-                                <ul>
-                                    <li><%= link_to 'Nueva dirección', new_address_path %></li>
-                                </ul>
-                            </div>
-                        </div>
-              </div>
-</div>
-<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-  <div class="shop-left">
-    <div class="left-title mb-20">
-      <h4>Novedades </h4>
     </div>
-    <div class="random-area mb-30">
-      <div class="product-active-2 owl-carousel" id=latest>
-        <div class="product-total-2">
-
-          <% Book.all.last(3).reverse.each do |book| %>
-              <div class="single-most-product bd mb-18">
-                <div class="most-product-img">
-                  <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
-                </div>
-                <div class="most-product-content">
-                  <h4><%= book.author_first_name %> <%=book.author_last_name %></h4>
-                  <div class="product-price">
-                      <ul>
-                          <li><a href="<%= book_path(book.id) %>"><%= book.title %></a></li><br>
-                          <li><%= number_to_currency(book.price, precision: 0) %></li>
-                      </ul>
-                  </div>
-                </div>
-              </div>
-          <% end %>
-        </div>
-      </div>
     </div>
-    <div class="banner-area mb-30">
-      <div class="banner-img-2">
-        <a href="#"><img src="<%= asset_path 'img/banner/33.jpg' %>" alt="banner" /></a>
-      </div>
-    </div>
-    <div class="left-title mb-20">
-      <h4>Los más comentados</h4>
-    </div>
-    <div class="random-area mb-30">
-      <div class="product-active-2 owl-carousel" id=commented>
-        <div class="product-total-2">
-          <% @bycomments.limit(3).each do |book| %>
-              <div class="single-most-product bd mb-18">
-                <div class="most-product-img">
-                  <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
-                </div>
-                <div class="most-product-content">
-                  <h4><%= book.author_first_name %> <%=book.author_last_name %></h4>
-                  <div class="product-price">
-                      <ul>
-                          <li><a href="<%= book_path(book.id) %>"><%= book.title %></a></li><br>
-                          <li><%= number_to_currency(book.price, precision: 0) %></li>
-                      </ul>
-                  </div>
-                </div>
-              </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
 </div>

@@ -43,6 +43,25 @@
     <%= form.select :method, options_for_select(["Paypal", "Depósito", "Mach"]), :class => 'genForm_dropBox' %>
   </div>
 
+  <div class="field">
+    <%= form.label :url_facebook %>
+    <%= form.text_field :facebook %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url_twitter %>
+    <%= form.text_field :twitter %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url_instagram %>
+    <%= form.text_field :instagram %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url_website %>
+    <%= form.text_field :website %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>

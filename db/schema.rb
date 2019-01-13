@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_11_184458) do
+ActiveRecord::Schema.define(version: 2019_01_11_194644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_01_11_184458) do
     t.text "synopsis"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "pvp"
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
   end
 
@@ -159,8 +160,8 @@ ActiveRecord::Schema.define(version: 2019_01_11_184458) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "voucher", default: 1
-    t.integer "method", default: 1
+    t.integer "voucher", default: 0
+    t.integer "method", default: 0
     t.text "address"
     t.string "facebook"
     t.string "twitter"

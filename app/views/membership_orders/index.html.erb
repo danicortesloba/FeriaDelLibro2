@@ -24,8 +24,12 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to 'Confirmar compra', pre_pay_millings_path, class: 'btn btn-success float-right' %>
-<br>
+    <% if signed_in? && current_user.publisher.method == 'Paypal'%>
+      <%= link_to 'Confirmar compra', pre_pay_millings_path, class: 'btn btn-success float-right' %>
+    <br>
+    <% else %>
+      <%= link_to 'Confirmar compra', alternative_millings_path, class: 'btn btn-success float-right' %>
+    <% end %>
 <% else %>
 <p>No tienes ninguna membresía por comprar </p>
 <% end %>

@@ -1,31 +1,24 @@
-Models
-
-- To publisher model and form: address, boleta o factura, facebook, instagram, twitter, webpage
-- Botón "pagar" en memberships must go to billings or deposit or mach according to what they chose in publisher model
-- Add pvp to book form, then add it to show and index
-
 
 Index
 - Limit genres and ignore if no books
-- Carrousel with random
-- Carrousel with cheapest
 
 Pages
-- Book form: mention suggested dimensions
-- In show add botón agregar género for publishers
-- About divided by tabs de vender y comprar libros, talk about benefits for both (it can be your site and easier for readers), and about offers
-- FAQ: distributor and ebooks
-- Contact
 - Publisher show: social media and website
 - Publishers index (only last book cover and name with link)
 - Publisher form: divide by sections
 - Millings: After membership is paid, when it goes to millings index, show the link to the publisher page.
+- About divided by tabs de vender y comprar libros, talk about benefits for both (it can be your site and easier for readers), and about offers
+- FAQ: distributor and ebooks
+- Contact
 
 
-
+Permissions
+- Access
+- Buttons
 
 
 Later
+- Add nickname to comments?
 - Page with all the books?
 - Add shipping model (1.500 per book). Or perhaps just add a field to order.
 - Bot

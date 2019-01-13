@@ -7,8 +7,10 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
   def index
 
     @publishers = Publisher.all
+    @random = Book.order("RANDOM()")
+    @byprice = Book.order(:price)
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
-    @byorders = Book.joins(:orders).group("books.id").order("count(books.id)DESC")
+    @byorders = Book.joins(:orders).where("payed = true").group("books.id").order("count(books.id)DESC")
     if params[:query].present?
       @books = Book.where("lower(title) LIKE ?", "%#{params[:query].downcase}%" ).or(Book.where("lower(author_first_name) LIKE ?", "%#{params[:query].downcase}%" )).or(Book.where("lower(author_last_name) LIKE ?", "%#{params[:query].downcase}%" ))
     else
@@ -70,7 +72,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.html { redirect_to @book, notice: 'El libro se creó correctamente.' }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
@@ -84,7 +86,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        format.html { redirect_to @book, notice: 'El libro se actualizó correctamente.' }
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit }
@@ -98,7 +100,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.html { redirect_to books_url, notice: 'El libro se eliminó' }
       format.json { head :no_content }
     end
   end

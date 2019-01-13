@@ -6,6 +6,10 @@ class OrdersController < ApplicationController
   # GET /orders.json
   def index
     @orders = current_user.orders.cart
+    precios = @orders.map do |order|
+    order.book.price
+    end
+    @total = precios.sum
   end
 
   # GET /orders/1
