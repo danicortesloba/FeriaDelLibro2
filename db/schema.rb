@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_13_031548) do
+ActiveRecord::Schema.define(version: 2019_01_14_014325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,12 @@ ActiveRecord::Schema.define(version: 2019_01_13_031548) do
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active", default: true
+    t.string "benefit1"
+    t.string "benefit2"
+    t.string "benefit3"
+    t.string "benefit4"
+    t.string "benefit5"
   end
 
   create_table "millings", force: :cascade do |t|

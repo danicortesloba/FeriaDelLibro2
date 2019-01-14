@@ -121,6 +121,6 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
     end
 
     def comment_params
-      params.require(:comment).permit(:id, :content, :publisher_id, :user_id, :book_id)
+      params.require(:comment).permit(:id, :content, :publisher_id, :user_id, :book_id, :pvp)
     end
 end
