@@ -17,7 +17,7 @@ class AddressesController < ApplicationController
   def index
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
     @books = Book.all
-    @addresses = Address.all
+    @addresses = current_user.addresses
   end
 
   # GET /addresses/1

@@ -5,9 +5,14 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
+      <th>Plan</th>
+      <th>Descripción</th>
+      <th>Duración</th>
+      <th>Libros subidos</th>
+      <th>Libros vendidos</th>
+      <th>Tienda exclusiva de editorial</th>
+      <th>Promoción de novedades en redes sociales</th>
+      <th>Precio/th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,14 +22,15 @@
       <tr>
         <td><%= membership.name %></td>
         <td><%= membership.description %></td>
+        <td><%= membership.benefit1 %></td>
+        <td><%= membership.benefit2 %></td>
+        <td><%= membership.benefit3 %></td>
+        <td><%= membership.benefit4 %></td>
+        <td><%= membership.benefit5 %></td>
         <td><%= number_to_currency(membership.price, precision: 0) %></td>
-        <td><%= link_to 'Show', membership %></td>
-        <td><%= link_to 'Edit', edit_membership_path(membership) %></td>
-        <td><%= link_to 'Destroy', membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% if signed_in? && current_user.role == 'Editorial' %>
-        <td><%= link_to 'Contratar', membership_membership_orders_path(membership), method: :post %> </td>
-        <% else %>
-        <td> Ingresa con tu cuenta de editor para comprar </td>
+        <% if signed_in? && current_user.role == 'admin'%>
+        <td><%= link_to 'Editar', edit_membership_path(membership) %></td>
+        <td><%= link_to 'Eliminar', membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>

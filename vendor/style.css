@@ -4183,7 +4183,7 @@ nav.menu .cr-dropdown ul {
     color: #666;
     font-size: 16px;
     position: relative;
-    
+
 }
 .review-field-ratings .single-control .review-control-vote a:hover {
     color: #f07c29;
@@ -5404,6 +5404,7 @@ nav.menu .cr-dropdown ul {
     border-right: 1px solid #e5e5e5;
 }
 .table-content table th {
+    background: #337ab7;
     border-top: medium none;
     font-weight: normal;
     padding: 20px 10px;

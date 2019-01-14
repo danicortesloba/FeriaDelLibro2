@@ -12,7 +12,7 @@
                   <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                     <div class="cart-main-area mb-70">
                       <div class="container">
-                    <% if current_user.addresses.exists? %>
+                    <% if @addresses.exists? %>
                         <div class="row">
                           <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                             <form action="#">
@@ -28,7 +28,7 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <% current_user.addresses.each do |address| %>
+                                    <% @addresses.each do |address| %>
                                         <tr>
                                             <td class="product-name"><%= address.title %></td>
                                             <td class="product-name"><%= address.address %></td>
