@@ -9,11 +9,15 @@ class BillingsController < ApplicationController
             @com = a.commune
             @reg = a.region
       end
-      @billing = current_user.billings.last
-      precios = @billing.orders.map do |order|
-            order.book.price
-      end
+      @billings = current_user.billings
+      if @billings.any?
+        @billing = current_user.billings.last
+        precios = @billing.orders.map do |order|
+              order.book.price
+        end
       @total = precios.sum
+      @expiration = (@billing.created_at + 20.days)
+      end
   end
 
   def prepay

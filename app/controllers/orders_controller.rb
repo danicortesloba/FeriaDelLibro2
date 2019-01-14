@@ -5,11 +5,19 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
+    @books = Book.all
+    @reader = current_user.reader
     @orders = current_user.orders.cart
     precios = @orders.map do |order|
     order.book.price
     end
     @total = precios.sum
+    @addresses = current_user.addresses.where(default:true).each do |a|
+          @adr =  a.address
+          @com = a.commune
+          @reg = a.region
+    end
   end
 
   # GET /orders/1

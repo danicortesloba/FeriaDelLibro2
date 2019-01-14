@@ -4,12 +4,15 @@ class MillingsController < ApplicationController
   def index
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
     @books = Book.all
-    @milling = current_user.millings.last
     @publisher = current_user.publisher
-    @milling.membership_orders.each do |order|
-      @price = order.membership.price
-    end
-    @expiration= (@milling.created_at + 1.year)
+    @millings = current_user.millings
+    if @millings.any?
+        @milling = current_user.millings.last
+        @milling.membership_orders.each do |order|
+          @price = order.membership.price
+        end
+        @expiration= (@milling.created_at + 1.year)
+   end
   end
 
   def alternative

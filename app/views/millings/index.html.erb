@@ -1,3 +1,5 @@
+<% if user_signed_in? && current_user.role == 'Editorial' %>
+<% if current_user.millings.any? %>
 <p id="notice"><%= notice %></p>
 <div class="product-main-area mb-70">
   <div class="container">
@@ -24,8 +26,8 @@
                             <tbody>
                               <% @milling.membership_orders.each do |order| %>
                               <tr>
-                                <td class="product-quantity"><%= order.membership.name %></td>
-                                <td class="product-quantity"><span class="amount"><%= number_to_currency(order.membership.price, precision: 0) %></span></td>
+                                <td class="product-quantity"><h4><%= order.membership.name %></h4></td>
+                                <td class="product-quantity"><h4><span class="amount"><%= number_to_currency(order.membership.price, precision: 0) %></h4></span></td>
 
                               </tr>
                               <% end %>
@@ -41,11 +43,11 @@
                                       <h2>Total: <span class="amount"><%= number_to_currency(@price, precision: 0) %> </span></h2><br>
                                   </div>
 
-                                      <div class="wc-proceed-to-checkout">
-                                        <strong>
-                                          <p> Tu membresía es válida hasta: <%= @expiration.to_date.strftime("%m/%d/%Y") %>. </p>
-                                          <p> Puedes ver la tienda de <%= @publisher.name %> <a href="<%= publisher_path(@publisher)%>"> aquí.</a> <p>
-                                        </strong>
+                                      <div>
+
+                                          <h4> Tu membresía es válida hasta: <%= @expiration.to_date.strftime("%d/%m/%Y") %>. </h4>
+                                          <h4> Puedes ver la tienda de <%= @publisher.name %> <a href="<%= publisher_path(@publisher)%>"> aquí.</a> </h4>
+
                                       </div>
                               </div>
                   </div>
@@ -115,3 +117,5 @@
       </div>
     </div>
   </div>
+  <% end %>
+<% end %>

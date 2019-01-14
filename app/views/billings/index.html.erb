@@ -1,8 +1,12 @@
+<% if user_signed_in? && current_user.role == 'Lector' %>
+<% if current_user.billings.any? %>
+
+
 <p id="notice"><%= notice %></p>
 <div class="product-main-area mb-70">
   <div class="container">
     <div class="row">
-      
+
       <div class="col-lg-12">
         <div class="login-title text-center mb-30">
           <h2>¡Gracias por tu compra!</h2>
@@ -41,16 +45,26 @@
                  </div>
                  <div class="row">
                              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                 <div class="wc-proceed-to-checkout">
-                                     <h2>Total: <span class="amount"><%= number_to_currency(@total, precision: 0) %> </span></h2><br>
-                                 </div>
-
                                      <div class="wc-proceed-to-checkout">
-                                       <strong>
-                                         <p> Tu pedido se enviará a <%= @reader.firstname %> <%= @reader.lastname %> en:  <%= @adr %>, <%= @com %>, <%= @reg %>.</p>
-                                         <p> Fecha de pedido: <%= @billing.created_at.to_date.strftime("%m/%d/%Y") %> </p>
-                                         <p> Si no te llega en un plazo de 20 días, <a href="<%= users_contact_path %>">contáctate con nosotros.</a> <p>
-                                       </strong>
+                                         <h2>Total: <span class="amount"><%= number_to_currency(@total, precision: 0) %> </span></h2><br>
+                                     </div>
+                                     <div>
+                                       <% if @addresses.any? %>
+                                         <h4> Tu pedido se enviará a:</h4>
+                                         <h4> <%= @reader.firstname %> <%= @reader.lastname %></h4>
+                                         <h4><%= @adr %>,</h4>
+                                         <h4> <%= @com %>, <%= @reg %>.</h4>
+                                         <h4> <%= link_to "Cambiar", addresses_path%></h4>
+                                       <% else %>
+                                         <h4> ¡Ojo! No tienes una dirección de envío fijada.</h4>
+                                         <h4> <%= link_to "Agregar dirección", addresses_path%></h4>
+                                       <% end %>
+                                     </div>
+
+                                     <div>
+                                         <br>
+                                         <h4> Fecha de pedido: <%= @billing.created_at.to_date.strftime("%d/%m/%Y") %>. </h4>
+                                         <h4> Si no te llega hasta <%= @expiration.to_date.strftime("%d/%m/%Y") %>, <a href="<%= users_contact_path %>">contáctate con nosotros.</a> </h4>
                                      </div>
                              </div>
                  </div>
@@ -121,3 +135,5 @@
       </div>
     </div>
   </div>
+  <% end %>
+<% end %>
