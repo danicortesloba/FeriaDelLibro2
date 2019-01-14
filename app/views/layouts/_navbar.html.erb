@@ -101,7 +101,13 @@
               </div>
               <div class="cart-bottom">
                 <a class="view-cart" href="<%= membership_orders_path%>">Carrito de Compras</a>
-                <a href="<%= pre_pay_millings_path %>">Pagar</a>
+                <% if signed_in? && current_user.publisher.method == 'Paypal'%>
+                  <a href="<%= pre_pay_millings_path %>">Pagar</a>
+                <br>
+                <% else %>
+                <a href="<%= alternative_millings_path %>">Pagar</a>
+                <% end %>
+
               </div>
             </div>
           </li>
@@ -131,13 +137,14 @@
                 </span>
               </div>
             </li>
-            <li><a href="<%= users_publishers_path %>">Editoriales</a></li>
+            <li><a href="<%= publishers_path %>">Editoriales</a></li>
             <li><a href="<%= users_about_path %>">¿Cómo funciona?</a></li>
             <% if signed_in? && current_user.role == 'admin'%>
                 <li><a href="#">Admin<i class="fa fa-angle-down"></i></a>
                   <div class="sub-menu sub-menu-2">
                     <ul>
-                      <li><a href="<%= publishers_path %>">Editoriales</a></li>
+                      <li><a href="<%= users_memberships_path %>">Membresías</a></li>
+                      <li><a href="<%= users_publishers_path %>">Editoriales</a></li>
                       <li><a href="<%= readers_path %>">Lectores</a></li>
                     </ul>
                   </div>

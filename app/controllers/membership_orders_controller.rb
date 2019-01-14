@@ -4,7 +4,14 @@ class MembershipOrdersController < ApplicationController
   # GET /membership_orders
   # GET /membership_orders.json
   def index
+      @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
+      @books = Book.all
       @membership_orders = current_user.membership_orders.cart
+      @publisher = current_user.publisher
+      precios = @membership_orders.map do |order|
+            order.membership.price
+      end
+      @total = precios.sum
   end
 
   # GET /membership_orders/1

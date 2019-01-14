@@ -8,50 +8,58 @@ Show: OK
 Index: OK
 
 Billings
-Index: cart
+Index: OK
 
+millings
+Index: OK
 
 
 Devise
-Login: login
-Form:register
-Password: register
-
-Genres:
-Show books:
-
-Memberships:
-Form: register
-Index: cart
+Login: OK
+Form:OK
+Edit: OK
+Password: OK
 
 MembershipOrder:
-Index: Cart
+Index: OK
+
+Memberships:
+Form: Ok
+Index: cart
 
 Orders:
 Index: cart
 
 Publishers:
-Form: Register
-Index: Wishlist
-Show: shop
+Form: Register, divide y sections
+Index: Wishlist (only last book cover and name with link)
+Show: shop (social media and website)
 
 Readers:
 Form: Register
-Index: Wishlist
+Index (for admin): Wishlist
 Show: Cart
 
 Users:
 My_books: Wishlist
 Profile: Cart
-
-About: About + Pestañas
-
+About: About + Pestañas de vender y comprar libros, talk about benefits for both (it can be your site and easier for readers), and about offers
 Contact: contact
+FAQ: About + pestañas, distributor and ebooks
+Publishers (for admin): Wishlist
+Memberships (for admin): Wishlist
 
-FAQ: About + pestañas
+Genres:
+Show books:
 
-Publishers: Wishlist
+Footer
 
-Also:
-- Limit genre menu
-- Footer
+Utilización correcta del viewport, añadir favicon, descriptions y título a cada página.
+
+Also make sure spanish in: views, controllers, forms
+
+Form boxes dissapear in mobile
+
+Get rid of arrow
+
+Devise mails and confirmations <%= render "devise/shared/links" %> (confirmable module https://stackoverflow.com/questions/4114835/heroku-devise-missing-host-to-link-to-please-provide-host-parameter-or-set-d)

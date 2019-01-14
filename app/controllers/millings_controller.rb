@@ -1,11 +1,20 @@
 class MillingsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
+    @books = Book.all
     @milling = current_user.millings.last
+    @publisher = current_user.publisher
+    @milling.membership_orders.each do |order|
+      @price = order.membership.price
+    end
+    @expiration= (@milling.created_at + 1.year)
   end
 
   def alternative
   end
-  
+
   def pre_pay
     orders = current_user.membership_orders.cart
     precios = orders.map do |order|

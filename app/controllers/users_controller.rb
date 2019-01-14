@@ -24,5 +24,9 @@ class UsersController < ApplicationController
 
   def publishers
   end
-  
+
+  def memberships
+    @memberships = Membership.all
+  end
+
 end

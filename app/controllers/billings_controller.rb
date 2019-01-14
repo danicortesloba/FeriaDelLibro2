@@ -1,12 +1,15 @@
 class BillingsController < ApplicationController
   before_action :authenticate_user!
   def index
-      @addresses = current_user.addresses.where(default:true).each do |a|
-            @current=  a.address
-      end
-      @billing = current_user.billings.last
       @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
       @books = Book.all
+      @reader = current_user.reader
+      @addresses = current_user.addresses.where(default:true).each do |a|
+            @adr =  a.address
+            @com = a.commune
+            @reg = a.region
+      end
+      @billing = current_user.billings.last
       precios = @billing.orders.map do |order|
             order.book.price
       end

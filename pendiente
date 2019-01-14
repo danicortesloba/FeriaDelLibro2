@@ -1,16 +1,7 @@
 
-Index
+Help
 - Limit genres and ignore if no books
-
-Pages
-- Publisher show: social media and website
-- Publishers index (only last book cover and name with link)
-- Publisher form: divide by sections
-- Millings: After membership is paid, when it goes to millings index, show the link to the publisher page.
-- About divided by tabs de vender y comprar libros, talk about benefits for both (it can be your site and easier for readers), and about offers
-- FAQ: distributor and ebooks
-- Contact
-
+- Edit: add cascade so i can edit devise password that has reader or publisher
 
 Permissions
 - Access
@@ -20,6 +11,7 @@ Permissions
 Later
 - Add nickname to comments?
 - Page with all the books?
+- Convert deposit into a model
 - Add shipping model (1.500 per book). Or perhaps just add a field to order.
 - Bot
 - When i invite: send fake user name so they can add books. If they accept they create user and publisher and i update membership payed.
