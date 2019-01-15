@@ -9,10 +9,11 @@ Permissions
 
 
 Later
+- Cascade
 - Add nickname to comments?
 - Page with all the books?
-- Convert deposit into a model
-- Add shipping model (1.500 per book). Or perhaps just add a field to order.
+- Add deposit  model
+- Add shipping model (unless por cobrar, add regions list model)
 - Bot
 - When i invite: send fake user name so they can add books. If they accept they create user and publisher and i update membership payed.
 - Offer only first month

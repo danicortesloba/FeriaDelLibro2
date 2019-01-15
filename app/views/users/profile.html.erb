@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>Email: <%= @user.email %> <%= link_to 'Cambiar', edit_user_registration_path %> </p>
+<p><%= link_to 'Cambiar contraseña', edit_user_registration_path %> </p>
+
 
 <% if @user.role == "Editorial" %>
     <p> Nombre: <%= @user.publisher.name%> <%= link_to 'Cambiar', edit_publisher_path(@publisher) %> </p>

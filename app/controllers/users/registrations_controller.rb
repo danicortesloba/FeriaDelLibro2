@@ -3,6 +3,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
    before_action :configure_sign_up_params, only: [:create]
    before_action :configure_account_update_params, only: [:update]
+   before_action :set_user, only: [:show, :edit, :update, :destroy]
+
 
   # GET /resource/sign_up
   # def new
@@ -24,14 +26,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
    end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to users_profile_path, notice: 'Tu cuenta se actualizó correctamente.' }
+        format.json { render :show, status: :ok, location: @book }
+      else
+        format.html { render :edit }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
 
   # DELETE /resource
   # def destroy
@@ -65,6 +74,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
      devise_parameter_sanitizer.permit(:account_update, keys: [:email, :role, :password])
    end
 
+   def set_user
+     @user = User.find(current_user.id)
+   end
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
   #   super(resource)

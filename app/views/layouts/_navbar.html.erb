@@ -101,11 +101,13 @@
               </div>
               <div class="cart-bottom">
                 <a class="view-cart" href="<%= membership_orders_path%>">Carrito de Compras</a>
-                <% if signed_in? && current_user.publisher.method == 'Paypal'%>
+                <% if signed_in? && current_user.publisher.present? %>
+                  <% if current_user.publisher.method == 'Paypal'%>
                   <a href="<%= pre_pay_millings_path %>">Pagar</a>
-                <br>
-                <% else %>
-                <a href="<%= alternative_millings_path %>">Pagar</a>
+                  <br>
+                  <% else %>
+                  <a href="<%= alternative_millings_path %>">Pagar</a>
+                  <% end %>
                 <% end %>
 
               </div>

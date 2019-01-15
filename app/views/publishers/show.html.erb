@@ -1,35 +1,206 @@
 <p id="notice"><%= notice %></p>
+<div class="product-main-area mb-70">
+  <div class="container">
+    <div class="row">
 
-<h1>
-  <%= @publisher.name %>
-</h1>
+                <div class="col-lg-12">
+                  <div class="login-title text-center mb-30">
+                    <h2><%= @publisher.name %></h2>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="link-follow text-center">
+                        <ul>
+                            <% if @publisher.twitter.present? %>
+                            <li><a href="<%= users_about_path %>"><img src="<%= asset_path 'facebook.png' %>" alt="facebook" /></a></li>
+                            <% end %>
+                            <% if @publisher.facebook.present? %>
+                              <%= link_to @publisher.facebook, :target => "_blank" do %>
+                                <%= image_tag asset_path("facebook.png") %>
+                              <% end %>
+                            <% end %>
+                            <% if @publisher.instagram.present? %>
+                            <li><a href="<%= @publisher.instagram.url %>"><i class="fa fa-instagram"></i></a></li>
+                            <% end %>
+                            <% if @publisher.website.present? %>
+                            <li><a href="<%= @publisher.website.url%>"><i class="fa fa-globe"></i></a></li>
+                            <% end %>
+                        </ul>
+                  </div>
+                </div>
+
+                  <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    <div class="cart-main-area mb-70">
+
+                        <% @pbooks.each do |book| %>
+
+                          <div class="single-shop mb-30">
+                            <div class="row">
+                              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="product-wrapper-2">
+                                  <div class="product-img">
+                                    <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book) %>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="product-wrapper-content">
+                                  <div class="product-details">
+                                    <h4><a href="<%= book_path(book) %>"><%= book.title %></a></h4>
+                                    <h5> <%= book.author_first_name %> <%= book.author_last_name %> <h5>
+                                    <div class="product-price">
+                                      <ul>
+                                        <li><%= number_to_currency(book.price, precision: 0) %></li>
+                                        <li class="old-price"><%= number_to_currency(book.pvp, precision: 0) %></li>
+                                      </ul>
+                                    </div>
+                                    <p><%= book.synopsis %> </p>
+                                  </div>
+                                  <div class="product-link">
+                                    <div class="product-button">
+                                      <%= link_to 'Agregar al carro', book_orders_path(book), method: :post%> <i class="fa fa-shopping-cart"> </i>
+                                    </div>
+                                    <div class="add-to-link">
+                                                                  <ul>
+                                                                    <li><a href="<%= book_path(book) %>" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                                                  </ul>
+                                                              </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        <% end %>
+
+                        <div class="row">
+                          <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                            <div class="pagination-area mt-50 mb-100">
+                              <div class="list-page-2">
+                                <p><%= will_paginate @pbooks %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="product-info-area mt-80">
+                          <ul class="nav nav-tabs" role="tablist">
+                            <li class="active"><a href="#Reviews" data-toggle="tab">Comentarios</a></li>
+                          </ul>
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="Reviews">
+                                <div class="valu valu-2">
+                                    <div class="review-field-ratings">
+                                      <div class="control">
+                                        <div class="single-control">
+                                            <% if signed_in? && current_user.role =='Lector' %>
+                                                      <% @publisher.publisher_comments.each do |publisher_comment| %>
+                                                          <div class="review-control-vote">
+                                                              <%= publisher_comment.content%>
+                                                                <% if signed_in? && publisher_comment.user == current_user %>
+                                                                    <%= link_to 'X', remove_publisher_comment_publisher_path(@publisher, publisher_comment_id: publisher_comment.id), method: :delete %>
+                                                                <% end %>
+                                                          </div><br>
+                                                      <% end %>
+
+                                           <% else %>
+                                                     <% @publisher.publisher_comments.each do |publisher_comment| %>
+                                                          <div class="review-control-vote">
+                                                              <%= publisher_comment.content%>
+                                                          </div><br>
+                                                    <% end %>
+                                            <% end %>
+
+                                        </div>
+                                     </div>
+                                    </div>
+                                    <% if signed_in? && current_user.role == 'Lector' %>
+                                     <div class="review-add">
+                                        <h3>Estás comentando:</h3>
+                                        <h4><%= @publisher.name %></h4>
+                                      </div>
+
+                                        <div class="review-form">
+                                            <div class="single-form">
+                                                        <p><%= form_tag (add_publisher_comment_publisher_path(@publisher)) do %>
+                                                              <%= text_area_tag "content" %></p>
+                                                              <div class="buttons-cart mb-10">
+                                                                    <%= submit_tag "Guardar comentario"%>
+                                                              </div>
+                                            </div>
+
+                                            <% end %>
+                                        </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
 
 
-  <% @publisher.books.each do |book| %>
-<p>  <%= book.title%> por <%= book.author_first_name %> <%=" "%><%=book.author_last_name %></p>
-     <% book.comments.each do |comment| %>
-        <p><%= comment.content %></p>
-     <% end %>
-  <% end %>
+                    </div>
+                  </div>
 
-  <strong> Comentarios: </strong>
-  <% if signed_in? && current_user.role =='Lector' %>
-      <% @publisher.publisher_comments.each do |publisher_comment| %>
-          <p><%= publisher_comment.content%>
-          <%= link_to 'X', remove_publisher_comment_publisher_path(@publisher, publisher_comment_id: publisher_comment.id), method: :delete %></p>
-      <% end %>
-  <% else %>
-      <% @publisher.publisher_comments.each do |publisher_comment| %>
-          <p><%= publisher_comment.content%></p>
-      <% end %>
-  <% end %>
+                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="shop-left">
+                      <div class="left-title mb-20">
+                        <h4>Novedades </h4>
+                      </div>
+                      <div class="random-area mb-30">
+                        <div class="product-active-2 owl-carousel" id=latest>
+                          <div class="product-total-2">
 
-  <% if signed_in? && current_user.role == 'Lector' %>
-      <h3>Agregar comentario</h3>
-      <%= form_tag (add_publisher_comment_publisher_path(@publisher)) do %>
-      <%= text_field_tag "content" %>
-      <% end %>
-  <% end %>
-
-<%= link_to 'Edit', edit_publisher_path(@publisher) %> |
-<%= link_to 'Back', publishers_path %>
+                            <% Book.all.last(3).reverse.each do |book| %>
+                                <div class="single-most-product bd mb-18">
+                                  <div class="most-product-img">
+                                    <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
+                                  </div>
+                                  <div class="most-product-content">
+                                    <h4><%= book.author_first_name %> <%=book.author_last_name %></h4>
+                                    <div class="product-price">
+                                        <ul>
+                                            <li><a href="<%= book_path(book.id) %>"><%= book.title %></a></li><br>
+                                            <li><%= number_to_currency(book.price, precision: 0) %></li>
+                                        </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="banner-area mb-30">
+                        <div class="banner-img-2">
+                          <a href="<%= users_about_path %>"><img src="<%= asset_path 'banners/ShowRightHouse2.png' %>" alt="banner" /></a>
+                        </div>
+                      </div>
+                      <div class="left-title mb-20">
+                        <h4>Los más comentados</h4>
+                      </div>
+                      <div class="random-area mb-30">
+                        <div class="product-active-2 owl-carousel" id=commented>
+                          <div class="product-total-2">
+                            <% @bycomments.limit(3).each do |book| %>
+                                <div class="single-most-product bd mb-18">
+                                  <div class="most-product-img">
+                                    <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
+                                  </div>
+                                  <div class="most-product-content">
+                                    <h4><%= book.author_first_name %> <%=book.author_last_name %></h4>
+                                    <div class="product-price">
+                                        <ul>
+                                            <li><a href="<%= book_path(book.id) %>"><%= book.title %></a></li><br>
+                                            <li><%= number_to_currency(book.price, precision: 0) %></li>
+                                        </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+     </div>
+  </div>
+</div>

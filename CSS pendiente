@@ -31,27 +31,31 @@ Orders:
 Index: OK
 
 Publishers:
-Form: Register, divide y sections
-Index: Wishlist (only last book cover and name with link)
+Form: OK
+Index: OK
 Show: shop (social media and website)
 
 Readers:
 Form: Register
-Index (for admin): Wishlist
-Show: Cart
+Index (for admin): Cart
 
 Users:
 My_books: Wishlist
 Profile: Cart
+Publishers (for admin): Cart
+Memberships (for admin): Cart
 About: About + Pestañas de vender y comprar libros, talk about benefits for both (it can be your site and easier for readers), and about offers
 Contact: contact
 FAQ: About + pestañas, distributor and ebooks
-Publishers (for admin): Wishlist
-Memberships (for admin): Wishlist
 
 Genres:
-Show books:
+Show books: Cart
 
+
+
+Fix so in search you only get one book result
+
+Buy url, create email and social networks
 
 Utilización correcta del viewport, añadir favicon, descriptions y título a cada página.
 

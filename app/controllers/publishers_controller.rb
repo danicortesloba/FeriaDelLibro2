@@ -5,11 +5,16 @@ class PublishersController < ApplicationController
   # GET /publishers
   # GET /publishers.json
   def index
-    @publishers = Publisher.all
+    @publishers = Publisher.paginate(:page => params[:page], :per_page => 24)
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
+    @books = Book.all
   end
   # GET /publishers/1
   # GET /publishers/1.json
   def show
+    @pbooks = @publisher.books.paginate(:page => params[:page], :per_page => 3)
+    @publishers = Publisher.all
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
     @books = Book.all
   end
 
@@ -88,6 +93,6 @@ class PublishersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def publisher_params
-      params.require(:publisher).permit(:name, :rut, :giro, :user_id, :id, :voucher, :method, :address, :facebook, :twitter, :instagram, :website)
+      params.require(:publisher).permit(:name, :rut, :giro, :user_id, :id, :voucher, :method, :address, :facebook, :twitter, :instagram, :website, :razon)
     end
 end

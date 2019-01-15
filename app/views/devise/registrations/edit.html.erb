@@ -1,4 +1,4 @@
-<div class="user-login-area mb-70">
+  <div class="user-login-area mb-70">
       <div class="container">
         <div class="row">
 
@@ -7,6 +7,7 @@
               <h2>Editar usuario</h2>
             </div>
           </div>
+
       </div>
     </div>
   </div>
@@ -15,7 +16,7 @@
     <div class="container">
       <div class="row">
 
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= form_for(resource, as: resource_name, url: user_registration_path, method: :patch) do |f| %>
             <%= devise_error_messages! %>
             <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
                 <div class="billing-fields">
@@ -81,21 +82,12 @@
                      </div>
                   </div>
 
-                  <div class="row">
-                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                           <div class="single-register">
-                             <h4>¿No te gustó?</h4>
-                             <div class="buttons-cart mb-30"
-                                <p><%= button_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "¿Estás seguro?" }, method: :delete %></p>
-                            </div>
-                          </div>
-                     </div>
-                  </div>
+
                 </div>
             </div>
 
           <% end %>
 
-       </div>
+      </div>
     </div>
-</div>
+  </div
