@@ -10,12 +10,12 @@ class GenresController < ApplicationController
   # GET /genres/1
   # GET /genres/1.json
   def show
-
-    @books = []
+  @books = []
     genres = Genre.where(name: @genre.name)
     genres.each do |genre|
       @books += genre.books.map{|x| x if x.title.present?} if genre.books.any?
     end
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
   end
 
   # GET /genres/new
@@ -31,7 +31,7 @@ class GenresController < ApplicationController
   # POST /genres.json
   def create
     @genre = Genre.new(genre_params)
-    @genre.update(name: @genre.name.titleize) 
+    @genre.update(name: @genre.name.titleize)
 
     respond_to do |format|
       if @genre.save

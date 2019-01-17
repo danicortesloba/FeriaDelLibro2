@@ -12,10 +12,11 @@ class PublishersController < ApplicationController
   # GET /publishers/1
   # GET /publishers/1.json
   def show
-    @pbooks = @publisher.books.paginate(:page => params[:page], :per_page => 3)
+    @pbooks = @publisher.books.paginate(:page => params[:page], :per_page => 5)
     @publishers = Publisher.all
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
     @books = Book.all
+    @facebookurl = "https://" + @publisher.facebook
   end
 
   # GET /publishers/new
@@ -39,7 +40,6 @@ class PublishersController < ApplicationController
   end
 
   def remove_publisher_comment
-    byebug
     publisher_comment = @publisher.publisher_comments.find(params[:publisher_comment_id])
     @publisher.publisher_comments.delete(publisher_comment)
     redirect_to publisher_path
@@ -52,7 +52,7 @@ class PublishersController < ApplicationController
 
     respond_to do |format|
       if @publisher.save
-        format.html { redirect_to memberships_path, notice: 'Publisher was successfully created.' }
+        format.html { redirect_to memberships_path, notice: 'La editorial se creó correctamente' }
         format.json { render :show, status: :created, location: @publisher }
       else
         format.html { render :new }
@@ -66,7 +66,7 @@ class PublishersController < ApplicationController
   def update
     respond_to do |format|
       if @publisher.update(publisher_params)
-        format.html { redirect_to @publisher, notice: 'Publisher was successfully updated.' }
+        format.html { redirect_to books_path, notice: 'La editorial se actualizó correctamente' }
         format.json { render :show, status: :ok, location: @publisher }
       else
         format.html { render :edit }
@@ -80,7 +80,7 @@ class PublishersController < ApplicationController
   def destroy
     @publisher.destroy
     respond_to do |format|
-      format.html { redirect_to publishers_url, notice: 'Publisher was successfully destroyed.' }
+      format.html { redirect_to publishers_url, notice: 'La editorial se eliminó.' }
       format.json { head :no_content }
     end
   end

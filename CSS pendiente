@@ -12,6 +12,7 @@ Index: OK
 
 millings
 Index: OK
+Alternative: OK
 
 
 Devise
@@ -33,36 +34,35 @@ Index: OK
 Publishers:
 Form: OK
 Index: OK
-Show: shop (social media and website)
+Show: Falta social media
 
 Readers:
-Form: Register
-Index (for admin): Cart
+Form: OK
+Index (for admin): OK
 
 Users:
-My_books: Wishlist
-Profile: Cart
-Publishers (for admin): Cart
-Memberships (for admin): Cart
-About: About + Pestañas de vender y comprar libros, talk about benefits for both (it can be your site and easier for readers), and about offers
+My_books: OK
+Profile: OK
+Publishers (for admin): OK
+Memberships (for admin): OK
+
+About: OK
 Contact: contact
-FAQ: About + pestañas, distributor and ebooks
+FAQ: OK Falta rellenar
 
 Genres:
-Show books: Cart
-
-
-
-Fix so in search you only get one book result
-
-Buy url, create email and social networks
+Show books: OK
 
 Utilización correcta del viewport, añadir favicon, descriptions y título a cada página.
 
-Also make sure spanish in: views, controllers, forms
 
-Form boxes dissapear in mobile
+Falta social media en publishers: show. find out how to get absolute url.
+Falta rellenar social media en FAQ
+Ver si se puede usar will_paginate en genre show
 
+
+
+Form boxes dissappear in mobile
 Get rid of arrow
-
+Buy domain, create email and social networks
 Devise mails and confirmations <%= render "devise/shared/links" %> (confirmable module https://stackoverflow.com/questions/4114835/heroku-devise-missing-host-to-link-to-please-provide-host-parameter-or-set-d)

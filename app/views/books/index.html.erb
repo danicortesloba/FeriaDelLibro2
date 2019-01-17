@@ -90,7 +90,7 @@
                         <div class="category-menu">
                           <nav class="menu">
                             <ul>
-                              <% Genre.select(:name).distinct.each do |genre|  %>
+                              <% Genre.select(:name).distinct.limit(15).each do |genre|  %>
                                 <% genre = Genre.find_by_name genre[:name] %>
                                 <li class="cr-dropdown"><a href="<%= genre_path(genre.id)%>"><%= genre.name.titleize %><i class="none-lg fa fa-angle-down"></i></a>
                                 </li>
@@ -149,55 +149,100 @@
                 <!-- new-book-area-start -->
 
                         <div class="new-book-area ptb-20 mb-10">
-                            <% if @books.any? %>
-                                    <div class="section-title-2 mb-20">
-                                      <h3>Novedades</h3>
+                          <% if params[:query].present? %>
+                                <% if @books.any? %>
+                                        <div class="section-title-2 mb-20">
+                                          <h3>Resultados</h3>
+                                        </div>
+
+                                        <div class="tab-active-3 owl-carousel" id="search">
+                                            <% @books.last(10).reverse.each do |book| %>
+                                                <div class="tab-total">
+                                                      <div class="product-wrapper">
+                                                          <div class="product-img">
+                                                              <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
+                                                              <div class="quick-view">
+                                                                  <a class="action-view" href="#" data-target="#productModal<%= book.id %>" data-toggle="modal" title="Quick View">
+                                                                    <i class="fa fa-search-plus"></i>
+                                                                  </a>
+                                                              </div>
+                                                              <div class="product-flag">
+                                                                  <ul>
+                                                                    <li><span class="sale">Nuevo</span></li>
+                                                                  </ul>
+                                                              </div>
+                                                          </div>
+                                                          <div class="product-details text-center">
+                                                              <h4><a href="<%= book_path(book.id) %>"><%= book.title %></a></h4>
+                                                              <h4><a href="<%= book_path(book.id) %>"><%= book.author_first_name %> <%= book.author_last_name %></a></h4>
+                                                              <div class="product-price">
+                                                                  <ul>
+                                                                    <li><%= number_to_currency(book.price, precision: 0) %></li>
+                                                                  <li><span class="old-price">Librerías: <%= number_to_currency(book.pvp, precision: 0) %></span></li>
+
+                                                                  </ul>
+                                                              </div>
+                                                          </div>
+                                                          <div class="product-link">
+                                                              <div class="product-button">
+                                                                <%= link_to 'Agregar al carro', book_orders_path(book), method: :post%> <i class="fa fa-shopping-cart"> </i>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                </div>
+                                            <% end %>
+                                       </div>
+
+                                <% else %>
+                                    <div class="section-title-2 mb-30">
+                                        <h3>Resultados</h3>
+                                        <h4>No hay libros con esos criterios</h4>
                                     </div>
+                                <% end %>
+                          <% else %>
+                                <div class="section-title-2 mb-20">
+                                  <h3>Novedades</h3>
+                                </div>
 
-                                    <div class="tab-active-3 owl-carousel" id="new">
-                                        <% @books.last(10).reverse.each do |book| %>
-                                            <div class="tab-total">
-                                                  <div class="product-wrapper">
-                                                      <div class="product-img">
-                                                          <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
-                                                          <div class="quick-view">
-                                                              <a class="action-view" href="#" data-target="#productModal<%= book.id %>" data-toggle="modal" title="Quick View">
-                                                                <i class="fa fa-search-plus"></i>
-                                                              </a>
-                                                          </div>
-                                                          <div class="product-flag">
-                                                              <ul>
-                                                                <li><span class="sale">Nuevo</span></li>
-                                                              </ul>
-                                                          </div>
+                                <div class="tab-active-3 owl-carousel" id="new">
+                                    <% @books.last(10).reverse.each do |book| %>
+                                        <div class="tab-total">
+                                              <div class="product-wrapper">
+                                                  <div class="product-img">
+                                                      <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
+                                                      <div class="quick-view">
+                                                          <a class="action-view" href="#" data-target="#productModal<%= book.id %>" data-toggle="modal" title="Quick View">
+                                                            <i class="fa fa-search-plus"></i>
+                                                          </a>
                                                       </div>
-                                                      <div class="product-details text-center">
-                                                          <h4><a href="<%= book_path(book.id) %>"><%= book.title %></a></h4>
-                                                          <h4><a href="<%= book_path(book.id) %>"><%= book.author_first_name %> <%= book.author_last_name %></a></h4>
-                                                          <div class="product-price">
-                                                              <ul>
-                                                                <li><%= number_to_currency(book.price, precision: 0) %></li>
-                                                              <li><span class="old-price">Librerías: <%= number_to_currency(book.pvp, precision: 0) %></span></li>
-
-                                                              </ul>
-                                                          </div>
-                                                      </div>
-                                                      <div class="product-link">
-                                                          <div class="product-button">
-                                                            <%= link_to 'Agregar al carro', book_orders_path(book), method: :post%> <i class="fa fa-shopping-cart"> </i>
-                                                          </div>
+                                                      <div class="product-flag">
+                                                          <ul>
+                                                            <li><span class="sale">Nuevo</span></li>
+                                                          </ul>
                                                       </div>
                                                   </div>
-                                            </div>
-                                        <% end %>
-                                   </div>
+                                                  <div class="product-details text-center">
+                                                      <h4><a href="<%= book_path(book.id) %>"><%= book.title %></a></h4>
+                                                      <h4><a href="<%= book_path(book.id) %>"><%= book.author_first_name %> <%= book.author_last_name %></a></h4>
+                                                      <div class="product-price">
+                                                          <ul>
+                                                            <li><%= number_to_currency(book.price, precision: 0) %></li>
+                                                          <li><span class="old-price">Librerías: <%= number_to_currency(book.pvp, precision: 0) %></span></li>
 
-                            <% else %>
-                                <div class="section-title-2 mb-30">
-                                    <h3>Búsqueda</h3>
-                                    <h4>No hay libros con esos criterios</h4>
-                                </div>
-                            <% end %>
+                                                          </ul>
+                                                      </div>
+                                                  </div>
+                                                  <div class="product-link">
+                                                      <div class="product-button">
+                                                        <%= link_to 'Agregar al carro', book_orders_path(book), method: :post%> <i class="fa fa-shopping-cart"> </i>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                        </div>
+                                    <% end %>
+                               </div>
+
+                          <% end %>
                         </div>
 
                         <div class="new-book-area ptb-10 mb-10">

@@ -16,6 +16,8 @@ class MillingsController < ApplicationController
   end
 
   def alternative
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
+
   end
 
   def pre_pay

@@ -14,6 +14,7 @@ Later
 - Page with all the books?
 - Add deposit  model
 - Add shipping model (unless por cobrar, add regions list model)
+- Add ajax so instead of going to a new form for reader and publisher, the user form gets reloaded
 - Bot
 - When i invite: send fake user name so they can add books. If they accept they create user and publisher and i update membership payed.
 - Offer only first month

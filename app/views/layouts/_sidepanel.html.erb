@@ -1,0 +1,60 @@
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+  <div class="shop-left">
+    <div class="left-title mb-20">
+      <h4>Novedades </h4>
+    </div>
+    <div class="random-area mb-30">
+      <div class="product-active-2 owl-carousel" id=latest>
+        <div class="product-total-2">
+
+          <% Book.all.last(3).reverse.each do |book| %>
+              <div class="single-most-product bd mb-18">
+                <div class="most-product-img">
+                  <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
+                </div>
+                <div class="most-product-content">
+                  <h4><%= book.author_first_name %> <%=book.author_last_name %></h4>
+                  <div class="product-price">
+                      <ul>
+                          <li><a href="<%= book_path(book.id) %>"><%= book.title %></a></li><br>
+                          <li><%= number_to_currency(book.price, precision: 0) %></li>
+                      </ul>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="banner-area mb-30">
+      <div class="banner-img-2">
+        <a href="<%= users_about_path %>"><img src="<%= asset_path 'banners/ShowRightHouse2.png' %>" alt="banner" /></a>
+      </div>
+    </div>
+    <div class="left-title mb-20">
+      <h4>Los más comentados</h4>
+    </div>
+    <div class="random-area mb-30">
+      <div class="product-active-2 owl-carousel" id=commented>
+        <div class="product-total-2">
+          <% @bycomments.limit(3).each do |book| %>
+              <div class="single-most-product bd mb-18">
+                <div class="most-product-img">
+                  <%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %>
+                </div>
+                <div class="most-product-content">
+                  <h4><%= book.author_first_name %> <%=book.author_last_name %></h4>
+                  <div class="product-price">
+                      <ul>
+                          <li><a href="<%= book_path(book.id) %>"><%= book.title %></a></li><br>
+                          <li><%= number_to_currency(book.price, precision: 0) %></li>
+                      </ul>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

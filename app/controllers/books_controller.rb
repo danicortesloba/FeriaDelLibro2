@@ -5,7 +5,6 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
   # GET /books
   # GET /books.json
   def index
-
     @publishers = Publisher.all
     @random = Book.order("RANDOM()")
     @byprice = Book.order(:price)
