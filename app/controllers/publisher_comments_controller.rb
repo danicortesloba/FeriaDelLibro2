@@ -1,5 +1,5 @@
 class PublisherCommentsController < ApplicationController
-  before_action :set_publisher_comment, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /publisher_comments
   # GET /publisher_comments.json

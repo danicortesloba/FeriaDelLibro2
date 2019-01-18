@@ -88,9 +88,9 @@
                                           <% if @book.genres.any? %>
                                                 <% @book.genres.each do |genre| %>
                                                     <p><%= genre.name%>
-                                                    <% if signed_in? && @book.publisher.user == current_user%>
+
                                                       <%=  link_to 'X', remove_genre_book_path(@book, genre_id: genre.id), method: :delete %></p>
-                                                    <% end %>
+
                                                 <% end %>
                                           <% else %>
                                                 <p>Este libro no tiene géneros asociados.</p>

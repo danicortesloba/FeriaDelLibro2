@@ -1,5 +1,5 @@
 class MillingsController < ApplicationController
-  before_action :authenticate_user!
+  load_and_authorize_resource
 
   def index
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")

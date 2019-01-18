@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:profile, :my_books, :publishers, :memberships]
   def profile
     @user = current_user
     @publisher = current_user.publisher
@@ -13,8 +13,8 @@ class UsersController < ApplicationController
     if current_user.role == 'Editorial'
     publisher = current_user.publisher
     @books = publisher.books.paginate(:page => params[:page], :per_page => 8)
-    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
     end
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
   end
 
   def about

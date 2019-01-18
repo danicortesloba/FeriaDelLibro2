@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
-before_action :authenticate_user!, only: [:new, :create]
-before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :remove_genre, :add_comment, :remove_comment]
+load_and_authorize_resource
+before_action :set_book, only: [:add_genre, :remove_genre, :add_comment, :remove_comment]
 
   # GET /books
   # GET /books.json
@@ -25,7 +25,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
 
   def remove_genre
     genre = @book.genres.find(params[:genre_id])
-    @book.genres.delete(genre)
+      @book.genres.delete(genre)
     redirect_to book_path
   end
 
@@ -42,7 +42,9 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
 
   def remove_comment
     comment = @book.comments.find(params[:comment_id])
-    @book.comments.delete(comment)
+    if comment.user == current_user
+      @book.comments.delete(comment)
+    end
     redirect_to book_path
   end
 

@@ -53,16 +53,22 @@ FAQ: OK Falta rellenar
 Genres:
 Show books: OK
 
-Utilización correcta del viewport, añadir favicon, descriptions y título a cada página.
 
 
+
+Preguntas
 Falta social media en publishers: show. find out how to get absolute url.
-Falta rellenar social media en FAQ
+Ignorar genres sin libros en navbar e index
 Ver si se puede usar will_paginate en genre show
 
 
-
+Añadir descriptions y título a cada página.
+Falta agregar links a about
+Falta rellenar FAQ
 Form boxes dissappear in mobile
 Get rid of arrow
 Buy domain, create email and social networks
+
+
+
 Devise mails and confirmations <%= render "devise/shared/links" %> (confirmable module https://stackoverflow.com/questions/4114835/heroku-devise-missing-host-to-link-to-please-provide-host-parameter-or-set-d)

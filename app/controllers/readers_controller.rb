@@ -1,6 +1,5 @@
 class ReadersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
-  before_action :set_reader, only: [:show, :edit, :update, :destroy]
+load_and_authorize_resource
 
   # GET /readers
   # GET /readers.json

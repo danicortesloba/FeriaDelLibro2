@@ -1,6 +1,6 @@
 class PublishersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
-  before_action :set_publisher, only: [:show, :edit, :update, :destroy, :add_publisher_comment, :remove_publisher_comment]
+  load_and_authorize_resource
+  before_action :set_publisher, only: [:add_publisher_comment, :remove_publisher_comment]
 
   # GET /publishers
   # GET /publishers.json
@@ -41,7 +41,9 @@ class PublishersController < ApplicationController
 
   def remove_publisher_comment
     publisher_comment = @publisher.publisher_comments.find(params[:publisher_comment_id])
-    @publisher.publisher_comments.delete(publisher_comment)
+    if publisher_comment.user == current_user
+      @publisher.publisher_comments.delete(publisher_comment)
+    end
     redirect_to publisher_path
   end
 
