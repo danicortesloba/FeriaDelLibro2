@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:profile, :my_books, :publishers, :memberships]
+  authorize_resource :class => false
   def profile
     @user = current_user
     @publisher = current_user.publisher

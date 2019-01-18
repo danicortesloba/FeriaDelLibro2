@@ -1,20 +1,33 @@
 
-Help
-- Limit genres and ignore if no books
-- Edit: add cascade so i can edit devise password that has reader or publisher
+Preguntas
+Falta social media en publishers: show. find out how to get absolute url.
+Ignorar genres sin libros en navbar e index
+Remove publisher comments
 
-Permissions
-- Access
-- Buttons
+
+Contact
+Añadir descriptions y título a cada página.
+Falta agregar links a about
+Falta rellenar FAQ
+Form boxes dissappear in mobile
+Get rid of arrow
+Buy domain, create email and social networks
+Fill in FAQ
+Add deposit  model
+Add publisher addresses model (or use current addresses model)
+Add shipping type to orders
 
 
 Later
-- Cascade
-- Add nickname to comments?
+- Take my_books from users to a publishersbooks scaffold
+- Ver si se puede usar will_paginate en genre show
+- Cascade?
+- Add nickname to reader for comments?
 - Page with all the books?
-- Add deposit  model
-- Add shipping model (unless por cobrar, add regions list model)
 - Add ajax so instead of going to a new form for reader and publisher, the user form gets reloaded
 - Bot
 - When i invite: send fake user name so they can add books. If they accept they create user and publisher and i update membership payed.
 - Offer only first month
+
+
+Devise mails and confirmations <%= render "devise/shared/links" %> (confirmable module https://stackoverflow.com/questions/4114835/heroku-devise-missing-host-to-link-to-please-provide-host-parameter-or-set-d)
