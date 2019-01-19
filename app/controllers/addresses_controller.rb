@@ -1,15 +1,20 @@
 class AddressesController < ApplicationController
   load_and_authorize_resource
 
+
   # GET /addresses
   # GET /addresses.json
 
   def default
-    @default = Address.where(default: true)
-    @default.update(default: false)
+  @default = Address.where(default: true).where(user: current_user)
+  @default.update(default: false)
 
-   @address = Address.find(params[:id])
-   @address.update(default: true)
+
+
+  @address = Address.find(params[:id])
+  @address.update(default: true)
+
+
    redirect_to addresses_path
   end
 
@@ -76,9 +81,7 @@ class AddressesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_address
-      @address = Address.find(params[:id])
-    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def address_params

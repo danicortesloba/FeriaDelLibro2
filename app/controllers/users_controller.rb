@@ -17,6 +17,17 @@ class UsersController < ApplicationController
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
   end
 
+  def my_sales
+    @morders = Order.joins(:book).where(:books => { :publisher => current_user.publisher })
+    @orders = @morders.where(payed: true)
+    @orders.each do |order|
+      @expiration = (order.billing.created_at + 20.day).to_date.strftime("%d/%m/%Y")
+      @addresses= order.user.addresses.where(default: true)
+    end
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
+
+  end
+
   def about
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
   end

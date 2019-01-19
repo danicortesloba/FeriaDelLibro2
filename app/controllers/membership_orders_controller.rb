@@ -1,5 +1,6 @@
 class MembershipOrdersController < ApplicationController
-  load_and_authorize_resource
+  load_resource :except => [:create]
+  authorize_resource
 
   # GET /membership_orders
   # GET /membership_orders.json

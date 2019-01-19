@@ -1,3 +1,4 @@
+<% if user_signed_in? && current_user.role == 'Editorial' %>
 <p id="notice"><%= notice %></p>
 <div class="product-main-area mb-70">
   <div class="container">
@@ -5,11 +6,10 @@
 
       <div class="col-lg-12">
         <div class="login-title text-center mb-30">
-          <h2><%= @genre.name %></h2>
+          <h2>Mis ventas</h2>
         </div>
       </div>
-
-      <% if @books.any? %>
+      <% if @orders.any? %>
       <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
               <div class="cart-main-area mb-70">
                 <div class="container">
@@ -20,52 +20,49 @@
                           <table>
                             <thead>
                               <tr>
-                                <th class="product-thumbnail">Portada</th>
                                 <th class="product-name">Título</th>
-                                <th class="product-name">Autor</th>
-                                <th class="product-name">Editorial</th>
-                                <th class="product-price">Precio</th>
-
+                                <th class="product-price">Fecha máxima de entrega</th>
+                                <th class="product-name">Nombre Lector</th>
+                                <th class="product-name">Dirección de envío</th>
                               </tr>
                             </thead>
                             <tbody>
-                                <% @books.each do |book| %>
+                              <% @orders.each do |order| %>
                               <tr>
-                                <td class="product-thumbnail"><%= link_to image_tag("#{book.cover.thumb.url}", :alt => book.title), book_path(book.id) %></td>
-                                <td class="product-quantity"><h4><a href="<%= book_path(book) %>"><%= book.title %></a></h4></td>
-                                <td class="product-quantity"><h4><%= book.author_first_name %> <%= book.author_last_name %></h4></td>
-                                <td class="product-quantity"><%= book.publisher.name %> </td>
-                                <td class="product-quantity"><span class="amount"><%= number_to_currency(book.price, precision: 0) %></span></td>
-                              </tr>
+                                <td class="product-quantity"><%= order.book.title %></td>
+                                <td class="product-quantity"><%= @expiration %></td>
+                                <td class="product-quantity"><%= order.user.reader.firstname %> <%= order.user.reader.lastname %></td>
+                                <% @addresses.each do |address| %>
+                                <td class="product-quantity"><p><%= address.address %></p> <p><%= address.commune %>, <%= address.region %></p></td>
                                 <% end %>
-
+                             </tr>
+                             <% end %>
                             </tbody>
                           </table>
                         </div>
                       </form>
                     </div>
                  </div>
+
+
                 </div>
               </div>
       </div>
-
       <% else %>
-
       <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
               <div class="cart-main-area mb-70">
                 <div class="container">
                   <div class="row">
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                      <h3>¡Oops! No tenemos libros de <%= @genre.name %></h3>
+                    <h3>Aún no tienes ventas</h3>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-
+      </div>
       <% end %>
-
-        <%= render 'layouts/sidepanel' %>
+      <%= render 'layouts/sidepanel' %>
       </div>
     </div>
   </div>
+<% end %>

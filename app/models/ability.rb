@@ -17,7 +17,7 @@ class Ability
         can [:read, :add_publisher_comment], Publisher
         can [:read, :update], Reader, user_id: user.id
         can :create, Address
-        can [:read, :update, :destroy], Address, user_id: user.id
+        can [:read, :update, :destroy, :default], Address, user_id: user.id
         can :create, Order
         can [:read, :update, :destroy], Order, user_id: user.id
         can :manage, Billing, user_id: user.id
@@ -26,8 +26,7 @@ class Ability
         can [:read, :create], PublisherComment
         can :remove_publisher_comment, Publisher
         can [:update, :destroy], PublisherComment, user_id: user.id
-        can [:faq, :contact, :about], :user
-        can :profile, :user, user_id: user.id
+        can [:faq, :contact, :about, :profile], :user
 
       elsif user.role == 'Editorial'
         can :read, Membership
@@ -42,9 +41,10 @@ class Ability
         can [:read, :update, :destroy], MembershipOrder, user_id: user.id
         can :manage, Milling, user_id: user.id
         can [:add_genre, :remove_genre], Book, publisher: user.publisher
-        can :create, :read, Genre
+        can [:create, :read], Genre
         can [:update, :destroy], Genre, publisher: user.publisher
-        can [:faq, :contact, :about, :profile, :my_books], :user
+        can [:faq, :contact, :about, :profile, :my_books, :my_sales], :user
+        can :read, Address
       else
         can :read, [Book, Comment, Genre, Membership, PublisherComment, Publisher]
         can [:faq, :contact, :about], :user

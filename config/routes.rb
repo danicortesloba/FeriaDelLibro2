@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     get 'users/contact'
     get 'users/publishers'
     get 'users/memberships'
+    get 'users/my_sales'
     resources :billings, only: [] do
         collection do
             get 'index'
