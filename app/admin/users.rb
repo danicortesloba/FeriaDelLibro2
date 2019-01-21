@@ -1,4 +1,6 @@
 ActiveAdmin.register User do
+
+permit_params :email, :password, :role
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -28,6 +30,26 @@ index do
     end
 
     actions
+end
+
+form do |f|
+  inputs 'Nuevo usuario' do
+  input :email
+  input :password
+  input :role
+end
+  actions
+end
+
+
+controller do
+    def update
+     if (params[:user][:password].blank? && params[:user][:password_confirmation].blank?)
+     params[:user].delete("password")
+     params[:user].delete("password_confirmation")
+     end
+     super
+    end
 end
 
 end
