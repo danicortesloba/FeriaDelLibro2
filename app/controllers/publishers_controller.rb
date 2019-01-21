@@ -5,14 +5,14 @@ class PublishersController < ApplicationController
   # GET /publishers
   # GET /publishers.json
   def index
-    @publishers = Publisher.paginate(:page => params[:page], :per_page => 24)
+    @publishers = Publisher.page(params[:page]).per(24)
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
     @books = Book.all
   end
   # GET /publishers/1
   # GET /publishers/1.json
   def show
-    @pbooks = @publisher.books.paginate(:page => params[:page], :per_page => 5)
+    @pbooks = @publisher.books.page(params[:page]).per(5)
     @publishers = Publisher.all
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
     @books = Book.all

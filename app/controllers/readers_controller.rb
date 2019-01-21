@@ -4,7 +4,7 @@ load_and_authorize_resource
   # GET /readers
   # GET /readers.json
   def index
-    @readers = Reader.paginate(:page => params[:page], :per_page => 30)
+    @readers = Reader.page(params[:page]).per(30)
   end
 
   # GET /readers/1

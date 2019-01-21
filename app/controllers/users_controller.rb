@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def my_books
     if current_user.role == 'Editorial'
     publisher = current_user.publisher
-    @books = publisher.books.paginate(:page => params[:page], :per_page => 8)
+    @books = publisher.books.page(params[:page]).per(8)
     end
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
   end
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
   def publishers
     @millings = Milling.all
-    @publishers = Publisher.paginate(:page => params[:page], :per_page => 10)
+    @publishers = Publisher.page(params[:page]).per(10)
   end
 
   def memberships

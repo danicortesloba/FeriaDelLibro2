@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
     resources :memberships do
       resources :membership_orders, only: :create
       resources :membership_orders, only: :index
