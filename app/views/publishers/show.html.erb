@@ -12,18 +12,24 @@
                   <div class="link-follow text-center"
                         <ul>
                             <% if @publisher.twitter.present? %>
-                            <li><a href="<%= users_about_path %>"><img src="<%= asset_path 'facebook.png' %>" alt="facebook" /></a></li>
+                              <%= link_to @publisher.twitter_link, target: "_blank" do %>
+                              <%= image_tag asset_path("twitter.png"), :class => "socialmedia" %>
+                              <% end %>
                             <% end %>
                             <% if @publisher.facebook.present? %>
-                              <%= link_to @facebookurl, :target => "_blank" do %>
-                                <%= image_tag asset_path("facebook.png") %>
+                              <%= link_to @publisher.facebook_link, target: "_blank" do %>
+                              <%= image_tag asset_path("facebook.png"), :class => "socialmedia" %>
                               <% end %>
                             <% end %>
                             <% if @publisher.instagram.present? %>
-                            <li>><a href="<%= @publisher.instagram.url %>"><i class="fa fa-instagram"></i></a></li>
+                              <%= link_to @publisher.instagram_link, target: "_blank" do %>
+                              <%= image_tag asset_path("instagram.png"), :class => "socialmedia" %>
+                              <% end %>
                             <% end %>
                             <% if @publisher.website.present? %>
-                            <li><a href="<%= @publisher.website.url%>"><i class="fa fa-globe"></i></a></li>
+                              <%= link_to @publisher.website, target: "_blank" do %>
+                              <%= image_tag asset_path("website.png"), :class => "socialmedia" %>
+                              <% end %>
                             <% end %>
                         </ul>
                   </div>

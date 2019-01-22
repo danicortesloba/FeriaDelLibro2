@@ -1,0 +1,7 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<h3> Pedidos de libros </h3>
+<% billing_chart = Billing.created_by_month %>
+<%= bar_chart billing_chart %>
+<h3> Membresías pagadas </h3>
+<% milling_chart = Milling.created_by_month %>
+<%= bar_chart milling_chart %>

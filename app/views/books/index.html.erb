@@ -90,10 +90,12 @@
                         <div class="category-menu">
                           <nav class="menu">
                             <ul>
-                              <% Genre.select(:name).distinct.limit(15).each do |genre|  %>
-                                <% genre = Genre.find_by_name genre[:name] %>
-                                <li class="cr-dropdown"><a href="<%= genre_path(genre.id)%>"><%= genre.name.titleize %><i class="none-lg fa fa-angle-down"></i></a>
-                                </li>
+                              <% Genre.select(:name).distinct.limit(15).each do |genre| %>
+                                <% if Book.includes(:genres).where('genres.name' => genre.name ).any? %>
+                                  <% genre = Genre.find_by_name genre[:name] %>
+                                  <li class="cr-dropdown"><a href="<%= genre_path(genre.id)%>"><%= genre.name.titleize %><i class="none-lg fa fa-angle-down"></i></a>
+                                  </li>
+                                <% end %>
                               <% end %>
 
 

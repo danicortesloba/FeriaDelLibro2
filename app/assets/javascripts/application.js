@@ -25,6 +25,7 @@
 //= require waypoints.min
 //= require plugins
 //= require main
+//= require chartkick
 //= require custom
 
 

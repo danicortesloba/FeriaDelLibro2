@@ -131,6 +131,11 @@ ul {
 .clear {
     clear: both
 }
+
+.socialmedia {
+    height: 50px;
+    width: 50px
+}
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;

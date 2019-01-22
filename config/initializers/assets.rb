@@ -27,6 +27,7 @@ Rails.application.config.assets.paths << Rails.root.join('vendor', 'img', 'team'
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'img', 'thum-2')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'js')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'js', 'vendor')
+Rails.application.config.assets.precompile += %w( chartkick.js )
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
