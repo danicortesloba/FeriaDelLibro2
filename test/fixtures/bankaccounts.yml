@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  name: MyString
+  bank: MyString
+  type: 
+  rut: 1
+  account: 1
+  email: MyString
+
+two:
+  user: two
+  name: MyString
+  bank: MyString
+  type: 
+  rut: 1
+  account: 1
+  email: MyString

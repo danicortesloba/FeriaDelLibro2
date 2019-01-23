@@ -66,7 +66,7 @@
                                       <th class="product-thumbnail">Rut</th>
                                       <th class="product-name">Razón Social</th>
                                       <th class="product-price">Giro</th>
-                                      <th class="product-price">Dirección</th>
+                                      <th class="product-price">Dirección de Facturación</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -171,7 +171,7 @@
                                         <% @addresses.each do |address| %>
                                             <tr>
                                                 <td class="product-name"><%= address.title %></td>
-                                                <td class="product-name"><%= address.address %></td>
+                                                <td class="product-name"><%= address.address %><br><%=address.commune %>, <%= address.region %></td>
                                                 <td class="product-remove"><%= link_to 'Editar', edit_address_path(address) %></td>
                                                 <td class="product-remove"><%= link_to 'Eliminar', address, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
                                                 <% if address.default == true %>
@@ -200,6 +200,104 @@
                                     </div>
                         </div>
 
+                        <% end %>
+
+                        <% if @user.role == "Editorial" %>
+                        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                          <div class="login-title text-left mb-30">
+                            <h4>Mi dirección</h4>
+                            <p>Esta es la dirección donde tus lectores pueden ir a buscar sus libros, si así lo eligen. En el caso de que no tengas una oficina puedes, por ejemplo, poner una estación de metro. Si tus compradores eligen recoger los libros, te enviaremos su dirección de correo electrónico para que coordines la entrega.</p>
+                          </div>
+                        </div>
+
+                        <% if @addresses.exists? %>
+                            <div class="row">
+                              <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                                <form action="#">
+                                  <div class="table-content table-responsive">
+                                    <table>
+                                      <thead>
+                                        <tr>
+                                          <th class="product-thumbnail">Nombre</th>
+                                          <th class="product-name">Dirección</th>
+                                          <th class="product-price">Editar</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <% @addresses.last do |address| %>
+                                            <tr>
+                                                <td class="product-name"><%= address.title %></td>
+                                                <td class="product-name"><%= address.address %>,<br> <%= address.commune %>, <% address.region %></td>
+                                                <td class="product-remove"><%= link_to 'Editar', edit_address_path(address) %></td>
+                                             </tr>
+                                         <% end %>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                        <% else %>
+                        <div class="row">
+                          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                            <div class="login-title text-left mb-30">
+                                <p> Aún no has ingresado direcciones </p>
+                                <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                <div class="wc-proceed-to-checkout mb-30">
+                                                    <ul>
+                                                        <li><%= link_to 'Nueva dirección', new_address_path %></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <% end %>
+                        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                          <div class="login-title text-left mb-30">
+                            <h4>Mi cuenta</h4>
+                            <p>En esta cuenta te depositaremos los pagos por tus ventas.</p>
+                          </div>
+                        </div>
+
+                        <% if current_user.bankaccounts.exists? %>
+                            <div class="row">
+                              <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                                <form action="#">
+                                  <div class="table-content table-responsive">
+                                    <table>
+                                      <thead>
+                                        <tr>
+                                          <th class="product-thumbnail">Cuenta</th>
+                                          <th class="product-price">Editar</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                            <tr>
+                                                <td class="product-name text-left">Titular: <%= @bankaccount.name%><br> Banco:<%= @bankaccount.bank%><br>Cuenta: <%= @bankaccount.account%><br> Tipo: <%= @bankaccount.accounttype%><br>Rut: <%= @bankaccount.rut%><br>Email: <%= @bankaccount.email%><br></td>
+                                                <td class="product-remove"><%= link_to 'Editar', edit_bankaccount_path(@bankaccount) %></td>
+                                             </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                        <% else %>
+                          <div class="row">
+                                      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                          <div class="wc-proceed-to-checkout">
+                                            <p> Aún no has ingresado una cuenta </p>
+                                              <ul>
+                                                  <li><%= link_to 'Nueva cuenta', new_bankaccount_path %></li>
+                                              </ul>
+                                          </div>
+                                      </div>
+                          </div>
+                        <% end %>
                         <% end %>
 
                       </div>

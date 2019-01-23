@@ -29,6 +29,8 @@ load_and_authorize_resource
 
     respond_to do |format|
       if @reader.save
+        EmailMailer.welcome_reader(@reader).deliver_later
+
         format.html { redirect_to books_path, notice: 'El lector se creó correctamente' }
         format.json { render :show, status: :created, location: @reader }
       else

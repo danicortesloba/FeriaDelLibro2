@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
     @books = Book.all
     @addresses = current_user.addresses
+    @bankaccount = current_user.bankaccounts.last
   end
 
   def my_books
@@ -25,6 +26,7 @@ class UsersController < ApplicationController
       @addresses= order.user.addresses.where(default: true)
     end
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
+    @bankaccount = current_user.bankaccounts.last
 
   end
 

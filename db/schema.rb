@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_21_175050) do
+ActiveRecord::Schema.define(version: 2019_01_23_222406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,19 @@ ActiveRecord::Schema.define(version: 2019_01_21_175050) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "bankaccounts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.string "bank"
+    t.string "accounttype"
+    t.integer "rut"
+    t.integer "account"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_bankaccounts_on_user_id"
   end
 
   create_table "billings", force: :cascade do |t|
@@ -167,6 +180,7 @@ ActiveRecord::Schema.define(version: 2019_01_21_175050) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "billing_id"
+    t.boolean "delivery", default: false
     t.index ["billing_id"], name: "index_orders_on_billing_id"
     t.index ["book_id"], name: "index_orders_on_book_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -228,6 +242,7 @@ ActiveRecord::Schema.define(version: 2019_01_21_175050) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "bankaccounts", "users"
   add_foreign_key "billings", "users"
   add_foreign_key "books", "publishers"
   add_foreign_key "comments", "books"

@@ -19,7 +19,7 @@ class Ability
         can :create, Address
         can [:read, :update, :destroy, :default], Address, user_id: user.id
         can :create, Order
-        can [:read, :update, :destroy], Order, user_id: user.id
+        can [:read, :update, :destroy, :delivery, :pickup], Order, user_id: user.id
         can :manage, Billing, user_id: user.id
         can [:read, :create], Comment
         can [:update, :destroy], Comment, user_id: user.id
@@ -44,7 +44,10 @@ class Ability
         can [:create, :read], Genre
         can [:update, :destroy], Genre, publisher: user.publisher
         can [:faq, :contact, :about, :profile, :my_books, :my_sales], :user
-        can :read, Address
+        can [:read, :create], Address
+        can [:update, :destroy, :default], Address, user_id: user.id
+        can :create, Bankaccount
+        can [:read, :update, :destroy], Bankaccount, user_id: user.id
       else
         can :read, [Book, Comment, Genre, Membership, PublisherComment, Publisher]
         can [:faq, :contact, :about], :user

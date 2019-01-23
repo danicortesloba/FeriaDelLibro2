@@ -25,6 +25,7 @@
                                 <th class="product-name">Título</th>
                                 <th class="product-price">Precio</th>
                                 <th class="product-quantity">Editorial</th>
+                                <th class="product-quantity">Envío</th>
                                 <th class="product-quantity">Eliminar</th>
                               </tr>
                             </thead>
@@ -35,6 +36,15 @@
                                 <td class="product-quantity"><h4><a href="<%= book_path(order.book_id) %>"><%= order.book.title %></a></h4></td>
                                 <td class="product-quantity"><span class="amount"><%= number_to_currency(order.book.price, precision: 0) %></span></td>
                                 <td class="product-quantity"><h4><a href="<%= publisher_path(order.book.publisher_id) %>"><%= order.book.publisher.name %></a></h4></td>
+                                <% if order.delivery == false %>
+                                    <td class="product-name text-left">Recógelo en:<br> <strong> <%= @publisher_address.address %> <br> <%= @publisher_address.commune %>, <%= @publisher_address.region %>.</strong> <p>La editorial se contactará contigo para coordinar la entrega.</p><%= link_to 'Prefiero que me lo manden a mi dirección.', orders_delivery_path(order) %></td>
+                                <% else %>
+                                    <% if @addresses.any? %>
+                                        <td class="product-name text-left">Te lo enviaremos a:<br> <strong> <%= @adr %> <br> <%= @com %>, <% @reg %>. </strong><p> Revisa <a href="http://www.starken.cl/personas/cotiza-tu-envio"><strong>aquí</strong></a> cuanto te saldrá.</p> <p>(Recuerda que el envío se hace por editorial).</p> <%= link_to 'Prefiero recogerlo en la editorial', orders_pickup_path(order) %></td>
+                                    <% else %>
+                                        <td class ="product-name text-left"> ¡Oops! No tienes una dirección registrada. <%= link_to "Agregar dirección", addresses_path%> </td>
+                                    <% end %>
+                                <% end %>
                                 <td class="product-quantity"><%= link_to "Eliminar", order, method: :delete %></td>
                               </tr>
                               <% end %>
@@ -50,23 +60,9 @@
                                          <h2>Total: <span class="amount"><%= number_to_currency(@total, precision: 0) %> </span></h2><br>
                                      </div>
 
-                                     <% if @addresses.any? %>
-                                     <div>
-                                         <h4> Tu pedido se enviará a:</h4>
-                                         <h4> <%= @reader.firstname %> <%= @reader.lastname %></h4>
-                                         <h4><%= @adr %>,</h4>
-                                         <h4> <%= @com %>, <%= @reg %>.</h4>
-                                         <h4> <%= link_to "Cambiar", addresses_path%></h4>
-                                      </div>
                                       <div class="wc-proceed-to-checkout">
                                           <%= link_to 'Pagar', prepay_billings_path %>
                                       </div>
-                                       <% else %>
-                                      <div>
-                                         <h4> ¡Ojo! No tienes una dirección de envío fijada.</h4>
-                                         <h4> <%= link_to "Agregar dirección", addresses_path%></h4>
-                                     </div>
-                                     <% end %>
                              </div>
                  </div>
 

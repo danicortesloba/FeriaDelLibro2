@@ -31,7 +31,7 @@
                                     <% @addresses.each do |address| %>
                                         <tr>
                                             <td class="product-name"><%= address.title %></td>
-                                            <td class="product-name"><%= address.address %></td>
+                                            <td class="product-name"><%= address.address %><br> <%= address.commune %>, <%= address.region %></td>
                                             <td class="product-remove"><%= link_to 'Editar', edit_address_path(address) %></td>
                                             <td class="product-remove"><%= link_to 'Eliminar', address, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
                                             <% if address.default == true %>

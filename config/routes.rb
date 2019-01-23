@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bankaccounts
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
     resources :memberships do
@@ -34,6 +35,8 @@ Rails.application.routes.draw do
       end
     end
     resources :orders
+    get 'orders/:id/delivery', to: 'orders#delivery', as:'orders_delivery'
+    get 'orders/:id/pickup', to: 'orders#pickup', as:'orders_pickup'
     resources :membership_orders
     resources :readers
     devise_for :users, controllers: {

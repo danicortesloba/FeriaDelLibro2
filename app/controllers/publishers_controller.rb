@@ -54,7 +54,7 @@ class PublishersController < ApplicationController
 
     respond_to do |format|
       if @publisher.save
-        format.html { redirect_to memberships_path, notice: 'La editorial se creó correctamente' }
+        format.html { redirect_to new_address_path, notice: 'La editorial se creó correctamente' }
         format.json { render :show, status: :created, location: @publisher }
       else
         format.html { render :new }

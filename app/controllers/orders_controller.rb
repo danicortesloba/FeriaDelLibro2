@@ -9,6 +9,9 @@ class OrdersController < ApplicationController
     @books = Book.all
     @reader = current_user.reader
     @orders = current_user.orders.cart
+    @orders.each do |order|
+      @publisher_address = order.book.publisher.user.addresses.last
+    end
     precios = @orders.map do |order|
     order.book.price
     end
@@ -18,6 +21,18 @@ class OrdersController < ApplicationController
           @com = a.commune
           @reg = a.region
     end
+  end
+
+  def delivery
+    @order = Order.find(params[:id])
+    @order.update(delivery: true)
+    redirect_to orders_path
+  end
+
+  def pickup
+    @order = Order.find(params[:id])
+    @order.update(delivery: false)
+    redirect_to orders_path
   end
 
   # GET /orders/1
@@ -78,6 +93,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:user_id, :book_id, :payed, :billing)
+      params.require(:order).permit(:user_id, :book_id, :payed, :billing, :delivery)
     end
 end

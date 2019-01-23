@@ -44,13 +44,26 @@ class AddressesController < ApplicationController
   def create
     @address = Address.new(address_params)
 
-    respond_to do |format|
-      if @address.save
-        format.html { redirect_to addresses_path, notice: 'La dirección se creó correctamente.' }
-        format.json { render :show, status: :created, location: @address }
-      else
-        format.html { render :new }
-        format.json { render json: @address.errors, status: :unprocessable_entity }
+    if current_user.role =="Editorial"
+
+      respond_to do |format|
+        if @address.save
+          format.html { redirect_to memberships_path, notice: 'La dirección se creó correctamente.' }
+          format.json { render :show, status: :created, location: @address }
+        else
+          format.html { render :new }
+          format.json { render json: @address.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        if @address.save
+          format.html { redirect_to addresses_path, notice: 'La dirección se creó correctamente.' }
+          format.json { render :show, status: :created, location: @address }
+        else
+          format.html { render :new }
+          format.json { render json: @address.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
