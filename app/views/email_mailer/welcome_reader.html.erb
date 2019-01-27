@@ -2,8 +2,13 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <%= stylesheet_link_tag '/stylesheets/mailers/build_mailer' %>
   </head>
   <body>
+
+    <%= email_image_tag("banners/logo2.png") %>
+    
+
 
     <h1>Hi <%= @user.reader.firstname%></h1>
     <p>

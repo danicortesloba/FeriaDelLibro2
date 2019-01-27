@@ -45,7 +45,7 @@ class Ability
         can [:update, :destroy], Genre, publisher: user.publisher
         can [:faq, :contact, :about, :profile, :my_books, :my_sales], :user
         can [:read, :create], Address
-        can [:update, :destroy, :default], Address, user_id: user.id
+        can [:update, :default], Address, user_id: user.id
         can :create, Bankaccount
         can [:read, :update, :destroy], Bankaccount, user_id: user.id
       else

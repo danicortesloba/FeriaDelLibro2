@@ -79,9 +79,11 @@
                                                               <% end %>
                                                             <% end %>
                                                             <% if user_signed_in? && current_user.role == 'Editorial' %>
+                                                             <% if current_user.publisher.present? %>
                                                               <li><a href="<%= users_my_books_path %>">Mis libros</a></li>
                                                               <li><a href="<%= users_my_sales_path %>">Mis ventas</a></li>
                                                               <li><a href="<%= membership_orders_path %>">Mi carrito</a></li>
+                                                              <% end %>
                                                               <% if current_user.millings.any? %>
                                                                 <li><a href="<%= millings_path %>">Mi membresía</a></li>
                                                               <% end %>

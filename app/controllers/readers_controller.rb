@@ -31,7 +31,7 @@ load_and_authorize_resource
       if @reader.save
         EmailMailer.welcome_reader(@reader).deliver_later
 
-        format.html { redirect_to books_path, notice: 'El lector se creó correctamente' }
+        format.html { redirect_to books_path, notice: 'El lector se creó correctamente.' }
         format.json { render :show, status: :created, location: @reader }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ load_and_authorize_resource
   def update
     respond_to do |format|
       if @reader.update(reader_params)
-        format.html { redirect_to books_path, notice: 'El lector se actualizó correctamente' }
+        format.html { redirect_to books_path, notice: 'El lector se actualizó correctamente.' }
         format.json { render :show, status: :ok, location: @reader }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ load_and_authorize_resource
   def destroy
     @reader.destroy
     respond_to do |format|
-      format.html { redirect_to readers_url, notice: 'El lector se eliminó' }
+      format.html { redirect_to readers_url, notice: 'El lector se eliminó.' }
       format.json { head :no_content }
     end
   end

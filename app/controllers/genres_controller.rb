@@ -35,7 +35,7 @@ class GenresController < ApplicationController
 
     respond_to do |format|
       if @genre.save
-        format.html { redirect_to @genre, notice: 'Genre was successfully created.' }
+        format.html { redirect_to @genre, notice: 'El género se agregó al libro.' }
         format.json { render :show, status: :created, location: @genre }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class GenresController < ApplicationController
   def update
     respond_to do |format|
       if @genre.update(genre_params)
-        format.html { redirect_to @genre, notice: 'Genre was successfully updated.' }
+        format.html { redirect_to @genre, notice: 'El género se actualizó.' }
         format.json { render :show, status: :ok, location: @genre }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class GenresController < ApplicationController
   def destroy
     @genre.destroy
     respond_to do |format|
-      format.html { redirect_to genres_url, notice: 'Genre was successfully destroyed.' }
+      format.html { redirect_to genres_url, notice: 'El género se eliminó.' }
       format.json { head :no_content }
     end
   end

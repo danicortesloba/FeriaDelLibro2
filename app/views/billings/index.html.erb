@@ -26,6 +26,7 @@
                                 <th class="product-name">Título</th>
                                 <th class="product-price">Precio</th>
                                 <th class="product-quantity">Editorial</th>
+                                <th class="product-quantity">Envío</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -35,6 +36,15 @@
                                 <td class="product-quantity"><h4><a href="<%= book_path(order.book_id) %>"><%= order.book.title %></a></h4></td>
                                 <td class="product-quantity"><span class="amount"><%= number_to_currency(order.book.price, precision: 0) %></span></td>
                                 <td class="product-quantity"><h4><a href="<%= publisher_path(order.book.publisher_id) %>"><%= order.book.publisher.name %></a></h4></td>
+                                <% if order.delivery == false && @publisher_address.present? %>
+                                    <td class="product-name text-left">Recógelo en:<br> <strong> <%= @publisher_address.address %> <br> <%= @publisher_address.commune %>, <%= @publisher_address.region %>.</strong> <p>La editorial se contactará contigo para coordinar la entrega.</p></td>
+                                <% else %>
+                                    <% if @addresses.any? %>
+                                        <td class="product-name text-left">Te lo enviaremos a:<br> <strong> <%= @adr %> <br> <%= @com %>, <%= @reg %>. </strong><p>(Recuerda que el envío se hace por editorial y lo debes pagar cuando el paquete te llegue).</p></td>
+                                    <% else %>
+                                        <td class ="product-name text-left"> ¡Oops! No tienes una dirección registrada. <%= link_to "Agregar dirección", addresses_path%> </td>
+                                    <% end %>
+                                <% end %>
                               </tr>
                               <% end %>
                             </tbody>
@@ -48,22 +58,12 @@
                                      <div class="wc-proceed-to-checkout">
                                          <h2>Total: <span class="amount"><%= number_to_currency(@total, precision: 0) %> </span></h2><br>
                                      </div>
-                                     <div>
-                                       <% if @addresses.any? %>
-                                         <h4> Tu pedido se enviará a:</h4>
-                                         <h4> <%= @reader.firstname %> <%= @reader.lastname %></h4>
-                                         <h4><%= @adr %>,</h4>
-                                         <h4> <%= @com %>, <%= @reg %>.</h4>
-                                       <% else %>
-                                         <h4> ¡Ojo! No tienes una dirección de envío fijada.</h4>
-                                         <h4> <%= link_to "Agregar dirección", addresses_path%></h4>
-                                       <% end %>
-                                     </div>
+
 
                                      <div>
                                          <br>
                                          <h4> Fecha de pedido: <%= @billing.created_at.to_date.strftime("%d/%m/%Y") %>. </h4>
-                                         <h4> Si no te llega hasta <%= @expiration.to_date.strftime("%d/%m/%Y") %>, <a href="<%= users_contact_path %>">contáctate con nosotros.</a> </h4>
+                                         <h4> Si no te llega hasta <%= @expiration.to_date.strftime("%d/%m/%Y") %>, <a href="<%= users_contact_path %>">contáctate con nosotros.</a>  Tienes hasta <%= @expiration_complaint.to_date.strftime("%d/%m/%Y") %> para presentar el reclamo.</h4>
                                      </div>
                              </div>
                  </div>

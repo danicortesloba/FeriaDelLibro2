@@ -8,7 +8,7 @@
           <h2>Mis direcciones</h2>
         </div>
       </div>
-
+                  <% if current_user.role == "Lector" %>
                   <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                     <div class="cart-main-area mb-70">
                       <div class="container">
@@ -63,6 +63,54 @@
                       </div>
                     </div>
                   </div>
+                  <% end %>
+                  <% if current_user.role == "Editorial" %>
+                  <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    <div class="cart-main-area mb-70">
+                      <div class="container">
+                    <% if @addresses.exists? %>
+                        <div class="row">
+                          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                            <form action="#">
+                              <div class="table-content table-responsive">
+                                <table>
+                                  <thead>
+                                    <tr>
+                                      <th class="product-thumbnail">Nombre</th>
+                                      <th class="product-name">Dirección</th>
+                                      <th class="product-price">Editar</th>
+                                      <th class="product-quantity">Eliminar</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                        <tr>
+                                            <td class="product-name"><%= @lastaddress.title %></td>
+                                            <td class="product-name"><%= @lastaddress.address %><br> <%= @lastaddress.commune %>, <%= @lastaddress.region %></td>
+                                            <td class="product-remove"><%= link_to 'Editar', edit_address_path(@lastaddress) %></td>
+                                         </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                    <% else %>
+                    <h3> ¡Debes ingresar una dirección! </h3>
+                    <% end %>
+
+                        <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                        <div class="wc-proceed-to-checkout">
+                                            <ul>
+                                                <li><%= link_to 'Nueva dirección', new_address_path %></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <% end %>
             <%= render 'layouts/sidepanel' %>
     </div>
     </div>

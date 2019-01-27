@@ -1,0 +1,20 @@
+¡Gracias por comprar en Líbrate!
+Tu pedido será enviado por cada una de las editoriales.
+Si uno de tus libros no ha llegado hasta <%= @expiration.to_date.strftime("%d/%m/%Y") %>, puedes escribirnos a libratechile@gmail.com para presentar un reclamo.
+Tienes hasta <%= @expiration_complaint.to_date.strftime("%d/%m/%Y") %> para presentar el reclamo.
+En el caso que la editorial no haya mandado el libro, te devolveremos tu dinero.
+
+<% @billing.orders.each do |order| %>
+    - <%= order.book.title %>
+    - <%= number_to_currency(order.book.price, precision: 0) %>
+    - <%= order.book.publisher.name %>
+    <% if order.delivery == false && @publisher_address.present? %>
+        - Recógelo en: <%= @publisher_address.address %>
+        <%= @publisher_address.commune %>, <%= @publisher_address.region %>
+        -La editorial se contactará contigo para coordinar la entrega.
+    <% else %>
+        - Te lo enviaremos a:<br> <strong> <%= @adr %> <br> <%= @com %>, <%= @reg %>.
+        (Recuerda que el envío se hace por editorial y lo debes pagar cuando el paquete te llegue).
+    <% end %>
+
+<% end %>

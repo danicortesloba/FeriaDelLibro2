@@ -1,6 +1,6 @@
 class BillingsController < ApplicationController
   load_and_authorize_resource
-  
+
   def index
       @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
       @books = Book.all
@@ -16,8 +16,12 @@ class BillingsController < ApplicationController
         precios = @billing.orders.map do |order|
               order.book.price
         end
+        @billing.orders.each do |order|
+          @publisher_address = order.book.publisher.user.addresses.last
+        end
       @total = precios.sum
       @expiration = (@billing.created_at + 20.days)
+      @expiration_complaint = (@billing.created_at + 30.days)
       end
   end
 
@@ -54,7 +58,13 @@ class BillingsController < ApplicationController
 
   def execute
      paypal_payment = PayPal::SDK::REST::Payment.find(params[:paymentId])
-
+     @billings = current_user.billings
+     if @billings.any?
+       @billing = current_user.billings.last
+       @billing.orders.each do |order|
+         @publisher = order.book.publisher.user
+       end
+     end
      if paypal_payment.execute(payer_id: params[:PayerID])
          amount = paypal_payment.transactions.first.amount.total
          billing = Billing.create(
@@ -68,7 +78,10 @@ class BillingsController < ApplicationController
          orders = current_user.orders.cart
          orders.update_all(payed: true, billing_id: billing.id)
 
-         redirect_to billings_path, notice: "La compra se realizó con éxito!"
+
+         redirect_to billings_path, notice: "¡La compra se realizó con éxito!"
+         EmailMailer.billing_confirmation(current_user).deliver_now
+         EmailMailer.sale_confirmation(@publisher, @billing).deliver_now
      else
          render plain: "No se puedo generar el cobro en PayPal."
      end

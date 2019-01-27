@@ -22,6 +22,7 @@ class AddressesController < ApplicationController
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
     @books = Book.all
     @addresses = current_user.addresses
+    @lastaddress = @addresses.last
   end
 
   # GET /addresses/1

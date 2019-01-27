@@ -185,11 +185,13 @@
                                                                   </ul>
                                                               </div>
                                                           </div>
-                                                          <div class="product-link">
-                                                              <div class="product-button">
-                                                                <%= link_to 'Agregar al carro', book_orders_path(book), method: :post%> <i class="fa fa-shopping-cart"> </i>
-                                                              </div>
-                                                          </div>
+                                                          <% if user_signed_in? && current_user.role == 'Lector' %>
+                                                            <div class="product-link">
+                                                                <div class="product-button">
+                                                                  <%= link_to 'Agregar al carro', book_orders_path(book), method: :post%> <i class="fa fa-shopping-cart"> </i>
+                                                                </div>
+                                                            </div>
+                                                          <% end %>
                                                       </div>
                                                 </div>
                                             <% end %>
@@ -236,7 +238,9 @@
                                                   </div>
                                                   <div class="product-link">
                                                       <div class="product-button">
-                                                        <%= link_to 'Agregar al carro', book_orders_path(book), method: :post%> <i class="fa fa-shopping-cart"> </i>
+                                                        <% if user_signed_in? && current_user.role == 'Lector' %>
+                                                          <%= link_to 'Agregar al carro', book_orders_path(book), method: :post%> <i class="fa fa-shopping-cart"> </i>
+                                                        <% end %>
                                                       </div>
                                                   </div>
                                               </div>
@@ -277,7 +281,9 @@
                                                       </div>
                                                       <div class="product-link">
                                                           <div class="product-button">
-                                                            <%= link_to 'Agregar al carro', book_orders_path(book), method: :post%> <i class="fa fa-shopping-cart"> </i>
+                                                            <% if user_signed_in? && current_user.role == 'Lector' %>
+                                                              <%= link_to 'Agregar al carro', book_orders_path(book), method: :post%> <i class="fa fa-shopping-cart"> </i>
+                                                            <% end %>
                                                           </div>
                                                       </div>
                                                   </div>
@@ -445,8 +451,9 @@
                                                 <span><%= number_to_currency(book.price, precision: 0) %> </span>
                                             </div>
                                             <p><%= book.synopsis %> </p>
-                                            <h4>  <%= link_to 'Agregar al carro', book_orders_path(book), method: :post%> <i class="fa fa-shopping-cart"> </i></h4>
-
+                                            <% if user_signed_in? && current_user.role == 'Lector' %>
+                                              <h4>  <%= link_to 'Agregar al carro', book_orders_path(book), method: :post%> <i class="fa fa-shopping-cart"> </i></h4>
+                                            <% end %>
                                     </div>
                                 </div>
 

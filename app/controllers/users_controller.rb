@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
     @books = Book.all
     @addresses = current_user.addresses
+    @lastaddress = @addresses.last
     @bankaccount = current_user.bankaccounts.last
   end
 
@@ -24,9 +25,13 @@ class UsersController < ApplicationController
     @orders.each do |order|
       @expiration = (order.billing.created_at + 20.day).to_date.strftime("%d/%m/%Y")
       @addresses= order.user.addresses.where(default: true)
+      if order.user.reader.present?
+        @reader = order.user.reader
+      end
     end
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
     @bankaccount = current_user.bankaccounts.last
+    @publisher_address = current_user.addresses.last
 
   end
 

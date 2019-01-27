@@ -28,7 +28,7 @@ class BankaccountsController < ApplicationController
 
     respond_to do |format|
       if @bankaccount.save
-        format.html { redirect_to users_profile_path, notice: 'Bankaccount was successfully created.' }
+        format.html { redirect_to users_profile_path, notice: 'Se guardaron los detalles de tu cuenta de depósito.' }
         format.json { render :show, status: :created, location: @bankaccount }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class BankaccountsController < ApplicationController
   def update
     respond_to do |format|
       if @bankaccount.update(bankaccount_params)
-        format.html { redirect_to users_profile_path, notice: 'Bankaccount was successfully updated.' }
+        format.html { redirect_to users_profile_path, notice: 'Se guardaron los detalles de tu cuenta de depósito' }
         format.json { render :show, status: :ok, location: @bankaccount }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class BankaccountsController < ApplicationController
   def destroy
     @bankaccount.destroy
     respond_to do |format|
-      format.html { redirect_to users_profile_path, notice: 'Bankaccount was successfully destroyed.' }
+      format.html { redirect_to users_profile_path, notice: 'Se eliminó tu cuenta de depósito.' }
       format.json { head :no_content }
     end
   end

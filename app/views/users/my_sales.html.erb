@@ -31,9 +31,11 @@
                               <tr>
                                 <td class="product-quantity"><%= order.book.title %></td>
                                 <td class="product-quantity"><%= @expiration %></td>
-                                <td class="product-quantity"><%= order.user.reader.firstname %> <%= order.user.reader.lastname %></td>
-                                <% @addresses.each do |address| %>
-                                <td class="product-quantity"><p><%= address.address %></p> <p><%= address.commune %>, <%= address.region %></p></td>
+                                <td class="product-quantity"><%= @reader.firstname %> <%= @reader.lastname %></td>
+                                <% if order.delivery == false %>
+                                    <td class="product-name text-left">El lector lo recogerá en: <br> <strong> <%= @publisher_address.address %> <br> <%= @publisher_address.commune %>, <%= @publisher_address.region %>.</strong> <p>Te enviaremos un correo con los datos del lector para que coordines la entrega.</p></td>
+                                <% else %>
+                                        <td class="product-name text-left">Debes enviarlo a por pagar a través de Starken a: <br> <strong> <%= @adr %> <br> <%= @com %>, <%= @reg %>. </strong></td>
                                 <% end %>
                              </tr>
                              <% end %>

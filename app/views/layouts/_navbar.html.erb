@@ -156,6 +156,7 @@
                 </li>
             <% end %>
             <% if signed_in? && current_user.role == 'Editorial'%>
+             <% if current_user.publisher.present? %>
                 <li><a href="#">Editores<i class="fa fa-angle-down"></i></a>
                   <div class="sub-menu sub-menu-2">
                     <ul>
@@ -165,6 +166,7 @@
                     </ul>
                   </div>
                 </li>
+              <% end %>
             <% end %>
           </ul>
         </nav>

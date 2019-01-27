@@ -101,7 +101,7 @@ before_action :set_book, only: [:add_genre, :remove_genre, :add_comment, :remove
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'El libro se eliminó' }
+      format.html { redirect_to books_url, notice: 'El libro se eliminó.' }
       format.json { head :no_content }
     end
   end

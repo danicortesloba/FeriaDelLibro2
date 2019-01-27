@@ -67,7 +67,7 @@ class MillingsController < ApplicationController
           orders = current_user.membership_orders.cart
           orders.update_all(paid: true, milling_id: milling.id)
 
-          redirect_to millings_path, notice: "La compra se realizó con éxito!"
+          redirect_to millings_path, notice: "¡La compra se realizó con éxito!"
       else
           render plain: "No se puedo generar el cobro en PayPal."
       end

@@ -28,7 +28,7 @@ class PublisherCommentsController < ApplicationController
 
     respond_to do |format|
       if @publisher_comment.save
-        format.html { redirect_to @publisher_comment, notice: 'Publisher comment was successfully created.' }
+        format.html { redirect_to @publisher_comment, notice: 'El comentario se creó correctamente.' }
         format.json { render :show, status: :created, location: @publisher_comment }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PublisherCommentsController < ApplicationController
   def update
     respond_to do |format|
       if @publisher_comment.update(publisher_comment_params)
-        format.html { redirect_to @publisher_comment, notice: 'Publisher comment was successfully updated.' }
+        format.html { redirect_to @publisher_comment, notice: 'El comentario se actualizó.' }
         format.json { render :show, status: :ok, location: @publisher_comment }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PublisherCommentsController < ApplicationController
   def destroy
     @publisher_comment.destroy
     respond_to do |format|
-      format.html { redirect_to publisher_comments_url, notice: 'Publisher comment was successfully destroyed.' }
+      format.html { redirect_to publisher_comments_url, notice: 'El comentario se eliminó.' }
       format.json { head :no_content }
     end
   end
