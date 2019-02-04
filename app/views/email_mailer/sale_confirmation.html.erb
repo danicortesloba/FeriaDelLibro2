@@ -8,7 +8,7 @@
     <h2 align="center"> ¡Vendiste un libro!</h2>
     <p align="left">Hola, <% order.book.publisher.name %>. </p>
     <p align="left"> ¡Felicidades por tu venta! </p>
-    <p align="left"> Recuerda que tu pago se retendrá por 30 días para asegurarnos que el libro le llegue al lector. El libro le debe llegar al lector hasta el <%= @expiration.to_date.strftime("%d/%m/%Y") %>. De lo contrario, el lector tendrá 10 días para presentar un reclamo. Te recomendamos que guardes los recibos de Starken para comprobar que enviaste el libro. </p>
+    <p align="left"> Recuerda que tu pago se retendrá por 30 días para asegurarnos que el libro le llegue al lector. El libro le debe llegar al lector hasta el <%= @expiration.to_date.strftime("%d/%m/%Y") %>. De lo contrario, el lector tendrá 10 días para presentar un reclamo. Te recomendamos que guardes los recibos de Starken para comprobar que enviaste el libro. Para las entregas directas, si el lector nos indica que no pudo coordinarse la entrega, deberás mostrarnos correos que acrediten que hiciste un esfuerzo para coordinar la entrega. (Es decir, que le diste al lector más de una opción de fecha y hora para recoger el libro). </p>
     <p align="left"> Si te llega más de un pedido para una misma dirección, por favor junta los pedidos en un solo paquete. :) </p>
     <table style="border: 1px solid black;">
       <thead>
