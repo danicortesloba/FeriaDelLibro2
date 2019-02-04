@@ -26,7 +26,7 @@ class Ability
         can [:read, :create], PublisherComment
         can :remove_publisher_comment, Publisher
         can [:update, :destroy], PublisherComment, user_id: user.id
-        can [:faq, :contact, :about, :profile], :user
+        can [:faq, :about, :profile], :user
 
       elsif user.role == 'Editorial'
         can :read, Membership
@@ -43,14 +43,14 @@ class Ability
         can [:add_genre, :remove_genre], Book, publisher: user.publisher
         can [:create, :read], Genre
         can [:update, :destroy], Genre, publisher: user.publisher
-        can [:faq, :contact, :about, :profile, :my_books, :my_sales], :user
+        can [:faq, :about, :profile, :my_books, :my_sales], :user
         can [:read, :create], Address
         can [:update, :default], Address, user_id: user.id
         can :create, Bankaccount
         can [:read, :update, :destroy], Bankaccount, user_id: user.id
       else
         can :read, [Book, Comment, Genre, Membership, PublisherComment, Publisher]
-        can [:faq, :contact, :about], :user
+        can [:faq, :about], :user
       end
     #
     # The first argument to `can` is the action you are giving the user

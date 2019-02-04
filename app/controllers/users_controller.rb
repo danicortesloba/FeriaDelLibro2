@@ -43,10 +43,6 @@ class UsersController < ApplicationController
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
   end
 
-  def contact
-    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
-  end
-
   def publishers
     @millings = Milling.all
     @publishers = Publisher.page(params[:page]).per(10)

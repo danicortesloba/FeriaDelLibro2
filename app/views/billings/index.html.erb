@@ -63,7 +63,7 @@
                                      <div>
                                          <br>
                                          <h4> Fecha de pedido: <%= @billing.created_at.to_date.strftime("%d/%m/%Y") %>. </h4>
-                                         <h4> Si no te llega hasta <%= @expiration.to_date.strftime("%d/%m/%Y") %>, <a href="<%= users_contact_path %>">contáctate con nosotros.</a>  Tienes hasta <%= @expiration_complaint.to_date.strftime("%d/%m/%Y") %> para presentar el reclamo.</h4>
+                                         <h4> Si no te llega hasta <%= @expiration.to_date.strftime("%d/%m/%Y") %>, escríbenos a <a href="mailto:libratechile@gmail.com">libratechile@gmail.com</a>. Tienes hasta <%= @expiration_complaint.to_date.strftime("%d/%m/%Y") %> para presentar el reclamo.</h4>
                                      </div>
                              </div>
                  </div>

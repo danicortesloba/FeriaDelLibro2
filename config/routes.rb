@@ -47,7 +47,6 @@ Rails.application.routes.draw do
     get 'users/profile'
     get 'users/about'
     get 'users/faq'
-    get 'users/contact'
     get 'users/publishers'
     get 'users/memberships'
     get 'users/my_sales'
