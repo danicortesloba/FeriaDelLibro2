@@ -37,10 +37,10 @@
                                 <td class="product-quantity"><span class="amount"><%= number_to_currency(order.book.price, precision: 0) %></span></td>
                                 <td class="product-quantity"><h4><a href="<%= publisher_path(order.book.publisher_id) %>"><%= order.book.publisher.name %></a></h4></td>
                                 <% if order.delivery == false && @publisher_address.present? %>
-                                    <td class="product-name text-left">Recógelo en:<br> <strong> <%= @publisher_address.address %> <br> <%= @publisher_address.commune %>, <%= @publisher_address.region %>.</strong> <p>La editorial se contactará contigo para coordinar la entrega.</p></td>
+                                    <td class="product-name text-left">Recógelo en:<br> <strong> <%= @publisher_address.address %> <br> <%= @publisher_address.commune %>, <%= @publisher_address.region %>.</strong> <p><%= order.book.publisher.name %> se contactará contigo para coordinar la entrega.</p></td>
                                 <% else %>
                                     <% if @addresses.any? %>
-                                        <td class="product-name text-left">Te lo enviaremos a:<br> <strong> <%= @adr %> <br> <%= @com %>, <%= @reg %>. </strong><p>(Recuerda que el envío se hace por editorial y lo debes pagar cuando el paquete te llegue).</p></td>
+                                        <td class="product-name text-left"><%= order.book.publisher.name %> te lo enviará a:<br> <strong> <%= @adr %> <br> <%= @com %>, <%= @reg %>. </strong><p>(Recuerda que el envío se hace por editorial y lo debes pagar cuando el paquete te llegue).</p></td>
                                     <% else %>
                                         <td class ="product-name text-left"> ¡Oops! No tienes una dirección registrada. <%= link_to "Agregar dirección", addresses_path%> </td>
                                     <% end %>

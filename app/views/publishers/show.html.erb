@@ -62,15 +62,18 @@
                                     </div>
                                     <p><%= book.synopsis %> </p>
                                   </div>
+
                                   <div class="product-link">
+                                    <% if signed_in? && current_user.role == 'Lector' %>
                                     <div class="product-button">
                                       <%= link_to 'Agregar al carro', book_orders_path(book), method: :post%> <i class="fa fa-shopping-cart"> </i>
                                     </div>
+                                    <% end %>
                                     <div class="add-to-link">
-                                                                  <ul>
-                                                                    <li><a href="<%= book_path(book) %>" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                                                  </ul>
-                                                              </div>
+                                        <ul>
+                                        <li><a href="<%= book_path(book) %>" title="Detalles"><i class="fa fa-external-link"></i></a></li>
+                                        </ul>
+                                        </div>
                                   </div>
                                 </div>
                               </div>

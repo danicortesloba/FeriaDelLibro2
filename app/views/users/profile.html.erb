@@ -22,6 +22,7 @@
                                     <tr>
                                       <% if @user.role == "Editorial" %>
                                       <th class="product-price">Nombre</th>
+                                      <th class="product-price">Mi tienda</th>
                                       <% elsif @user.role == "Lector"%>
                                       <th class="product-price">Nombre</th>
                                       <th class="product-quantity">Apellido</th>
@@ -35,6 +36,7 @@
                                         <tr>
                                           <% if @user.role == "Editorial" %>
                                           <td class="product-name"><p><strong><%= @publisher.name%></strong></p><p><%= link_to 'Cambiar', edit_publisher_path(@publisher) %></p></td>
+                                          <td class="product-name"><p><a href="<%= publisher_path(@publisher) %>">Mi tienda</a></p></td>
                                           <% elsif @user.role == "Lector"%>
                                           <td class="product-name"><p><%= @reader.firstname%> </p><p><%= link_to 'Cambiar', edit_reader_path(@reader) %></p></td>
                                           <td class="product-name"><p><%= @reader.lastname%> </p><p> <%= link_to 'Cambiar', edit_reader_path(@reader) %></p></td>

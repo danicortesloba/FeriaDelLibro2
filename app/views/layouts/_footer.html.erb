@@ -80,6 +80,7 @@
                                                             <% end %>
                                                             <% if user_signed_in? && current_user.role == 'Editorial' %>
                                                              <% if current_user.publisher.present? %>
+                                                             <li><a href="<%= publisher_path(current_user.publisher.id) %>">Mi tienda</a></li>
                                                               <li><a href="<%= users_my_books_path %>">Mis libros</a></li>
                                                               <li><a href="<%= users_my_sales_path %>">Mis ventas</a></li>
                                                               <li><a href="<%= membership_orders_path %>">Mi carrito</a></li>

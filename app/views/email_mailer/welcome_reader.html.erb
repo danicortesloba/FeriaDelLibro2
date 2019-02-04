@@ -5,14 +5,12 @@
     <%= stylesheet_link_tag '/stylesheets/mailers/build_mailer' %>
   </head>
   <body>
-
-    <%= email_image_tag("banners/logo2.png") %>
-    
-
-
-    <h1>Hi <%= @user.reader.firstname%></h1>
-    <p>
-      Sample mail sent using smtp.
-    </p>
-  </body>
+    <h2 align="center"> <%= logo_image_tag("banners/logo2.png") %></h2>
+    <h2 align="center"> ¡Muchas gracias por inscribirte en Líbrate!</h2>
+    <p align="left"> Hola, <%= @user.reader.firstname %>. </p>
+    <p align="left"> ¡Ya eres parte de Líbrate! Recuerda que tenemos descuentos en ¡todos nuestros libros!</p>
+    <p align="left"> Cuando hagas una compra, podrás elegir si quieres que te manden el libro a tu casa o recogerlo en el lugar designado por la editorial. Así tú puedes decidir si quieres pagar envío o no. </p>
+    <p align="left"> Si tienes cualquier pregunta, no dudes en revisar nuestra sección de preguntas frecuentes o contactarnos. </p>
+    <p align="left"> ¡Un abrazo y buena lectura </p>
+</body>
 </html>

@@ -58,13 +58,7 @@ class BillingsController < ApplicationController
 
   def execute
      paypal_payment = PayPal::SDK::REST::Payment.find(params[:paymentId])
-     @billings = current_user.billings
-     if @billings.any?
-       @billing = current_user.billings.last
-       @billing.orders.each do |order|
-         @publisher = order.book.publisher.user
-       end
-     end
+
      if paypal_payment.execute(payer_id: params[:PayerID])
          amount = paypal_payment.transactions.first.amount.total
          billing = Billing.create(
@@ -78,10 +72,18 @@ class BillingsController < ApplicationController
          orders = current_user.orders.cart
          orders.update_all(payed: true, billing_id: billing.id)
 
+         @billings = current_user.billings
+         if @billings.any?
+           @billing = current_user.billings.last
+           @billing.orders.each do |order|
+              EmailMailer.sale_confirmation(@billing).deliver_now
+          end
+        end
+
 
          redirect_to billings_path, notice: "¡La compra se realizó con éxito!"
          EmailMailer.billing_confirmation(current_user).deliver_now
-         EmailMailer.sale_confirmation(@publisher, @billing).deliver_now
+
      else
          render plain: "No se puedo generar el cobro en PayPal."
      end

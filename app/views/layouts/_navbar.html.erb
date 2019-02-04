@@ -160,6 +160,7 @@
                 <li><a href="#">Editores<i class="fa fa-angle-down"></i></a>
                   <div class="sub-menu sub-menu-2">
                     <ul>
+                      <li><a href="<%= publisher_path(current_user.publisher.id) %>">Mi tienda</a></li>
                       <li> <a href="<%= users_my_books_path%>">Mis libros</a> </li>
                       <li> <a href="<%= users_my_sales_path%>">Mis ventas</a> </li>
                       <li><a href="<%= new_book_path%>">Agregar libro</a></li>

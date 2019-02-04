@@ -54,6 +54,9 @@ class PublishersController < ApplicationController
 
     respond_to do |format|
       if @publisher.save
+
+        EmailMailer.welcome_publisher(@publisher).deliver_later
+
         format.html { redirect_to new_address_path, notice: 'La editorial se creó correctamente.' }
         format.json { render :show, status: :created, location: @publisher }
       else

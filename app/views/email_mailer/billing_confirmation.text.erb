@@ -1,4 +1,6 @@
 ¡Gracias por comprar en Líbrate!
+ Hola, <%= @user.reader.firstname %>.
+ Muchas gracias por tu compra.
 Tu pedido será enviado por cada una de las editoriales.
 Si uno de tus libros no ha llegado hasta <%= @expiration.to_date.strftime("%d/%m/%Y") %>, puedes escribirnos a libratechile@gmail.com para presentar un reclamo.
 Tienes hasta <%= @expiration_complaint.to_date.strftime("%d/%m/%Y") %> para presentar el reclamo.

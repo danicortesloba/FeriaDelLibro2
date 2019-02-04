@@ -2,9 +2,9 @@
 <%= form_with(model: address, local: true) do |form| %>
   <% if address.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(address.errors.count, "error") %> prohibited this address from being saved:</h2>
+      <h2><%= pluralize(address.errors.count, "errores") %> evitaron que se guarde esta dirección:</h2>
         <ul>
-          <% address.errors.full_messages.each do |message| %>
+          <% address.errors.each do |attribute, message| %>
           <li><%= message %></li>
   <% end %>
         </ul>

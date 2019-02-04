@@ -55,7 +55,7 @@ class OrdersController < ApplicationController
     @book = Book.find(params[:book_id])
     @order = Order.new(book: @book, user: current_user)
       if @order.save
-        redirect_to books_path, notice: 'Se agregó este libro a tu carrito de compras'
+        redirect_to books_path, notice: 'Se agregó el libro a tu carrito de compras'
       else
         redirect_to books_path, alert: 'No pudimos agregar el libro a tu carrito de compras'
       end
