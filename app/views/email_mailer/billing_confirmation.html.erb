@@ -27,9 +27,9 @@
           <td width="20%" style="border: 1px solid black;"><%= number_to_currency(order.book.price, precision: 0) %></td>
           <td width="20%" style="border: 1px solid black;"><h4><%= order.book.publisher.name %></h4></td>
           <% if order.delivery == false && @publisher_address.present? %>
-              <td width="20%" style="border: 1px solid black;">Recógelo en:<br> <strong> <%= @publisher_address.address %> <br> <%= @publisher_address.commune %>, <%= @publisher_address.region %>.</strong> <p>La editorial se contactará contigo para coordinar la entrega.</p></td>
+              <td width="20%" style="border: 1px solid black;">Recógelo en:<br> <strong> <%= @publisher_address.address %> <br> <%= @publisher_address.commune %>, <%= @publisher_address.region %>.</strong> <p><%= order.book.publisher.name %> se contactará contigo para coordinar la entrega.</p></td>
           <% else %>
-              <td width="20%" style="border: 1px solid black;">Te lo enviaremos a:<br> <strong> <%= @adr %> <br> <%= @com %>, <%= @reg %>. </strong><p>(Recuerda que el envío se hace por editorial y lo debes pagar cuando el paquete te llegue).</p></td>
+              <td width="20%" style="border: 1px solid black;"><%= order.book.publisher.name %> te lo enviará a:<br> <strong> <%= @adr %> <br> <%= @com %>, <%= @reg %>. </strong><p>(Recuerda que el envío se hace por editorial y lo debes pagar cuando el paquete te llegue).</p></td>
           <% end %>
         </tr>
         <% end %>
