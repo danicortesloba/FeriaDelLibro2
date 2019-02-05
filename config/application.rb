@@ -15,8 +15,8 @@ module FeriaDelLibro2
     config.app_generators.scaffold_controller = :scaffold_controller
 
     Raven.configure do |config|
-  config.dsn = 'https://e3cc3bf07147422a882d4507d42aba26:17bb5176a33a472fa1c28f1dcc6119c3@sentry.io/1387702'
-end
+      config.dsn = 'https://e3cc3bf07147422a882d4507d42aba26@sentry.io/1387702'
+    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
