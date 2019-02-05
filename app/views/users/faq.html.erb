@@ -71,8 +71,10 @@
                                                 <li> <i class="fa fa-star"></i><strong>¿Cobran alguna comisión?</strong></li>
                                                 <li>Nosotros no. Sin embargo, <a href="https://www.flow.cl/", target="_blank"> Flow</a> (el sistema que permite que los lectores paguen con tarjeta de débito o crédito) cobra una comisión del 4%. Te recomendamos que tengas esto en consideración a la hora de fijar tus precios. </li>
                                                 <br>
+                                                  <% if user_signed_in? && current_user.role == 'Editorial' %>
                                                 <li> <i class="fa fa-star"></i><strong>¿Cuál es mi tienda exclusiva?</strong></li>
                                                 <li>Para ver tu tienda, ingresa con tu cuenta de editor y pincha aquí: <a href="<%= publisher_path(current_user.publisher.id)%>">Mi tienda</a> </li>
+                                                  <% end %>
                                                 <br>
                                                 <li> <i class="fa fa-star"></i><strong>¿Cómo puedo actualizar mi información de facturación, pago y redes sociales?</strong></li>
                                                 <li>Para actualizar tus datos <a href="<%= users_profile_path %>">ingresa aquí.</a></li>
