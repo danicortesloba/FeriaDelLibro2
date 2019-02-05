@@ -1,10 +1,12 @@
 class MembershipsController < ApplicationController
-  before_action :set_membership, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /memberships
   # GET /memberships.json
   def index
-    @memberships = Membership.all
+    @memberships = Membership.where(active: true)
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
+    @books = Book.all
   end
 
   # GET /memberships/1
@@ -28,7 +30,7 @@ class MembershipsController < ApplicationController
 
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to @membership, notice: 'Membership was successfully created.' }
+        format.html { redirect_to users_memberships_path, notice: 'Se creó la membresía.' }
         format.json { render :show, status: :created, location: @membership }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class MembershipsController < ApplicationController
   def update
     respond_to do |format|
       if @membership.update(membership_params)
-        format.html { redirect_to @membership, notice: 'Membership was successfully updated.' }
+        format.html { redirect_to users_memberships_path, notice: 'Se actualizó la membresía.' }
         format.json { render :show, status: :ok, location: @membership }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class MembershipsController < ApplicationController
   def destroy
     @membership.destroy
     respond_to do |format|
-      format.html { redirect_to memberships_url, notice: 'Membership was successfully destroyed.' }
+      format.html { redirect_to users_memberships_path, notice: 'Se eliminó la membresía.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +71,6 @@ class MembershipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def membership_params
-      params.require(:membership).permit(:name, :description, :price)
+      params.require(:membership).permit(:name, :description, :price, :active, :benefit1, :benefit2, :benefit3, :benefit4, :benefit5)
     end
 end

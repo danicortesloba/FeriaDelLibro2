@@ -1,4 +1,6 @@
 $(document).on('turbolinks:load', function() {
+
+  jQuery('header nav').meanmenu();
   $('#main').owlCarousel({
       loop:true,
       margin:10,
@@ -21,7 +23,7 @@ $(document).on('turbolinks:load', function() {
       nav:true,
       responsive:{
           0:{
-              items:5
+              items:1
           },
           600:{
               items:5
@@ -31,13 +33,29 @@ $(document).on('turbolinks:load', function() {
           }
       }
   })
+  $('#search').owlCarousel({
+      loop:true,
+      margin:10,
+      nav:true,
+      responsive:{
+          0:{
+              items:1
+          },
+          600:{
+              items:1
+          },
+          1000:{
+              items:1
+          }
+      }
+  })
   $('#new2').owlCarousel({
       loop:true,
       margin:10,
       nav:true,
       responsive:{
           0:{
-              items:5
+              items:1
           },
           600:{
               items:5

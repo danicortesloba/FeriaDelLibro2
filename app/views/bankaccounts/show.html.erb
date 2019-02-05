@@ -1,0 +1,37 @@
+<p>
+  <strong>User:</strong>
+  <%= @bankaccount.user %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @bankaccount.name %>
+</p>
+
+<p>
+  <strong>Bank:</strong>
+  <%= @bankaccount.bank %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @bankaccount.type %>
+</p>
+
+<p>
+  <strong>Rut:</strong>
+  <%= @bankaccount.rut %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @bankaccount.account %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @bankaccount.email %>
+</p>
+
+<%= link_to 'Edit', edit_bankaccount_path(@bankaccount) %> |
+<%= link_to 'Back', bankaccounts_path %>

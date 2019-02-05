@@ -1,32 +1,99 @@
 <%= form_with(model: membership, local: true) do |form| %>
   <% if membership.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(membership.errors.count, "error") %> prohibited this membership from being saved:</h2>
+      <h2><%= pluralize(membership.errors.count, "errores") %> evitaron que se guarde esta membresía:</h2>
 
       <ul>
-      <% membership.errors.full_messages.each do |message| %>
+      <% membership.errors.each do |attribute, message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+  <div class="user-login-area mb-70">
+    <div class="container">
+      <div class="row">
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
+            <div class="billing-fields">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="single-register">
+                          <%= form.label :nombre %>
+                          <%= form.text_field :name %>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="single-register">
+                          <%= form.label :descripción %>
+                          <%= form.text_field :description %>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                         <div class="single-register">
+                           <%= form.label :precio %>
+                           <%= form.number_field :price %>
+                         </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                          <div class="single-register">
+                            <%= form.label :activa %>
+                            <%= form.check_box :active %>
+                          </div>
+                       </div>
+                  </div>
+                  <div class="row">
+                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                           <div class="single-register">
+                             <%= form.label :beneficio_1 %>
+                             <%= form.text_field :benefit1 %>
+                           </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="single-register">
+                              <%= form.label :beneficio_2 %>
+                              <%= form.text_field :benefit2 %>
+                            </div>
+                         </div>
+                  </div>
+                  <div class="row">
+                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                             <div class="single-register">
+                               <%= form.label :beneficio_3 %>
+                               <%= form.text_field :benefit3 %>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                              <div class="single-register">
+                                <%= form.label :beneficio_4 %>
+                                <%= form.text_field :benefit4 %>
+                              </div>
+                           </div>
+                  </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
 
-  <div class="actions">
-    <%= form.submit %>
+                 <div class="row">
+                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                       <div class="single-register">
+                         <%= form.label :beneficio_5 %>
+                         <%= form.text_field :benefit5 %>
+                       </div>
+                    </div>
+                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      <div class="text-center mb-30">
+                          <div class="buttons-cart mb-30">
+                          <%= form.submit "Guardar membresía"%>
+                          </div>
+                      </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
   </div>
-<% end %>
+  <% end %>

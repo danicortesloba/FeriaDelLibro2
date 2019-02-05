@@ -1,9 +1,9 @@
 <%= form_with(model: book, local: true) do |form| %>
   <% if book.errors.any? %>
     <div id="error_explanation">
-        <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+        <h2><%= pluralize(book.errors.count, "errores") %> evitaron que se guarde este libro:</h2>
         <ul>
-          <% book.errors.full_messages.each do |message| %>
+          <% book.errors.each do |attribute, message| %>
             <li><%= message %></li>
           <% end %>
         </ul>
@@ -15,11 +15,6 @@
     <div class="container">
       <div class="row">
 
-        <div class="col-lg-12">
-          <div class="login-title text-center mb-30">
-            <h2>Nuevo Libro</h2>
-          </div>
-        </div>
         <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
             <div class="billing-fields">
                 <div class="row">
@@ -50,6 +45,8 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="single-register">
                           <%= form.label :portada %>
+                          Sube un archivo .jpg, .jpeg o .png.<br>
+                          Recomendamos que tu portada sea de 436px X 623px.<br>
                           <%= form.file_field :cover, id: :cover_image %>
                         </div>
                     </div>
@@ -58,7 +55,20 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="single-register">
                           <%= form.label :precio %>
+                          Este es el precio de oferta para vender en Líbrate.<br>
+                          Debe ser una oferta interesante para el lector. <br>
+                          Sin embargo, recuerda que Flow, el sistema de pago,<br>
+                          cobra 4% de comisión por cada venta. <br>
                           <%= form.number_field :price %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-register">
+                          <%= form.label :PVP %>
+                          <%= form.number_field :pvp %>
                         </div>
                     </div>
                 </div>
@@ -82,7 +92,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <div class="text-center mb-30">
                           <div class="buttons-cart mb-30">
-                          <a href="#"><%= form.submit "Crear libro"%></a>
+                          <%= form.submit "Guardar libro"%>
                           </div>
 
                       </div>

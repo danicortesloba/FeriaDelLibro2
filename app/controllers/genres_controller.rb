@@ -1,5 +1,5 @@
 class GenresController < ApplicationController
-  before_action :set_genre, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /genres
   # GET /genres.json
@@ -10,12 +10,12 @@ class GenresController < ApplicationController
   # GET /genres/1
   # GET /genres/1.json
   def show
-
-    @books = []
+  @books = []
     genres = Genre.where(name: @genre.name)
     genres.each do |genre|
       @books += genre.books.map{|x| x if x.title.present?} if genre.books.any?
     end
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
   end
 
   # GET /genres/new
@@ -31,11 +31,11 @@ class GenresController < ApplicationController
   # POST /genres.json
   def create
     @genre = Genre.new(genre_params)
-    @genre.update(name: @genre.name.titleize) 
+    @genre.update(name: @genre.name.titleize)
 
     respond_to do |format|
       if @genre.save
-        format.html { redirect_to @genre, notice: 'Genre was successfully created.' }
+        format.html { redirect_to @genre, notice: 'El género se agregó al libro.' }
         format.json { render :show, status: :created, location: @genre }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class GenresController < ApplicationController
   def update
     respond_to do |format|
       if @genre.update(genre_params)
-        format.html { redirect_to @genre, notice: 'Genre was successfully updated.' }
+        format.html { redirect_to @genre, notice: 'El género se actualizó.' }
         format.json { render :show, status: :ok, location: @genre }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class GenresController < ApplicationController
   def destroy
     @genre.destroy
     respond_to do |format|
-      format.html { redirect_to genres_url, notice: 'Genre was successfully destroyed.' }
+      format.html { redirect_to genres_url, notice: 'El género se eliminó.' }
       format.json { head :no_content }
     end
   end

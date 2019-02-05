@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :bankaccounts
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
     resources :memberships do
       resources :membership_orders, only: :create
       resources :membership_orders, only: :index
@@ -32,6 +35,8 @@ Rails.application.routes.draw do
       end
     end
     resources :orders
+    get 'orders/:id/delivery', to: 'orders#delivery', as:'orders_delivery'
+    get 'orders/:id/pickup', to: 'orders#pickup', as:'orders_pickup'
     resources :membership_orders
     resources :readers
     devise_for :users, controllers: {
@@ -42,8 +47,9 @@ Rails.application.routes.draw do
     get 'users/profile'
     get 'users/about'
     get 'users/faq'
-    get 'users/contact'
     get 'users/publishers'
+    get 'users/memberships'
+    get 'users/my_sales'
     resources :billings, only: [] do
         collection do
             get 'index'
@@ -53,6 +59,7 @@ Rails.application.routes.draw do
     end
     resources :millings, only: [] do
         collection do
+            get 'alternative'
             get 'pre_pay'
             get 'execute'
             get 'index'

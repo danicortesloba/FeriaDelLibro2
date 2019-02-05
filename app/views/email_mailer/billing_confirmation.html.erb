@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2 align="center"> <%= logo_image_tag("banners/logo2.png")%></h2>
+    <h2 align="center"> ¡Gracias por comprar en Líbrate! </h2>
+    <p align="left"> Hola, <%= @user.reader.firstname %>.</p>
+    <p align="left"> Muchas gracias por tu compra.</p>
+    <p align="left"> Tu pedido será enviado por cada una de las editoriales. Si uno de tus libros no ha llegado hasta <%= @expiration.to_date.strftime("%d/%m/%Y") %>, puedes escribirnos a libratechile@gmail.com para presentar un reclamo. Tienes hasta <%= @expiration_complaint.to_date.strftime("%d/%m/%Y") %> para presentar el reclamo. En el caso que la editorial no haya mandado el libro, te devolveremos tu dinero. </p>
+    <table style="border: 1px solid black;">
+      <thead>
+        <tr>
+          <th style= "background: #00ABE0; border: 1px solid black;">Portada</th>
+          <th style= "background: #00ABE0; border: 1px solid black;">Título</th>
+          <th style= "background: #00ABE0; border: 1px solid black;">Precio</th>
+          <th style= "background: #00ABE0; border: 1px solid black;">Editorial</th>
+          <th style= "background: #00ABE0; border: 1px solid black;">Envío</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @billing.orders.each do |order| %>
+        <tr>
+          <td width="20%" style="border: 1px solid black;"><%= email_image_tag("#{order.book.cover.thumb.url}") %></td>
+          <td width="20%" style="border: 1px solid black;"><h4><%= order.book.title %></h4></td>
+          <td width="20%" style="border: 1px solid black;"><%= number_to_currency(order.book.price, precision: 0) %></td>
+          <td width="20%" style="border: 1px solid black;"><h4><%= order.book.publisher.name %></h4></td>
+          <% if order.delivery == false && @publisher_address.present? %>
+              <td width="20%" style="border: 1px solid black;">Recógelo en:<br> <strong> <%= @publisher_address.address %> <br> <%= @publisher_address.commune %>, <%= @publisher_address.region %>.</strong> <p><%= order.book.publisher.name %> se contactará contigo para coordinar la entrega.</p></td>
+          <% else %>
+              <td width="20%" style="border: 1px solid black;"><%= order.book.publisher.name %> te lo enviará a:<br> <strong> <%= @adr %> <br> <%= @com %>, <%= @reg %>. </strong><p>(Recuerda que el envío se hace por editorial y lo debes pagar cuando el paquete te llegue).</p></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+</body>
+</html>

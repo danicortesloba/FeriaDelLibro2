@@ -1,16 +1,22 @@
 class PublishersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
-  before_action :set_publisher, only: [:show, :edit, :update, :destroy, :add_publisher_comment, :remove_publisher_comment]
+  load_and_authorize_resource
+  before_action :set_publisher, only: [:add_publisher_comment, :remove_publisher_comment]
 
   # GET /publishers
   # GET /publishers.json
   def index
-    @publishers = Publisher.all
+    @publishers = Publisher.page(params[:page]).per(24)
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
+    @books = Book.all
   end
   # GET /publishers/1
   # GET /publishers/1.json
   def show
+    @pbooks = @publisher.books.page(params[:page]).per(5)
+    @publishers = Publisher.all
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
     @books = Book.all
+    @facebookurl = "https://" + @publisher.facebook
   end
 
   # GET /publishers/new
@@ -34,8 +40,10 @@ class PublishersController < ApplicationController
   end
 
   def remove_publisher_comment
-    publishercomment = @publisher.publisher_comments.find(params[:publisher_comment_id])
-    @publisher.publisher_comments.delete(publishercomment)
+    publisher_comment = @publisher.publisher_comments.find(params[:publisher_comment_id])
+    if publisher_comment.user == current_user
+      @publisher.publisher_comments.delete(publisher_comment)
+    end
     redirect_to publisher_path
   end
 
@@ -46,7 +54,10 @@ class PublishersController < ApplicationController
 
     respond_to do |format|
       if @publisher.save
-        format.html { redirect_to memberships_path, notice: 'Publisher was successfully created.' }
+
+        EmailMailer.welcome_publisher(@publisher).deliver_later
+
+        format.html { redirect_to new_address_path, notice: 'La editorial se creó correctamente.' }
         format.json { render :show, status: :created, location: @publisher }
       else
         format.html { render :new }
@@ -60,7 +71,7 @@ class PublishersController < ApplicationController
   def update
     respond_to do |format|
       if @publisher.update(publisher_params)
-        format.html { redirect_to @publisher, notice: 'Publisher was successfully updated.' }
+        format.html { redirect_to books_path, notice: 'La editorial se actualizó correctamente.' }
         format.json { render :show, status: :ok, location: @publisher }
       else
         format.html { render :edit }
@@ -74,7 +85,7 @@ class PublishersController < ApplicationController
   def destroy
     @publisher.destroy
     respond_to do |format|
-      format.html { redirect_to publishers_url, notice: 'Publisher was successfully destroyed.' }
+      format.html { redirect_to publishers_url, notice: 'La editorial se eliminó.' }
       format.json { head :no_content }
     end
   end
@@ -87,6 +98,6 @@ class PublishersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def publisher_params
-      params.require(:publisher).permit(:name, :rut, :giro, :user_id, :id)
+      params.require(:publisher).permit(:name, :rut, :giro, :user_id, :id, :voucher, :method, :address, :facebook, :twitter, :instagram, :website, :razon)
     end
 end

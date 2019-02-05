@@ -29,7 +29,7 @@
   <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
       <div class="logo-area">
-        <a href="<%= root_path %>"><img src="<%= asset_path 'img/logo/3.png' %>" alt="logo" /></a>
+        <a href="<%= root_path %>"><img src="<%= asset_path 'banners/logo2.png'%>" alt="logo" /></a>
       </div>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-5 col-xs-12">
@@ -101,7 +101,15 @@
               </div>
               <div class="cart-bottom">
                 <a class="view-cart" href="<%= membership_orders_path%>">Carrito de Compras</a>
-                <a href="<%= pre_pay_millings_path %>">Pagar</a>
+                <% if signed_in? && current_user.publisher.present? %>
+                  <% if current_user.publisher.method == 'Paypal'%>
+                  <a href="<%= pre_pay_millings_path %>">Pagar</a>
+                  <br>
+                  <% else %>
+                  <a href="<%= alternative_millings_path %>">Pagar</a>
+                  <% end %>
+                <% end %>
+
               </div>
             </div>
           </li>
@@ -125,33 +133,41 @@
               <div class="mega-menu">
                 <span>
                   <% Genre.select(:name).distinct.each do |genre|  %>
-                    <% genre = Genre.find_by_name genre[:name] %>
-                    <a href="<%= genre_path(genre.id)%>"> <%= genre.name.titleize %></a>
+                    <% if Book.includes(:genres).where('genres.name' => genre.name ).any? %>
+                      <% genre = Genre.find_by_name genre[:name] %>
+                      <a href="<%= genre_path(genre.id) %>"> <%= genre.name.titleize %></a>
+                    <% end %>
                   <% end %>
                 </span>
               </div>
             </li>
-            <li><a href="<%= users_publishers_path %>">Editoriales</a></li>
+            <li><a href="<%= publishers_path %>">Editoriales</a></li>
             <li><a href="<%= users_about_path %>">¿Cómo funciona?</a></li>
             <% if signed_in? && current_user.role == 'admin'%>
                 <li><a href="#">Admin<i class="fa fa-angle-down"></i></a>
                   <div class="sub-menu sub-menu-2">
                     <ul>
-                      <li><a href="<%= publishers_path %>">Editoriales</a></li>
+                      <li><a href="<%= admin_root_path %>">Dashboard</a></li>
+                      <li><a href="<%= users_memberships_path %>">Membresías</a></li>
+                      <li><a href="<%= users_publishers_path %>">Editoriales</a></li>
                       <li><a href="<%= readers_path %>">Lectores</a></li>
                     </ul>
                   </div>
                 </li>
             <% end %>
             <% if signed_in? && current_user.role == 'Editorial'%>
+             <% if current_user.publisher.present? %>
                 <li><a href="#">Editores<i class="fa fa-angle-down"></i></a>
                   <div class="sub-menu sub-menu-2">
                     <ul>
+                      <li><a href="<%= publisher_path(current_user.publisher.id) %>">Mi tienda</a></li>
                       <li> <a href="<%= users_my_books_path%>">Mis libros</a> </li>
+                      <li> <a href="<%= users_my_sales_path%>">Mis ventas</a> </li>
                       <li><a href="<%= new_book_path%>">Agregar libro</a></li>
                     </ul>
                   </div>
                 </li>
+              <% end %>
             <% end %>
           </ul>
         </nav>
@@ -167,31 +183,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="mobile-menu">
-        <nav id="mobile-menu-active">
-          <ul id="nav">
-            <li><a href="<%= root_path %>">Inicio</a></li>
-            <li><a href="<%= books_path %>">Libros</a>
-              <ul>
-                <li><% Genre.select(:name).distinct.each do |genre|  %>
-                  <% genre = Genre.find_by_name genre[:name] %>
-                  <a href="<%= genre_path(genre.id)%>"> <%= genre.name.titleize %></a>
-                <% end %></li>
-              </ul>
-            </li>
-            <li><a href="#">Admin</a>
-              <ul>
-                <li><a href="<%= publishers_path %>">Editoriales</a></li>
-                <li><a href="<%= readers_path %>">Lectores</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Editoriales</a>
-              <ul>
-                <li> <a href="<%= users_my_books_path%>">Mis libros</a> </li>
-                <li><a href="<%= new_book_path%>">Agregar libro</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
+
       </div>
     </div>
   </div>

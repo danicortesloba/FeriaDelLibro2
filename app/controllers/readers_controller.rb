@@ -1,11 +1,10 @@
 class ReadersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
-  before_action :set_reader, only: [:show, :edit, :update, :destroy]
+load_and_authorize_resource
 
   # GET /readers
   # GET /readers.json
   def index
-    @readers = Reader.all
+    @readers = Reader.page(params[:page]).per(30)
   end
 
   # GET /readers/1
@@ -30,7 +29,9 @@ class ReadersController < ApplicationController
 
     respond_to do |format|
       if @reader.save
-        format.html { redirect_to @reader, notice: 'Reader was successfully created.' }
+        EmailMailer.welcome_reader(@reader).deliver_later
+
+        format.html { redirect_to books_path, notice: 'El lector se creó correctamente.' }
         format.json { render :show, status: :created, location: @reader }
       else
         format.html { render :new }
@@ -44,7 +45,7 @@ class ReadersController < ApplicationController
   def update
     respond_to do |format|
       if @reader.update(reader_params)
-        format.html { redirect_to @reader, notice: 'Reader was successfully updated.' }
+        format.html { redirect_to books_path, notice: 'El lector se actualizó correctamente.' }
         format.json { render :show, status: :ok, location: @reader }
       else
         format.html { render :edit }
@@ -58,7 +59,7 @@ class ReadersController < ApplicationController
   def destroy
     @reader.destroy
     respond_to do |format|
-      format.html { redirect_to readers_url, notice: 'Reader was successfully destroyed.' }
+      format.html { redirect_to readers_url, notice: 'El lector se eliminó.' }
       format.json { head :no_content }
     end
   end

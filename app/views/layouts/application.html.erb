@@ -3,18 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Feria del Libro</title>
+        <title>Líbrate</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
         <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+        <%= favicon_link_tag asset_path('favicon.png') %>
+        <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   </head>
 
   <body class="home-4">
 
     <%= render 'layouts/navbar' %>
+      <%- flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+      <%- end -%>
     <%= yield %>
     <%= render 'layouts/footer' %>
   </body>

@@ -1,0 +1,108 @@
+<% if user_signed_in? && current_user.role == 'Editorial' %>
+<div class="product-main-area mb-70">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-12">
+        <div class="login-title text-center mb-30">
+          <h2>Mis ventas</h2>
+        </div>
+      </div>
+      <% if @orders.any? %>
+      <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+              <div class="cart-main-area mb-70">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                      <form action="#">
+                        <div class="table-content table-responsive">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th class="product-name">Título</th>
+                                <th class="product-price">Fecha máxima de entrega</th>
+                                <th class="product-name">Nombre Lector</th>
+                                <th class="product-name">Dirección de envío</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% @orders.each do |order| %>
+                              <tr>
+                                <td class="product-quantity"><%= order.book.title %></td>
+                                <td class="product-quantity"><%= @expiration %></td>
+                                <td class="product-quantity"><%= @reader.firstname %> <%= @reader.lastname %></td>
+                                <% if order.delivery == false %>
+                                    <td class="product-name text-left">El lector lo recogerá en: <br> <strong> <%= @publisher_address.address %> <br> <%= @publisher_address.commune %>, <%= @publisher_address.region %>.</strong> <p>Te enviaremos un correo con los datos del lector para que coordines la entrega.</p></td>
+                                <% else %>
+                                        <td class="product-name text-left">Debes enviarlo a por pagar a través de Starken a: <br> <strong> <%= @adr %> <br> <%= @com %>, <%= @reg %>. </strong></td>
+                                <% end %>
+                             </tr>
+                             <% end %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </form>
+                    </div>
+                 </div>
+                 <% if current_user.bankaccounts.exists? %>
+                     <div class="row">
+                       <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                         <form action="#">
+                           <p>Los ingresos de tus ventas se depositarán a esta cuenta. Recuerda que los pagos se retienen por 30 días. Si no hemos recibido ningún reclamo de tus lectores indicando que no recibieron sus libros, procederemos a depositarte el pago.</p>
+                           <div class="table-content table-responsive">
+                             <table>
+                               <thead>
+                                 <tr>
+                                   <th class="product-thumbnail">Cuenta</th>
+                                   <th class="product-price">Editar</th>
+                                 </tr>
+                               </thead>
+                               <tbody>
+                                     <tr>
+                                         <td class="product-name text-left">Titular: <%= @bankaccount.name%><br> Banco:<%= @bankaccount.bank%><br>Cuenta: <%= @bankaccount.account%><br> Tipo: <%= @bankaccount.accounttype%><br>Rut: <%= @bankaccount.rut%><br>Email: <%= @bankaccount.email%><br></td>
+                                         <td class="product-remove"><%= link_to 'Editar', edit_bankaccount_path(@bankaccount) %></td>
+                                      </tr>
+                               </tbody>
+                             </table>
+                           </div>
+                         </form>
+                       </div>
+                     </div>
+                 <% else %>
+                   <div class="row">
+                               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                   <div class="wc-proceed-to-checkout">
+                                     <h3> ¡Ojo! Aún no has ingresado una cuenta de depósito. </h3>
+                                       <ul>
+                                           <li><%= link_to 'Nueva cuenta', new_bankaccount_path %></li>
+                                       </ul>
+                                   </div>
+                               </div>
+                   </div>
+
+                 <% end %>
+
+
+                </div>
+              </div>
+      </div>
+
+
+      <% else %>
+      <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+              <div class="cart-main-area mb-70">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                    <h3>Aún no tienes ventas</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      </div>
+      <% end %>
+      <%= render 'layouts/sidepanel' %>
+      </div>
+    </div>
+  </div>
+<% end %>

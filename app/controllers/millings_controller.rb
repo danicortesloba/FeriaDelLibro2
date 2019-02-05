@@ -1,7 +1,25 @@
 class MillingsController < ApplicationController
+  load_and_authorize_resource
+
   def index
-    @milling = current_user.millings.last
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
+    @books = Book.all
+    @publisher = current_user.publisher
+    @millings = current_user.millings
+    if @millings.any?
+        @milling = current_user.millings.last
+        @milling.membership_orders.each do |order|
+          @price = order.membership.price
+        end
+        @expiration= (@milling.created_at + 1.year)
+   end
   end
+
+  def alternative
+    @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
+
+  end
+
   def pre_pay
     orders = current_user.membership_orders.cart
     precios = orders.map do |order|
@@ -49,7 +67,7 @@ class MillingsController < ApplicationController
           orders = current_user.membership_orders.cart
           orders.update_all(paid: true, milling_id: milling.id)
 
-          redirect_to millings_path, notice: "La compra se realizó con éxito!"
+          redirect_to millings_path, notice: "¡La compra se realizó con éxito!"
       else
           render plain: "No se puedo generar el cobro en PayPal."
       end

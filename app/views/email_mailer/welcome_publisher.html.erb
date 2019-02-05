@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <%= stylesheet_link_tag '/stylesheets/mailers/build_mailer' %>
+  </head>
+  <body>
+    <h2 align="center"> <%= logo_image_tag("banners/logo2.png") %></h2>
+    <h2 align="center"> ¡Muchas gracias por inscribirte en Líbrate!</h2>
+    <p align="left"> Hola, <%= @user.publisher.name %>. </p>
+    <p align="left"> ¡Ya eres parte de Líbrate!</p>
+    <p align="left"> Puedes ver tu tienda exclusiva aquí. Te invitamos a vincularla desde tu propio sitio web para que tus lectores puedan acceder a tus libros de manera más fácil.</p>
+    <p align="left"> Antes de comenzar a subir tus libros, recuerda elegir una membresía anual. Esta te permitirá subir y vender todos los libros que quieras. (La única comisión es la que hace Flow, el sistema de pago, la cual es de 5,4% por venta. ) </p>
+    <p align="left"> Por favor, lee detalladamente nuestra sección "¿Cómo funciona?", la cual te dará información importante sobre tus ventas, los envíos y las responsabilidades ante el Sistema de Impuestos Internos. </p>
+    <p align="left"> Además, puedes encontrar respuestas a todas tus dudas en nuestra sección de preguntas frecuentes o contactándonos a libratechile@gmail.com .</p>
+    <p align="left"> ¡Un abrazo y mucha suerte!</p>
+</body>
+</html>

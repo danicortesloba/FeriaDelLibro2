@@ -1,14 +1,15 @@
 class BooksController < ApplicationController
-before_action :authenticate_user!, only: [:new, :create]
-before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :remove_genre, :add_comment, :remove_comment]
+load_and_authorize_resource
+before_action :set_book, only: [:add_genre, :remove_genre, :add_comment, :remove_comment]
 
   # GET /books
   # GET /books.json
   def index
-
     @publishers = Publisher.all
+    @random = Book.order("RANDOM()")
+    @byprice = Book.order(:price)
     @bycomments = Book.joins(:comments).group("books.id").order("count(books.id)DESC")
-    @byorders = Book.joins(:orders).group("books.id").order("count(books.id)DESC")
+    @byorders = Book.joins(:orders).where("payed = true").group("books.id").order("count(books.id)DESC")
     if params[:query].present?
       @books = Book.where("lower(title) LIKE ?", "%#{params[:query].downcase}%" ).or(Book.where("lower(author_first_name) LIKE ?", "%#{params[:query].downcase}%" )).or(Book.where("lower(author_last_name) LIKE ?", "%#{params[:query].downcase}%" ))
     else
@@ -24,7 +25,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
 
   def remove_genre
     genre = @book.genres.find(params[:genre_id])
-    @book.genres.delete(genre)
+      @book.genres.delete(genre)
     redirect_to book_path
   end
 
@@ -41,7 +42,9 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
 
   def remove_comment
     comment = @book.comments.find(params[:comment_id])
-    @book.comments.delete(comment)
+    if comment.user == current_user
+      @book.comments.delete(comment)
+    end
     redirect_to book_path
   end
 
@@ -70,7 +73,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.html { redirect_to @book, notice: 'El libro se creó correctamente.' }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
@@ -84,7 +87,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        format.html { redirect_to @book, notice: 'El libro se actualizó correctamente.' }
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit }
@@ -98,7 +101,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.html { redirect_to books_url, notice: 'El libro se eliminó.' }
       format.json { head :no_content }
     end
   end
@@ -111,7 +114,7 @@ before_action :set_book, only: [:show, :edit, :update, :destroy, :add_genre, :re
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:comments_attributes, :genres_attributes, :id, :title, :author_first_name, :author_last_name, :publisher_id, :cover, :price, :isbn, :synopsis)
+      params.require(:book).permit(:comments_attributes, :genres_attributes, :id, :title, :author_first_name, :author_last_name, :publisher_id, :cover, :price, :isbn, :synopsis, :pvp)
     end
 
     def genre_params

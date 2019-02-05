@@ -1,31 +1,77 @@
-<p id="notice"><%= notice %></p>
+<div class="product-main-area mb-70">
+  <div class="container">
+    <div class="row">
 
-<% if @membership_orders.exists? %>
-<h1>Membership Orders</h1>
+      <div class="col-lg-12">
+        <div class="login-title text-center mb-30">
+          <h2>Mi carrito</h2>
+        </div>
+      </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Membership</th>
-      <th>Price</th>
-      <th>Paid</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <% if @membership_orders.exists? %>
+      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+              <div class="cart-main-area mb-70">
+                <div class="container">
+                    <div class="row">
+                      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                        <form action="#">
+                          <div class="table-content table-responsive">
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th class="product-price">Membresía</th>
+                                  <th class="product-quantity">Precio</th>
+                                  <th class="product-quantity">Borrar</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <% @membership_orders.each do |membership_order| %>
+                                <tr>
+                                  <td class="product-quantity"><h4><a href="<%= memberships_path %>"><%= membership_order.membership.name %></a></h4></td>
+                                  <td class="product-quantity"><span class="amount"><h4><%= number_to_currency(membership_order.membership.price, precision:0) %></h4></span></td>
+                                  <td class="product-quantity"><p><%= link_to 'Eliminar', membership_order, method: :delete %></p></td>
+                                </tr>
+                                <% end %>
+                              </tbody>
+                            </table>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div class="wc-proceed-to-checkout">
+                                        <h2>Total: <span class="amount"><%= number_to_currency(@total, precision: 0) %> </span></h2><br>
+                                    </div>
+                                    <div class="wc-proceed-to-checkout">
+                                      <% if signed_in? && current_user.publisher.method == 'Paypal'%>
+                                        <%= link_to 'Pagar', pre_pay_millings_path %>
+                                      <br>
+                                      <% else %>
+                                        <%= link_to 'Pagar', alternative_millings_path%>
+                                      <% end %>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+              </div>
+      </div>
 
-  <tbody>
-    <% @membership_orders.each do |membership_order| %>
-      <tr>
-        <td><%= membership_order.membership.name %></td>
-        <td><%= number_to_currency(membership_order.membership.price, precision:0) %></td>
-        <td><%= membership_order.paid %></td>
-        <td><%= link_to 'Borrar', membership_order, method: :delete %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= link_to 'Confirmar compra', pre_pay_millings_path, class: 'btn btn-success float-right' %>
-<br>
-<% else %>
-<p>No tienes ninguna membresía por comprar </p>
-<% end %>
+      <% else %>
+      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+              <div class="cart-main-area mb-70">
+                <div class="container">
+                    <div class="row">
+                      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                        <h3>No tienes membresías en tu carrito. </h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      <% end %>
+      <%= render 'layouts/sidepanel' %>
+
+      </div>
+    </div>
+  </div>

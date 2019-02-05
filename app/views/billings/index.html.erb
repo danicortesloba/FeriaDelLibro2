@@ -1,8 +1,77 @@
-    <% @billing.orders.each do |order| %>
+<% if user_signed_in? && current_user.role == 'Lector' %>
+<% if current_user.billings.any? %>
 
-          Título: <%= order.book.title %>
-          Editorial: <%= order.book.publisher.name %>
-          Precio: <%= number_to_currency(order.book.price, precision: 0) %>
+<div class="product-main-area mb-70">
+  <div class="container">
+    <div class="row">
 
-    <% end %>
-    
+      <div class="col-lg-12">
+        <div class="login-title text-center mb-30">
+          <h2>¡Gracias por tu compra!</h2>
+        </div>
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+              <div class="cart-main-area mb-70">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                      <form action="#">
+                        <div class="table-content table-responsive">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th class="product-thumbnail">Portada</th>
+                                <th class="product-name">Título</th>
+                                <th class="product-price">Precio</th>
+                                <th class="product-quantity">Editorial</th>
+                                <th class="product-quantity">Envío</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% @billing.orders.each do |order| %>
+                              <tr>
+                                <td class="product-thumbnail"><%= link_to image_tag("#{order.book.cover.thumb.url}", :alt => order.book.title), book_path(order.book_id) %></td>
+                                <td class="product-quantity"><h4><a href="<%= book_path(order.book_id) %>"><%= order.book.title %></a></h4></td>
+                                <td class="product-quantity"><span class="amount"><%= number_to_currency(order.book.price, precision: 0) %></span></td>
+                                <td class="product-quantity"><h4><a href="<%= publisher_path(order.book.publisher_id) %>"><%= order.book.publisher.name %></a></h4></td>
+                                <% if order.delivery == false && @publisher_address.present? %>
+                                    <td class="product-name text-left">Recógelo en:<br> <strong> <%= @publisher_address.address %> <br> <%= @publisher_address.commune %>, <%= @publisher_address.region %>.</strong> <p><%= order.book.publisher.name %> se contactará contigo para coordinar la entrega.</p></td>
+                                <% else %>
+                                    <% if @addresses.any? %>
+                                        <td class="product-name text-left"><%= order.book.publisher.name %> te lo enviará a:<br> <strong> <%= @adr %> <br> <%= @com %>, <%= @reg %>. </strong><p>(Recuerda que el envío se hace por editorial y lo debes pagar cuando el paquete te llegue).</p></td>
+                                    <% else %>
+                                        <td class ="product-name text-left"> ¡Oops! No tienes una dirección registrada. <%= link_to "Agregar dirección", addresses_path%> </td>
+                                    <% end %>
+                                <% end %>
+                              </tr>
+                              <% end %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </form>
+                    </div>
+                 </div>
+                 <div class="row">
+                             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                     <div class="wc-proceed-to-checkout">
+                                         <h2>Total: <span class="amount"><%= number_to_currency(@total, precision: 0) %> </span></h2><br>
+                                     </div>
+
+
+                                     <div>
+                                         <br>
+                                         <h4> Fecha de pedido: <%= @billing.created_at.to_date.strftime("%d/%m/%Y") %>. </h4>
+                                         <h4> Si no te llega hasta <%= @expiration.to_date.strftime("%d/%m/%Y") %>, escríbenos a <a href="mailto:libratechile@gmail.com">libratechile@gmail.com</a>. Tienes hasta <%= @expiration_complaint.to_date.strftime("%d/%m/%Y") %> para presentar el reclamo.</h4>
+                                     </div>
+                             </div>
+                 </div>
+
+                </div>
+              </div>
+        </div>
+      <%= render 'layouts/sidepanel' %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% end %>
