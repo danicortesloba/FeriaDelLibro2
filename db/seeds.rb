@@ -175,25 +175,26 @@ end
     benefit5: "Sí"
   )
 end
-
-1.times do |ba|
-  MembershipOrder.create(
-    user: User.find_by_email("publiser1@gmail.com"),
-    membership: Membership.find_by_name("Oferta de lanzamiento"),
-    paid: true,
-    milling: Milling.first
-  )
-end
-
 1.times do |ba|
   Milling.create(
-    user: User.find_by_email("publiser1@gmail.com"),
+    user: User.find_by_email("publisher1@gmail.com"),
     code: "Random #{ba+1}",
     payment_method: "paypal",
     amount: "2000",
     currency: "USD"
   )
 end
+
+1.times do |ba|
+  MembershipOrder.create(
+    user: User.find_by_email("publisher1@gmail.com"),
+    membership: Membership.find_by_name("Oferta de lanzamiento"),
+    paid: true,
+    milling: Milling.first
+  )
+end
+
+
 
 25.times do |ba|
     book = Book.find_by_title("Libro #{ba+1}")

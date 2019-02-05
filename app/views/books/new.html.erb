@@ -2,7 +2,7 @@
 <h3> ¡Oops! Para agregar libros debes tener una dirección registrada. <h3>
 <h4>Ingresa una aquí: <%= link_to 'Nueva dirección', new_address_path %><h4>
 <% else %>
-    <% if @unpaid.any? && current_user.membership_orders.empty? %>
+    <% if current_user.millings.empty? %>
     <h3> ¡Oops! Debes pagar tu membresía de editor para agregar libros. <h3>
     <h4>Revisa aquí las <%= link_to 'Membresías', memberships_path %><h4>
     <% else %>

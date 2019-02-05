@@ -114,7 +114,7 @@ before_action :set_book, only: [:add_genre, :remove_genre, :add_comment, :remove
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:comments_attributes, :genres_attributes, :id, :title, :author_first_name, :author_last_name, :publisher_id, :cover, :price, :isbn, :synopsis)
+      params.require(:book).permit(:comments_attributes, :genres_attributes, :id, :title, :author_first_name, :author_last_name, :publisher_id, :cover, :price, :isbn, :synopsis, :pvp)
     end
 
     def genre_params
@@ -122,6 +122,6 @@ before_action :set_book, only: [:add_genre, :remove_genre, :add_comment, :remove
     end
 
     def comment_params
-      params.require(:comment).permit(:id, :content, :publisher_id, :user_id, :book_id, :pvp)
+      params.require(:comment).permit(:id, :content, :publisher_id, :user_id, :book_id)
     end
 end

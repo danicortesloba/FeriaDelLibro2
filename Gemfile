@@ -18,6 +18,8 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'activeadmin'
 
+gem 'fog-aws', '>= 1.3.1'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 gem 'devise'
@@ -36,7 +38,7 @@ gem 'mini_magick'
 gem 'kaminari'
 gem 'chartkick', '~> 2.2.0'
 gem 'groupdate'
-gem 'actionmailer_inline_css' 
+gem 'actionmailer_inline_css'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
