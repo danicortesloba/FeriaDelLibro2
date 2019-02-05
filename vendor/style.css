@@ -2613,7 +2613,7 @@ a#scrollUp:hover {
 }
 .slider-content-3 a {
     border-bottom: 1px solid #fff;
-    color: white;
+    color: "white";
     display: inline-block;
     font-size: 18px;
     font-weight: 400;
