@@ -43,7 +43,6 @@ gem 'kaminari'
 gem 'chartkick', '~> 2.2.0'
 gem 'groupdate'
 gem 'actionmailer_inline_css'
-gem 'jquery-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
