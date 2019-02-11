@@ -193,11 +193,3 @@ end
     milling: Milling.first
   )
 end
-
-
-
-25.times do |ba|
-    book = Book.find_by_title("Libro #{ba+1}")
-    genre = Genre.find_by_name("Género #{ba+1}")
-    genre.books << book
-end
