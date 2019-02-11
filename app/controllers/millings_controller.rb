@@ -40,7 +40,7 @@ class MillingsController < ApplicationController
         :payer =>  {
           :payment_method =>  "paypal" },
           :redirect_urls => {
-          :return_url => "http://localhost:3000/millings/execute",
+          :return_url => execute_millings_url,
           :cancel_url => "http://localhost:3000/" },
           :transactions =>  [{ :item_list => { items: items },:amount =>  {:total =>  total.to_s, :currency =>  "USD" },:description =>  "Carro de compras." }]})
         if @payment.create

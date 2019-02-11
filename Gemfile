@@ -22,6 +22,8 @@ gem 'activeadmin'
 
 gem 'fog-aws', '>= 1.3.1'
 
+gem 'rails_12factor', group: :production
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 gem 'devise'
