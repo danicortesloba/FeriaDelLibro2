@@ -5,6 +5,16 @@ Welcome to líbrate!
 
 Current stage: development
 
+Repository: https://github.com/danicortesloba/FeriaDelLibro2
+
+Production: https://calm-atoll-72221.herokuapp.com/
+
+Video: https://youtu.be/xG2MXWo-SBw
+
+* Missing from Production:
+- REST paths
+- Jquery event load
+
 
 Basic Requirements
 

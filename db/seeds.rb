@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 AdminUser.destroy_all
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@gmail.com', password: '123456', password_confirmation: '123456') if Rails.env.development?
 
 Address.destroy_all
 Bankaccount.destroy_all
@@ -24,6 +24,14 @@ Publisher.destroy_all
 Reader.destroy_all
 User.destroy_all
 #publishers, bankaccounts, books
+1.times do |u|
+  User.create!(
+    email: "admin@gmail.com",
+    password: "123456",
+    password_confirmation: "123456",
+    role: 'admin')
+end
+
 10.times do |u|
   User.create!(
     email: "publisher#{u+1}@gmail.com",

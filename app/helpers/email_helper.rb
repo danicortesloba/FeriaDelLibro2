@@ -1,6 +1,7 @@
 module EmailHelper
   def email_image_tag(image, **options)
-    attachments[image] = File.read(Rails.root.join("public/#{image}"))
+    require 'open-uri'
+    attachments[image] = open("#{image}").read
     image_tag attachments[image].url, **options
   end
   def logo_image_tag(image, **options)
