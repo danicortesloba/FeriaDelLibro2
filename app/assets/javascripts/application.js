@@ -26,8 +26,9 @@
 //= require main
 //= require chartkick
 //= require custom
-//= require chosen.jquery.min
+
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require chosen.jquery.min
