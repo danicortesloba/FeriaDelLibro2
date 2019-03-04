@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
 
-  jQuery('header nav').meanmenu();
+  $('header nav').meanmenu();
   $('#main').owlCarousel({
       loop:true,
       margin:10,
