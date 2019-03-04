@@ -20,15 +20,13 @@
 //= require jquery.parallax-1.1.3
 //= require jquery.countdown.min
 //= require jquery.flexslider
-//= require chosen.jquery.min
 //= require jquery.counterup.min
 //= require waypoints.min
 //= require plugins
 //= require main
 //= require chartkick
 //= require custom
-
-
+//= require chosen.jquery.min
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
