@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       member do
         post 'add_publisher_comment'
         delete 'remove_publisher_comment/:publisher_comment_id',
-        to: 'publisher#remove_publisher_comment', :format => false,
+        to: 'publishers#remove_publisher_comment', :format => false,
         as: 'remove_publisher_comment'
       end
     end
