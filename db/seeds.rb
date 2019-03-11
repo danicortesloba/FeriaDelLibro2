@@ -59,8 +59,8 @@ end
         title: "Libro #{@a}",
         price: 2000,
         pvp: 10000,
-        author_first_name: "Fabián #{b+1}",
-        author_last_name: "General #{b+1}",
+        author_first_name: "Juanito #{b+1}",
+        author_last_name: "Perez #{b+1}",
         isbn: 1234567,
         synopsis: "Un carismático psicópata. Un adolescente luchando en contra de su propia naturaleza. Una joven tratando de borrar el dolor.En el mundo de la brujería, nadie es inocente. Todos tienen un secreto y un demonio que ocultar. Chile es el escenario para esta novela llena de magia y violencia. Los brujos se han unido en la Nueva Recta Provincia, organización que busca resguardar la seguridad de los brujos y brujas a lo largo del país. Sin embargo, detrás de esta loable misión se esconde una verdad mucho más siniestra. Cada miembro del grupo tiene sus propios objetivos y es leal sólo a su sombra, un ente mágico que lo acompaña y alimenta su poder. En este contexto, solo una regla importa: nunca confíes en nadie."
       )
