@@ -22,7 +22,7 @@
       <tbody>
         <% @billing.orders.each do |order| %>
         <tr>
-          <td width="20%" style="border: 1px solid black;"><%= email_image_tag("#{order.book.cover.thumb.url}") %></td>
+          <td width="20%" style="border: 1px solid black;"><%= email_image_tag(order.book.cover.thumb) %></td>
           <td width="20%" style="border: 1px solid black;"><h4><%= order.book.title %></h4></td>
           <td width="20%" style="border: 1px solid black;"><%= number_to_currency(order.book.price, precision: 0) %></td>
           <td width="20%" style="border: 1px solid black;"><h4><%= order.book.publisher.name %></h4></td>

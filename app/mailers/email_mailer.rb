@@ -35,19 +35,23 @@ class EmailMailer < ActionMailer::Base
     mail(to: @user.email, subject: 'Confirmación de compra')
   end
 
-  def sale_confirmation(billing)
+  def sale_confirmation(user, billing, book)
       @expiration = (billing.created_at + 20.days)
       @expiration_complaint = (billing.created_at + 30.days)
+      @book = book
       @orders = billing.orders
       @orders.each do |order|
-            @publisher_address = order.book.publisher.user.addresses.last
-            @addresses = order.user.addresses.where(default:true).each do |a|
-                  @adr =  a.address
-                  @com = a.commune
-                  @reg = a.region
+            @reader = order.user
+            @order = order
+            @publisher_address = @book.publisher.user.addresses.last
+            @reader.addresses.where(default:true).each do |a|
+              @adr =  a.address
+              @com = a.commune
+              @reg = a.region
             end
-            @user = order.book.publisher.user
-            mail(to: @user.email, subject: '¡Vendiste un libro!')
+
       end
+
+                  mail(to: user.email, subject: '¡Vendiste un libro!')
   end
 end

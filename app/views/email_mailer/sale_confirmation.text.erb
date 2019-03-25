@@ -1,22 +1,19 @@
  ¡Vendiste un libro!
-Recuerda que tu pago se retendrá por 30 días para asegurarnos que el libro le llegue al lector. El libro le debe llegar al lector hasta el <%= @expiration.to_date.strftime("%d/%m/%Y") %>. De lo contrario, el lector tendrá 10 días para presentar un reclamo. Te recomendamos que guardes los recibos de Starken para comprobar que enviaste el libro.
-Hola, <% @user.publisher.name %>.
+Hola, <%= @book.publisher.name %>.
 ¡Felicidades por tu venta!
-<% @orders.each do |order| %>
-    <% if order.book.publisher = @user.publisher %>
-          <%= email_image_tag("#{order.book.cover.thumb.url}") %></td>
-          <%= order.book.title %>
-          <%= number_to_currency(order.book.price, precision: 0) %>
-          <%= order.user.reader.firstname%> <%= order.user.reader.lastname %>
-          <% if order.delivery == false && @publisher_address.present? %>
+Recuerda que tu pago se retendrá por 30 días para asegurarnos que el libro le llegue al lector. El libro le debe llegar al lector hasta el <%= @expiration.to_date.strftime("%d/%m/%Y") %>. De lo contrario, el lector tendrá 10 días para presentar un reclamo. Te recomendamos que guardes los recibos de Starken para comprobar que enviaste el libro.
+
+
+          <%= @book.title %>
+          <%= number_to_currency(@book.price, precision: 0) %>
+          <%= @order.user.reader.firstname%> <%= @order.user.reader.lastname %>
+          <% if @order.delivery == false && @publisher_address.present? %>
                   El lector recogerá el libro en:
                   <%= @publisher_address.address %>
                   <%= @publisher_address.commune %>, <%= @publisher_address.region %>.
-                   Debes escribirle a <% order.user.email %> para coordinar la entrega.
+                   Debes escribirle a <% @order.user.email %> para coordinar la entrega.
            <% else %>
 
                 Debes enviar el libro por pagar a través de Starken a:
                  <%= @adr %> <%= @com %>, <%= @reg %>.
           <% end %>
-    <% end %>
-<% end %>

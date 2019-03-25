@@ -71,14 +71,15 @@ class BillingsController < ApplicationController
 
          orders = current_user.orders.cart
          orders.update_all(payed: true, billing_id: billing.id)
-
          @billings = current_user.billings
          if @billings.any?
            @billing = current_user.billings.last
            @billing.orders.each do |order|
-              EmailMailer.sale_confirmation(@billing).deliver_now
+             @user = order.book.publisher.user
+             @book = order.book
+             EmailMailer.sale_confirmation(@user, @billing, @book).deliver_now 
           end
-        end
+         end
 
 
          redirect_to billings_path, notice: "¡La compra se realizó con éxito!"
