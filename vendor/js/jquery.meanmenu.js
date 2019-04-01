@@ -25,6 +25,7 @@
 *
 */
 (function ($) {
+	$(document).on('turbolinks:load', function() {
 	"use strict";
 		$.fn.meanmenu = function (options) {
 				var defaults = {
@@ -282,4 +283,5 @@
 					showMeanMenu();
 				});
 		};
+		});
 })(jQuery);

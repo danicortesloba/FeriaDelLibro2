@@ -12,7 +12,8 @@ class EmailMailer < ActionMailer::Base
     mail(to: @user.email, subject: '¡Ya eres parte de Líbrate!')
   end
 
-  def billing_confirmation(user)
+  def billing_confirmation(user, orders)
+    @orders = orders
     @addresses = user.addresses.where(default:true).each do |a|
           @adr =  a.address
           @com = a.commune
@@ -27,6 +28,7 @@ class EmailMailer < ActionMailer::Base
       @billing.orders.each do |order|
         @publisher_address = order.book.publisher.user.addresses.last
       end
+
     @total = precios.sum
     @expiration = (@billing.created_at + 20.days)
     @expiration_complaint = (@billing.created_at + 30.days)

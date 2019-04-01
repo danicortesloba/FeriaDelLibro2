@@ -74,19 +74,20 @@ class BillingsController < ApplicationController
          @billings = current_user.billings
          if @billings.any?
            @billing = current_user.billings.last
+           @orders = @billing.orders
            @billing.orders.each do |order|
              @user = order.book.publisher.user
              @book = order.book
-             EmailMailer.sale_confirmation(@user, @billing, @book).deliver_now 
+             EmailMailer.sale_confirmation(@user, @billing, @book).deliver_now
           end
          end
 
 
          redirect_to billings_path, notice: "¡La compra se realizó con éxito!"
-         EmailMailer.billing_confirmation(current_user).deliver_now
+         EmailMailer.billing_confirmation(current_user, @orders).deliver_now
 
      else
-         render plain: "No se puedo generar el cobro en PayPal."
+         render plain: "No se pudo generar el cobro en PayPal."
      end
    end
 end

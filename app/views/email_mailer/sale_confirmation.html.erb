@@ -22,7 +22,11 @@
       </thead>
       <tbody>
           <tr>
+            <% if @book.cover.url.match(/fallback/) %>
+            <td width="20%" style="border: 1px solid black;"><%= fallback_image_tag("banners/email_thumb_fallback.png") %></td>
+            <% else %>
             <td width="20%" style="border: 1px solid black;"><%= email_image_tag(@book.cover.thumb) %></td>
+            <% end %>
             <td width="20%" style="border: 1px solid black;"><h4><%= @book.title %></h4></td>
             <td width="20%" style="border: 1px solid black;"><%= number_to_currency(@book.price, precision: 0) %></td>
             <td width="20%" style="border: 1px solid black;"><h4><%= @order.user.reader.firstname%> <%= @order.user.reader.lastname %></h4></td>
