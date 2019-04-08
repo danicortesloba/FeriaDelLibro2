@@ -24,7 +24,7 @@
 * Find more information at http://www.meanthemes.com/plugins/meanmenu/
 *
 */
-(function ($) {
+
 	$(document).on('turbolinks:load', function() {
 	"use strict";
 		$.fn.meanmenu = function (options) {
@@ -284,4 +284,3 @@
 				});
 		};
 		});
-})(jQuery);
