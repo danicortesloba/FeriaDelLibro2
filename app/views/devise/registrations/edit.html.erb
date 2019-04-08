@@ -23,9 +23,9 @@
 
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="single-register">
+                            <div class="form-group">
                               <%= f.label :email %><br />
-                              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
                             </div>
                         </div>
                     </div>
@@ -42,9 +42,9 @@
 
                   <div class="row">
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                          <div class="single-register">
+                          <div class="form-group">
                             <%= f.label :contraseña_nueva %> <i>(déjalo en blanco si no lo quieres cambiar)</i><br />
-                            <%= f.password_field :password, autocomplete: "new-password" %>
+                            <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
                             <% if @minimum_password_length %>
                               <br />
                               <em><%= @minimum_password_length %> caracteres mínimos</em>
@@ -55,18 +55,18 @@
 
                   <div class="row">
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                          <div class="single-register">
+                          <div class="form-group">
                             <%= f.label :confirmar_contraseña_nueva %><br />
-                            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
                           </div>
                       </div>
                   </div>
 
                   <div class="row">
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                          <div class="single-register">
+                          <div class="form-group">
                             <%= f.label :contraseña_actual %> <i>(necesitamos tu contraseña actual para confirmar los cambios)</i><br />
-                            <%= f.password_field :current_password, autocomplete: "current-password" %>
+                            <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
                           </div>
                       </div>
                   </div>

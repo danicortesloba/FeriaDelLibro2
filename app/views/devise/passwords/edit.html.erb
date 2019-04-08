@@ -21,18 +21,18 @@
                   <div class="billing-fields">
                       <div class="row">
                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                              <div class="single-register">
+                              <div class="form-group">
                                 <%= f.label :password, "Nueva contraseña" %><br />
                                 <% if @minimum_password_length %>
                                   <em>(<%= @minimum_password_length %> caracteres mínimos)</em><br />
                                 <% end %>
-                                <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+                                <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'form-control' %>
                               </div>
                           </div>
                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                              <div class="single-register">
+                              <div class="form-group">
                                 <%= f.label :password_confirmation, "Confirmar nueva contraseña" %><br />
-                                <%= f.password_field :password_confirmation, autocomplete: "off" %>
+                                <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
                               </div>
                           </div>
                       </div>

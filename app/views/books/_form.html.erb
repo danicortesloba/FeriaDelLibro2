@@ -19,72 +19,72 @@
             <div class="billing-fields">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="single-register">
+                        <div class="form-group">
                           <%= form.label :título %>
-                          <%= form.text_field :title %>
+                          <%= form.text_field :title, class: 'form-control' %>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="single-register">
+                        <div class="form-group">
                           <%= form.label :nombre_del_autor %>
-                          <%= form.text_field :author_first_name %>
+                          <%= form.text_field :author_first_name, class: 'form-control' %>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="single-register">
+                        <div class="form-group">
                           <%= form.label :apellido_del_autor %>
-                          <%= form.text_field :author_last_name %>
+                          <%= form.text_field :author_last_name, class: 'form-control' %>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="single-register">
+                        <div class="form-group">
                           <%= form.label :portada %>
                           Sube un archivo .jpg, .jpeg o .png.<br>
                           Recomendamos que tu portada sea de 436px X 623px.<br>
-                          <%= form.file_field :cover, id: :cover_image %>
+                          <%= form.file_field :cover, id: :cover_image, class: 'form-control' %>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="single-register">
+                        <div class="form-group">
                           <%= form.label :precio %>
                           Este es el precio de oferta para vender en Líbrate.<br>
                           Debe ser una oferta interesante para el lector. <br>
                           Sin embargo, recuerda que Flow, el sistema de pago,<br>
                           cobra 4% de comisión por cada venta. <br>
-                          <%= form.number_field :price %>
+                          <%= form.number_field :price, class: 'form-control' %>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="single-register">
+                        <div class="form-group">
                           <%= form.label :PVP %>
-                          <%= form.number_field :pvp %>
+                          <%= form.number_field :pvp, class: 'form-control' %>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="single-register">
+                        <div class="form-group">
                           <%= form.label :ISBN %>
-                          <%= form.number_field :isbn %>
+                          <%= form.number_field :isbn, class: 'form-control' %>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="single-register">
+                        <div class="form-group">
                           <%= form.label :sinopsis %>
-                          <%= form.text_area :synopsis %>
+                          <%= form.text_area :synopsis, class: 'form-control' %>
                         </div>
                     </div>
                 </div>

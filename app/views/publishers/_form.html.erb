@@ -21,9 +21,9 @@
 
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="single-register">
+                            <div class="form-group">
                               <%= form.label :nombre_de_fantasía_de_la_editorial %>
-                              <%= form.text_field :name %>
+                              <%= form.text_field :name, class: 'form-control' %>
                             </div>
                         </div>
                     </div>
@@ -34,31 +34,31 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="single-register">
+                            <div class="form-group">
                               <%= form.label :rut %>
-                              <%= form.number_field :rut %>
+                              <%= form.number_field :rut, class: 'form-control' %>
                             </div>
                          </div>
                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                             <div class="single-register">
+                             <div class="form-group">
                                <%= form.label :razón_social %>
-                               <%= form.text_field :razon %>
+                               <%= form.text_field :razon, class: 'form-control' %>
                              </div>
                           </div>
 
                         </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="single-register">
+                            <div class="form-group">
                               <%= form.label :giro %>
                               <p> En caso de no tener (por ejemplo, si eres escritor), escribe "no disponible". </p>
-                              <%= form.text_field :giro %>
+                              <%= form.text_field :giro, class: 'form-control' %>
                             </div>
                          </div>
                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                             <div class="single-register">
+                             <div class="form-group">
                                <%= form.label :dirección_legal_para_factura %><br><br>
-                               <%= form.text_area :address %>
+                               <%= form.text_area :address, class: 'form-control' %>
                              </div>
                           </div>
                     </div>
@@ -69,20 +69,20 @@
                         </div>
                         <div class="row">
                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                              <div class="single-register">
+                              <div class="form-group">
                                 <%= form.label :método_de_pago %><br />
                                 <p>¿Cómo pagarás tu membresía?</p>
                                 <p>(Recuerda que con Paypal puedes usar tu tarjeta de crédito Visa o Mastercard).</p>
                                 <br>
-                                <%= form.select :method, options_for_select(["Paypal", "Depósito", "Mach"]), :class => 'genForm_dropBox' %>
+                                <%= form.select :method, options_for_select(["Paypal", "Depósito", "Mach"]), {}, {class: 'form-control'} %>
                               </div>
                            </div>
                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                               <div class="single-register">
+                               <div class="form-group">
                                  <%= form.label :tipo_de_comprobante %><br/>
                                  <p> ¿Qué tipo de comprobante quieres que te entreguemos cuando pagues tu membresía? <p>
                                  <p>(La factura es sólo válida para empresas)</p>
-                                 <%= form.select :voucher, options_for_select(["Boleta", "Factura"]), :class => 'genForm_dropBox' %>
+                                 <%= form.select :voucher, options_for_select(["Boleta", "Factura"]), {}, {class: 'form-control'} %>
                                </div>
                             </div>
                         </div>
@@ -93,39 +93,39 @@
                         </div>
                         <div class="row">
                              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                 <div class="single-register">
+                                 <div class="form-group">
                                    <%= form.label :usuario_Facebook %>
                                    <p>Por ejemplo: lobaediciones <p>
-                                   <%= form.text_field :facebook %>
+                                   <%= form.text_field :facebook, class: 'form-control' %>
                                  </div>
                               </div>
 
                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                  <div class="single-register">
+                                  <div class="form-group">
                                     <%= form.label :usuario_Twitter %>
                                     <p>Por ejemplo: LobaEdiciones </p>
-                                    <%= form.text_field :twitter %>
+                                    <%= form.text_field :twitter, class: 'form-control' %>
                                   </div>
                                </div>
                         </div>
                        <div class="row">
 
                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                   <div class="single-register">
+                                   <div class="form-group">
                                      <%= form.label :usuario_Instagram %>
                                      <p>Por ejemplo: loba_ediciones</p>
                                      <br><br>
-                                     <%= form.text_field :instagram %>
+                                     <%= form.text_field :instagram, class: 'form-control' %>
                                    </div>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="single-register">
+                                    <div class="form-group">
                                       <%= form.label :url_Sitio_Web%>
                                       <p>Por favor, escribe la url completa. </p>
                                       <p>Por ejemplo: </p>
                                       <p>http://lobaediciones.cl/</p>
-                                      <%= form.text_field :website %>
+                                      <%= form.text_field :website, class: 'form-control' %>
                                     </div>
                                  </div>
                     </div>

@@ -20,36 +20,37 @@
                     <div class="billing-fields">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="single-register">
+                                <div class="form-group">
                                   <%= f.label :email %><br />
-                                  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="single-register">
+                                <div class="form-group">
                                   <%= f.label :seleciona_un_rol %>
+                                  <br>
                                   (Si eres escritor y quieres vender tus libros, selecciona "Editorial") <br>
-                                  <%= f.select :role, options_for_select(["Editorial", "Lector"]), :class => 'genForm_dropBox' %>
+                                  <%= f.select :role, options_for_select(["Editorial", "Lector"]), {}, {class: 'form-control'} %>
                                 </div>
                              </div>
                         </div>
                         <div class="row">
 
                              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                 <div class="single-register">
+                                 <div class="form-group">
                                    <%= f.label :contraseña %>
                                    <% if @minimum_password_length %>
                                    <em>(<%= @minimum_password_length %> caracteres mínimo)</em>
                                    <% end %><br />
-                                   <%= f.password_field :password, autocomplete: "new-password" %>
+                                   <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
                                  </div>
                               </div>
 
                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                  <div class="single-register">
+                                  <div class="form-group">
                                       <%= f.label :confirmar_contraseña %><br />
-                                      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                                      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
                                   </div>
                               </div>
                         </div>

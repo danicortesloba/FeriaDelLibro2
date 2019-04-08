@@ -20,28 +20,28 @@
                 <div class="billing-fields">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="single-register">
+                            <div class="form-group">
                               <%= form.label :nombre %>
                             (por ejemplo "casa") <br>
-                              <%= form.text_field :title %>
+                              <%= form.text_field :title, class: 'form-control' %>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="single-register">
+                            <div class="form-group">
                               <%= form.label :dirección %><br>
-                              <%= form.text_field :address %>
+                              <%= form.text_field :address, class: 'form-control'%>
                             </div>
                          </div>
                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                             <div class="single-register">
+                             <div class="form-group">
                                <%= form.label :comuna %><br>
-                               <%= form.text_field :commune %>
+                               <%= form.text_field :commune, class: 'form-control' %>
                              </div>
                           </div>
                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                              <div class="single-register">
+                              <div class="form-group">
                                 <%= form.label :región %><br>
-                                <%= form.text_field :region %>
+                                <%= form.text_field :region, class: 'form-control' %>
                               </div>
                            </div>
                     </div>
