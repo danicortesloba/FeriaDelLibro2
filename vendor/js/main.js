@@ -1,12 +1,12 @@
-(function($) {
+$(document).on('turbolinks:load', function() {
     "use strict";
-    
+
     /*----------------------------
      Top Menu Stick
     ------------------------------ */
     var header = $('#header-sticky');
     var win = $(window);
-    
+
     win.on('scroll', function() {
         if ($(this).scrollTop() > 120) {
             header.addClass("sticky");
@@ -14,17 +14,17 @@
             header.removeClass("sticky");
         }
     });
-    
+
     /*----------------------------
      Jquery MeanMenu
     ------------------------------ */
     jQuery('#mobile-menu-active').meanmenu();
-    
+
     /*----------------------------
      Wow js active
     ------------------------------ */
     new WOW().init();
-    
+
     /*----------------------------
      Slider active
     ------------------------------ */
@@ -48,8 +48,8 @@
             }
         }
     })
-    
-    
+
+
     /* Quickview-active active */
     $('.quickview-active').owlCarousel({
         loop: true,
@@ -60,8 +60,8 @@
         item: 3,
         margin: 12,
     })
-    
-    
+
+
     /*--------------------------
     Tab active
     ---------------------------- */
@@ -74,7 +74,7 @@
         $('.product-details-large .tab-pane').removeClass('active');
         $('.product-details-large ' + $href).addClass('active');
     })
-    
+
     /*----------------------------
      Tab slider active
     ------------------------------ */
@@ -135,7 +135,7 @@
             }
         }
     })
-    
+
     /*----------------------------
      Tab active 3
     ------------------------------ */
@@ -164,7 +164,7 @@
             }
         }
     })
-    
+
     /*----------------------------
      Post active
     ------------------------------ */
@@ -194,7 +194,7 @@
             }
         }
     })
-    
+
     /*----------------------------
      Bestseller active
     ------------------------------ */
@@ -222,7 +222,7 @@
             }
         }
     })
-    
+
     /*----------------------------
      Product active 2
     ------------------------------ */
@@ -296,7 +296,7 @@
             }
         }
     })
-    
+
     /*----------------------------
      Deal active
     ------------------------------ */
@@ -344,7 +344,7 @@
             }
         }
     })
-    
+
     /*----------------------------
      Hot sell active
     ------------------------------ */
@@ -392,12 +392,12 @@
             }
         }
     })
-    
+
     /*----------------------------
      Parallax active
     ------------------------------ */
     $('.bg').parallax("50%", 0.1);
-    
+
     /*----------------------------
      Flexslider slider active
     ------------------------------ */
@@ -405,48 +405,48 @@
         animation: "slide",
         controlNav: "thumbnails"
     });
-    
+
     /*-------------------------
       Showlogin toggle function
     --------------------------*/
     $('#showlogin').on('click', function() {
         $('#checkout-login').slideToggle(900);
     });
-    
+
     /*-------------------------
       Showcoupon toggle function
     --------------------------*/
     $('#showcoupon').on('click', function() {
         $('#checkout_coupon').slideToggle(900);
     });
-    
+
     /*-------------------------
       Create an account toggle function
     --------------------------*/
     $('#cbox').on('click', function() {
         $('#cbox_info').slideToggle(900);
     });
-    
+
     /*-------------------------
       Create an account toggle function
     --------------------------*/
     $('#ship-box').on('click', function() {
         $('#ship-box-info').slideToggle(1000);
     });
-    
+
     /*-------------------------
       Showlogin toggle function
     --------------------------*/
     $('#showcat').on('click', function() {
         $('#hidecat').slideToggle(900);
     });
-    
+
     /*Category accordion*/
     $('.rx-parent').on('click', function() {
         $('.rx-child').slideToggle();
         $(this).toggleClass('rx-change');
     });
-    
+
     /*--------------------------
        Countdown
     ---------------------------- */
@@ -457,8 +457,8 @@
             $this.html(event.strftime('<div class="cdown days"><span class="counting counting-2">%-D</span>days</div><div class="cdown hours"><span class="counting counting-2">%-H</span>hrs</div><div class="cdown minutes"><span class="counting counting-2">%M</span>mins</div><div class="cdown seconds"><span class="counting">%S</span>secs</div>'));
         });
     });
-    
-    
+
+
     /*---------------------
     	Counter
     --------------------- */
@@ -466,8 +466,8 @@
         delay: 10,
         time: 1000
     });
-    
-    
+
+
     /*---------------------
     	Category menu
     --------------------- */
@@ -488,8 +488,8 @@
         }
     });
     $('#cate-toggle>ul>li.has-sub>a').append('<span class="holder"></span>');
-    
-    
+
+
     /*--------------------------
      ScrollUp
     ---------------------------- */
@@ -499,8 +499,8 @@
         scrollSpeed: 900,
         animation: 'fade'
     });
-    
-    
+
+
     /* Category Dropdown Menu  */
     if ($(window).width() < 768) {
         function sidemenuDropdown() {
@@ -522,4 +522,4 @@
 
 
 
-})(jQuery);
+});

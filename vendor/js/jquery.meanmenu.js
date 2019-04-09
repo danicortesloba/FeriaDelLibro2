@@ -139,6 +139,7 @@
 
 						// navigation reveal
 						var showMeanMenu = function() {
+							$(".mean-bar").remove()
 								var meanStyles = "background:"+meanRevealColour+";color:"+meanRevealColour+";"+meanRevealPos;
 								if (currentWidth <= meanScreenWidth) {
 								jQuery(removeElements).addClass('mean-remove');
@@ -280,8 +281,8 @@
 						});
 
 					// run main menuMenu function on load
+
 					showMeanMenu();
 				});
 		};
 		});
-		
