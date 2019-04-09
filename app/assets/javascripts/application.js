@@ -13,9 +13,10 @@
 
 //= require modernizr-2.8.3.min
 //= require jquery-1.12.0.min
+//= require jquery.meanmenu
 //= require bootstrap.min
 //= require owl.carousel.min
-//= require jquery.meanmenu
+
 //= require wow.min
 //= require jquery.parallax-1.1.3
 //= require jquery.countdown.min
